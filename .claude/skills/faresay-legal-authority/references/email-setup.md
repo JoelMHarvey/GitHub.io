@@ -7,44 +7,49 @@ Do this **once**, with Joel, before operating the inbox. It involves DNS/mail ch
 domain Joel owns — so it is itself an **approval-gated** action: propose the exact records,
 get approval, then make the change (or have Joel make it).
 
-## Decide the agent mailbox first
+## Current Faresay setup (confirmed)
 
-The Gmail tools operate on a connected Google mailbox. Simplest robust setup:
-- A dedicated Gmail/Google Workspace mailbox (e.g. `faresay.agent@gmail.com` or a Workspace
-  user) that is the one connected to these tools.
-- `legal@faresay.com` and `enquiries@faresay.com` **forward** into that mailbox.
-- Outbound, when Joel sends, should appear **from** the faresay.com address (send-as alias), so
-  replies thread correctly. Configure send-as/alias in the mailbox settings with domain
-  verification.
+- **DNS:** Cloudflare. **Site host:** Vercel. → Use **Cloudflare Email Routing** (free) for the
+  forwards. It only adds MX/TXT records; it does **not** affect the Vercel site (A/CNAME for the
+  web app are untouched).
+- **Destination mailbox:** the Gmail account connected to these tools. The connected inbox looks
+  like Joel's **personal** Gmail. Decide before going live:
+  - **Option 1 — forward into Joel's personal Gmail.** Fastest. Add a Gmail filter so anything
+    `to:legal@faresay.com OR to:enquiries@faresay.com` is auto-labelled `faresay/inbound-new`
+    and kept out of the main inbox view. Business + personal share one mailbox.
+  - **Option 2 — dedicated mailbox** (e.g. a new `faresay.agent@gmail.com` or a Google Workspace
+    user on faresay.com) connected to these tools instead. Cleaner separation; small extra setup.
+  Confirm which with Joel; the steps below work for either.
 
-## Path A — Domain on Google Workspace (cleanest)
+## Primary path — Cloudflare Email Routing (Joel does this in the dashboard)
 
-1. Add `legal@` and `enquiries@` as **users** or, cheaper, as **aliases / Google Groups** that
-   forward to the agent mailbox.
-2. Configure **send-as** so outbound can use `legal@faresay.com` / `enquiries@faresay.com`.
-3. Confirm SPF/DKIM/DMARC are set so mail is trusted.
+There is no Cloudflare tool connected here, so Joel performs these clicks; the agent supplies the
+exact values and verifies delivery afterward.
 
-## Path B — Domain on WordPress.com (MCP can help)
+1. Cloudflare dashboard → select `faresay.com` → **Email** → **Email Routing** → enable.
+   Cloudflare auto-adds the required **MX** and **TXT (SPF)** records — accept them.
+2. **Destination addresses:** add the agent mailbox address and click the Cloudflare
+   verification link sent to it (the agent can read that verification email via the Gmail tools
+   and surface the link to Joel).
+3. **Custom addresses:** create two routes —
+   - `legal@faresay.com` → **Send to** → agent mailbox
+   - `enquiries@faresay.com` → **Send to** → agent mailbox
+4. **DMARC (recommended):** add a TXT record `_dmarc.faresay.com` →
+   `v=DMARC1; p=none; rua=mailto:legal@faresay.com` to start in monitoring mode.
 
-The connected WordPress.com tools can manage DNS, nameservers, and mail service for a domain:
-- `wpcom-domain-set-mail-service`, `wpcom-domain-update-dns-records`,
-  `wpcom-domain-restore-default-dns-records`, `wpcom-domain-update-nameservers`.
+### Sending *as* faresay.com (so replies look right)
 
-Steps:
-1. Confirm `faresay.com` is the domain and check its current mail service / DNS.
-2. Either enable a mailbox/forwarding mail service on the domain, **or** set MX + forwarding
-   records so `legal@` / `enquiries@` forward to the agent Gmail.
-3. Verify SPF/DKIM/DMARC for deliverability.
-4. **Propose the exact record changes to Joel as an approval request before applying them.**
+Cloudflare Email Routing is **receive/forward only** — it cannot send. Combined with the Gmail
+tools (which also cannot send), every outbound message is a draft Joel sends manually. For
+replies to appear **from** `legal@faresay.com`, set up Gmail **"Send mail as"** with that alias.
+That requires an SMTP sender for the alias (e.g. a transactional-email provider, or a Google
+Workspace mailbox on faresay.com). This is an optional polish step — flag it to Joel as a small
+follow-on, not a blocker for receiving and triaging mail.
 
-## Path C — Other registrar/host (Cloudflare, GoDaddy, Namecheap, etc.)
+## Alternative — if the domain ever moves to Google Workspace
 
-1. In the host's DNS, use the provider's **email forwarding** (many offer free forwarding):
-   create forwards `legal@faresay.com → agent mailbox` and `enquiries@faresay.com → agent mailbox`.
-2. If no native forwarding, point MX to a forwarding service (e.g. Cloudflare Email Routing —
-   free) and add the forward rules there.
-3. Set up send-as alias in the agent Gmail and verify the domain.
-4. Confirm SPF/DKIM/DMARC.
+Add `legal@`/`enquiries@` as aliases/Groups forwarding to the agent mailbox, configure send-as,
+and confirm SPF/DKIM/DMARC. (Not needed while on Cloudflare + Vercel.)
 
 ## Verification checklist (any path)
 

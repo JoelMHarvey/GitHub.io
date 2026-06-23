@@ -19,10 +19,22 @@ Format:
 
 <!-- entries below -->
 
-## (log starts here)
+## 2026-06-23 — Email infra decisions
 - TYPE: note
-- WHAT: Skill scaffolded. Mailbox + roadmap + approval protocol established. Awaiting Phase 0
-  setup (email infra) and Phase 1 (retain healthcare-regulatory counsel).
+- WHAT: faresay.com confirmed on Cloudflare DNS + Vercel host. Email infra = Cloudflare Email
+  Routing. Mailbox = DEDICATED Faresay mailbox (not Joel's personal Gmail). email-setup.md made
+  Cloudflare-specific. Awaiting Joel: create dedicated mailbox → repoint Gmail connector → run
+  Cloudflare routing. Agent will create faresay/* labels + triage once connector points to the
+  dedicated mailbox (must NOT label Joel's personal inbox).
+- COST: none
+- STATUS: awaiting Joel (mailbox creation + connector + Cloudflare clicks)
+- NEXT: On confirmation the dedicated mailbox is connected, create labels and begin triage; in
+  parallel, prep counsel shortlist + intro drafts for approval.
+
+## 2026-06-23 — Skill scaffolded
+- TYPE: note
+- WHAT: Skill created. Mailbox plan + roadmap + approval protocol established. PR #1 opened
+  (Joel merges himself).
 - COST: none
 - STATUS: done
-- NEXT: Confirm brief, set up legal@/enquiries@ forwarding, then shortlist counsel.
+- NEXT: Email infra (above), then Phase 1 (retain healthcare-regulatory counsel).

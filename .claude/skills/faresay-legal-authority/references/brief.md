@@ -55,4 +55,8 @@ Professional, decent, frugal, persistent-but-polite. (See SKILL.md operating pri
 ## Notes & instructions from Joel
 <!-- Joel: add ad-hoc instructions, constraints, preferences, or current focus here. -->
 
-- (none yet)
+- Domain `faresay.com`: DNS on **Cloudflare**, site on **Vercel**. Email via **Cloudflare
+  Email Routing** (free).
+- Mailbox decision: **dedicated Faresay mailbox** (not Joel's personal Gmail). The dedicated
+  mailbox must be the one connected to the Gmail tools.
+- PR with this skill: Joel merges it himself (don't auto-merge or babysit).

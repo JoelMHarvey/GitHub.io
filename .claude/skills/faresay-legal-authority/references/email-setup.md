@@ -12,14 +12,15 @@ get approval, then make the change (or have Joel make it).
 - **DNS:** Cloudflare. **Site host:** Vercel. → Use **Cloudflare Email Routing** (free) for the
   forwards. It only adds MX/TXT records; it does **not** affect the Vercel site (A/CNAME for the
   web app are untouched).
-- **Destination mailbox:** the Gmail account connected to these tools. The connected inbox looks
-  like Joel's **personal** Gmail. Decide before going live:
-  - **Option 1 — forward into Joel's personal Gmail.** Fastest. Add a Gmail filter so anything
-    `to:legal@faresay.com OR to:enquiries@faresay.com` is auto-labelled `faresay/inbound-new`
-    and kept out of the main inbox view. Business + personal share one mailbox.
-  - **Option 2 — dedicated mailbox** (e.g. a new `faresay.agent@gmail.com` or a Google Workspace
-    user on faresay.com) connected to these tools instead. Cleaner separation; small extra setup.
-  Confirm which with Joel; the steps below work for either.
+- **Destination mailbox: DEDICATED (chosen by Joel).** A new mailbox separate from Joel's
+  personal Gmail — e.g. `faresay.agent@gmail.com`, or a Google Workspace user on faresay.com.
+  This dedicated mailbox is the one that must be **connected to the Gmail tools** (repoint the
+  Claude Gmail connector to it), and is the **destination** for the Cloudflare forwards.
+  The agent does **not** create labels in or otherwise touch Joel's personal inbox.
+
+  **Prerequisite order:** (1) create the dedicated mailbox → (2) repoint the Gmail connector to
+  it → (3) do the Cloudflare routing below → (4) agent creates `faresay/*` labels and begins
+  triage in the dedicated mailbox.
 
 ## Primary path — Cloudflare Email Routing (Joel does this in the dashboard)
 

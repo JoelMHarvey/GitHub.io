@@ -19,6 +19,18 @@ Format:
 
 <!-- entries below -->
 
+## 2026-06-23 — Phase 1 counsel: shortlist + chosen 3 + intake routes
+- TYPE: note
+- WHAT: Researched & shortlisted 5 firms; Joel chose the Recommended 3 — Epstein Becker Green
+  (Amy Lerman, alerman@ebglaw.com — Telemental Health Laws survey lead), Nixon Gwilt Law
+  (Get Started questionnaire), Cohen Healthcare Law Group (contact form / (310) 844-3173, likely
+  paid initial consult). Outreach text drafted for all three. EBG = email (Gmail draft, approve-
+  to-send); Nixon Gwilt & Cohen = web-form intakes Joel submits.
+- COST: none yet (watch Cohen initial-consult fee — approve before booking)
+- STATUS: awaiting dedicated mailbox (for EBG draft) + Joel to submit the two web forms
+- NEXT: When mailbox live, create EBG Gmail draft for approval; provide form text for Nixon
+  Gwilt & Cohen when Joel is ready to submit.
+
 ## 2026-06-23 — Email infra decisions
 - TYPE: note
 - WHAT: faresay.com confirmed on Cloudflare DNS + Vercel host. Email infra = Cloudflare Email

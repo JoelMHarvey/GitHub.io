@@ -70,3 +70,47 @@ first. Add #2 / #5 if the first three don't fit.
 - Cohen Healthcare Law Group — MSO / fee-splitting: https://cohenhealthcarelaw.com/services/management-service-organizations/ ; https://mso-attorney.com/
 - LumaLex Law — Telehealth MSO: https://www.lumalexlaw.com/telehealth-mso/
 - O'Neil Cannon — CPOM & fee-splitting for telehealth ventures: https://www.wilaw.com/ochdl-health-law-advisor-corporate-practice-of-medicine-and-fee-splitting-considerations-for-telehealth-ventures/
+- Amy Lerman bio (EBG): https://www.ebglaw.com/people/amy-lerman
+- Nixon Gwilt "Get Started": https://nixongwiltlaw.com/get-started
+- Cohen Healthcare Law Group contact: https://cohenhealthcarelaw.com/contact-us/
+
+---
+
+# CHOSEN 3 — confirmed intake routes (2026-06-23)
+
+Joel selected the **Recommended 3**. Each firm's intake works differently — only EBG takes a
+direct email; the two boutiques use web intake. Mechanism matters for the approval flow.
+
+| Firm | Confirmed route | Outreach type | Status |
+|------|-----------------|---------------|--------|
+| **Epstein Becker Green** | **Amy Lerman** — lead author of the Telemental Health Laws 50-state survey. Published: `alerman@ebglaw.com` · 202-861-1832 · bio above. | **Email** (Gmail draft, approve-to-send) | route confirmed; draft ready; awaiting mailbox + approval |
+| **Nixon Gwilt Law** | **"Get Started" questionnaire** (https://nixongwiltlaw.com/get-started) to request an introductory call — no public intake email. | **Web form** (Joel submits; agent supplies the answers text) | route confirmed; form text ready; awaiting Joel to submit |
+| **Cohen Healthcare Law Group** | **Contact form** (https://cohenhealthcarelaw.com/contact-us/) · phone (310) 844-3173. Note: this firm typically charges for an initial consultation — confirm fee before booking. | **Web form / phone** (Joel submits; flag any consult fee for approval) | route confirmed; form text ready; awaiting Joel + fee check |
+
+### Mechanism note
+- **EBG** is the only true *email* outreach → it becomes a Gmail **draft** to `alerman@ebglaw.com`
+  once the dedicated mailbox is live, then Joel approves & sends. Best to send **from**
+  `legal@faresay.com` for credibility (the send-as polish step), but a plain send works too.
+- **Nixon Gwilt & Cohen** are **web-form** intakes → the agent provides the exact text to paste,
+  and **Joel submits the form** (the agent has no browser-form tool). Watch Cohen's **paid
+  initial consultation** — get the fee in writing and approve before booking.
+
+### Ready outreach text (all three use the behavioral-health-tuned intro above, lightly adapted)
+
+**EBG email — To:** alerman@ebglaw.com · **Subject:** Faresay — multi-state structuring for a
+behavioral-health marketplace
+> Dear Ms. Lerman,
+> I'm writing on behalf of Faresay, an online marketplace connecting clients with licensed
+> mental-health professionals (psychologists, clinical social workers, and counsellors). We
+> operate in the UK and are planning a US launch with the goal of being properly authorised in
+> every state. Your work leading the Telemental Health Laws survey is exactly the expertise we're
+> looking for. [...continues per the intro draft above: CPOM-for-behavioral-health + fee-splitting
+> around our 15% platform fee, MSO/friendly-PC where required, entity & per-state qualification,
+> licensing compacts, HIPAA/state privacy; asks (1) fit & experience, (2) fixed-fee scoping, (3)
+> fee structure.]
+> — Joel Harvey, Faresay, legal@faresay.com
+
+**Nixon Gwilt — Get Started questionnaire** and **Cohen — contact form:** same substance,
+condensed to their form fields (who we are, what we need, multi-state behavioral-health CPOM/
+fee-splitting/MSO, request an intro call). Agent will format to each form's fields when Joel is
+ready to submit.

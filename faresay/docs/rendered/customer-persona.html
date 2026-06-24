@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faresay — Customer Personas</title><style>
+:root { --teal:#1F6F6B; --dark:#15514e; }
+* { box-sizing:border-box; }
+html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:#2b3338; line-height:1.6; margin:0; background:#eceff0; }
+.page { max-width:820px; margin:24px auto; background:#fff; padding:0 0 8px;
+  box-shadow:0 1px 6px rgba(0,0,0,.12); border-radius:6px; overflow:hidden; }
+header.lh { display:flex; align-items:center; justify-content:space-between;
+  padding:26px 56px 18px; border-bottom:3px solid var(--teal); }
+header.lh .brand { display:flex; align-items:center; gap:12px; }
+header.lh .wm { font-size:26px; font-weight:700; letter-spacing:.5px; color:var(--dark); }
+header.lh .tag { font-size:13px; color:#6b7a80; }
+.titleblock { padding:30px 56px 4px; }
+.titleblock h1.doc { font-size:30px; color:var(--dark); margin:0 0 10px; line-height:1.2; }
+.meta { font-size:12.5px; color:#6b7a80; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px;
+  padding:4px 10px; border-radius:999px; text-transform:uppercase; }
+.badge.conf { background:#e7f1f0; color:var(--dark); }
+.badge.draft { background:#fdf3e7; color:#9a5b14; border:1px solid #f0d6ad; }
+.content { padding:8px 56px 40px; }
+.content h1 { font-size:23px; color:var(--dark); border-bottom:1px solid #e6eaea;
+  padding-bottom:6px; margin:34px 0 14px; }
+.content h2 { font-size:19px; color:var(--dark); margin:28px 0 10px; }
+.content h3 { font-size:16px; color:#33474a; margin:22px 0 8px; }
+.content p { margin:10px 0; }
+.content ul,.content ol { margin:10px 0; padding-left:22px; }
+.content li { margin:4px 0; }
+.content a { color:var(--teal); }
+.content code { background:#f1f4f4; padding:1px 5px; border-radius:4px; font-size:13px;
+  font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+.content pre { background:#f5f7f7; border:1px solid #e6eaea; border-radius:6px;
+  padding:14px 16px; overflow:auto; }
+.content pre code { background:none; padding:0; }
+.content blockquote { margin:14px 0; padding:8px 18px; border-left:4px solid var(--teal);
+  background:#f6faf9; color:#42565a; }
+.content table { border-collapse:collapse; width:100%; margin:16px 0; font-size:13.5px; }
+.content th { background:var(--teal); color:#fff; text-align:left; padding:9px 12px; }
+.content td { border-bottom:1px solid #e6eaea; padding:8px 12px; vertical-align:top; }
+.content tr:nth-child(even) td { background:#f7faf9; }
+.content hr { border:0; border-top:1px solid #e6eaea; margin:26px 0; }
+footer.lh { border-top:1px solid #e6eaea; margin:0 56px; padding:14px 0 18px;
+  font-size:11.5px; line-height:1.5; color:#8a979d; }
+footer.lh .org { font-weight:600; color:#5a6a70; }
+footer.lh a { color:var(--teal); text-decoration:none; }
+@media print {
+  body { background:#fff; }
+  .page { box-shadow:none; margin:0; max-width:none; border-radius:0; }
+  header.lh, .titleblock, .content, footer.lh { padding-left:0; padding-right:0; }
+  header.lh, footer.lh { margin:0; }
+  .content h1, .content h2, .content h3 { page-break-after:avoid; }
+  .content table, .content pre, .content blockquote { page-break-inside:avoid; }
+  @page { size:A4; margin:18mm 16mm; }
+}
+</style></head>
+<body><div class="page">
+  <header class="lh">
+    <div class="brand"><svg width="34" height="34" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#1F6F6B"/><path d="M9 18c0-3 2-5 5-5s5 2 5 5M9.5 11.5c.8-1.2 2.3-2 4.5-2s3.7.8 4.5 2" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg><span class="wm">Faresay</span></div>
+    <span class="tag">Therapy, matched.</span>
+  </header>
+  <div class="titleblock">
+    <h1 class="doc">Customer Personas</h1>
+    <div class="meta">
+      <span class="badge conf">Confidential</span>
+      <span>Faresay Ltd</span><span>·</span><span>25 June 2026</span>
+    </div>
+  </div>
+  <div class="content"><blockquote>
+<p>The people behind the beachhead. When marketing gets hard, come back here and ask: <em>what would
+Sarah search, read, trust, and click?</em> Companion to <code>gtm-strategy.md</code>. Personas are illustrative
+archetypes — refine with real client interviews. Last updated: [PLACEHOLDER: date]</p>
+</blockquote>
+<hr />
+<h2 id="primary-persona-sarah-the-one-we-build-for-first">Primary persona — "Sarah" (the one we build for first)</h2>
+<p><strong>Sarah, 34 · British · living in Tokyo · corporate professional</strong></p>
+<ul>
+<li><strong>Situation:</strong> relocated ~18 months ago for work. Competent and busy on the outside; isolated
+  underneath. Friends and family are 8 time zones away. Doesn't speak enough Japanese to navigate
+  local mental-health services, and isn't sure they'd "get" her anyway.</li>
+<li><strong>What she's feeling:</strong> loneliness, low-level anxiety, identity wobble ("who am I here?"), strain
+  on a long-distance or cross-cultural relationship, pressure to seem fine.</li>
+<li><strong>What she wants:</strong> to talk to someone <strong>in English</strong> who <strong>understands expat life</strong> — without
+  flying home, without a months-long waitlist, without explaining the basics of being an outsider.</li>
+<li><strong>Trigger:</strong> a bad week. She opens Google at 11pm and types <strong>"English speaking therapist Tokyo"</strong>
+  or <strong>"online therapy for expats."</strong></li>
+<li><strong>Objections / friction:</strong> <em>Is this person actually qualified? Will they understand my situation?
+  What's the time difference for sessions? How much, and can I cancel? Is my data private?</em></li>
+<li><strong>Where she spends time:</strong> Google, expat <strong>Facebook groups</strong> ("Tokyo Expats", "British in Japan"),
+  <strong>Reddit</strong> (r/Tokyo, r/expats, r/japanlife), LinkedIn, Instagram.</li>
+<li><strong>Why Faresay wins her:</strong> the page she lands on is <strong>about her life</strong>, the therapist is <strong>verified
+  and English-speaking with cross-cultural experience</strong>, booking shows <strong>her timezone</strong>, the price is
+  clear, and someone <strong>replies quickly</strong>. Trust, fit, no friction.</li>
+</ul>
+<p><strong>Her one-line job-to-be-done:</strong> <em>"Help me find a therapist who understands what it's like to live
+here as a foreigner — quickly, in English, that I can trust."</em></p>
+<hr />
+<h2 id="secondary-persona-marco-breadth-check">Secondary persona — "Marco" (breadth check)</h2>
+<p><strong>Marco, 41 · Italian · living in Singapore · senior tech/finance</strong></p>
+<ul>
+<li><strong>Situation:</strong> high earner, high stress, frequent mover (3rd country in 8 years). Burnout building;
+  marriage strained by relocations; doesn't want a colleague to know he's struggling.</li>
+<li><strong>Wants:</strong> discreet, professional, English-speaking therapy that fits a packed calendar across
+  time zones; quality over price.</li>
+<li><strong>Searches:</strong> "confidential online therapy", "executive stress therapist", "therapy for expats Singapore".</li>
+<li><strong>Why Faresay:</strong> privacy + verified quality + timezone-aware booking; price is not the barrier —
+  <strong>trust and fit</strong> are. (Validates the higher expat price point in <code>financial-model.md</code>.)</li>
+</ul>
+<hr />
+<h2 id="secondary-persona-aisha-corridor-breadth">Secondary persona — "Aisha" (corridor breadth)</h2>
+<p><strong>Aisha, 29 · British-Pakistani · living in Dubai · marketing professional</strong></p>
+<ul>
+<li><strong>Situation:</strong> moved for a great job; loves it but feels culturally between worlds; family pressure
+  back home; few people she can be fully open with.</li>
+<li><strong>Wants:</strong> a therapist who understands <strong>identity, belonging and bicultural life</strong> — culturally
+  sensitive, English-speaking, non-judgemental.</li>
+<li><strong>Searches:</strong> "therapist who understands cultural identity", "English therapist Dubai", "online
+  therapy expats UAE".</li>
+<li><strong>Why Faresay:</strong> the positioning ("therapy that understands international life") and the ability to
+  filter for a therapist with relevant cultural/identity experience.</li>
+</ul>
+<hr />
+<h2 id="how-to-use-these-personas">How to use these personas</h2>
+<ul>
+<li><strong>Channels:</strong> go where they actually are (§3 of <code>gtm-strategy.md</code>) — their Facebook groups,
+  subreddits, search terms.</li>
+<li><strong>Messaging:</strong> write to Sarah's 11pm feeling, not to "the mental-health market."</li>
+<li><strong>Product:</strong> the objections above are a backlog — verified badges, timezone display, clear pricing,
+  fast response, privacy assurances (see <code>product-requirements-document.md</code>).</li>
+<li><strong>SEO:</strong> their literal searches are your landing-page titles.</li>
+<li><strong>Refine:</strong> replace these archetypes with <strong>real client interviews</strong> as soon as you have clients.
+  [RESEARCH NEEDED: 5–10 interviews with early expat clients to validate triggers, objections, channels.]</li>
+</ul></div>
+  <footer class="lh">
+    <div class="org">Faresay</div>
+    <div><a href="https://faresay.com">faresay.com</a> · <a href="mailto:enquiries@faresay.com">enquiries@faresay.com</a> · <a href="mailto:legal@faresay.com">legal@faresay.com</a></div>
+    <div style="margin-top:6px;">Confidential. This document and its contents are the property of Faresay and are intended solely for the named recipient.</div>
+  </footer>
+</div></body></html>

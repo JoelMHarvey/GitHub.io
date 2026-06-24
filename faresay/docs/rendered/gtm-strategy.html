@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faresay — Go-To-Market Strategy (v1)</title><style>
+:root { --teal:#1F6F6B; --dark:#15514e; }
+* { box-sizing:border-box; }
+html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:#2b3338; line-height:1.6; margin:0; background:#eceff0; }
+.page { max-width:820px; margin:24px auto; background:#fff; padding:0 0 8px;
+  box-shadow:0 1px 6px rgba(0,0,0,.12); border-radius:6px; overflow:hidden; }
+header.lh { display:flex; align-items:center; justify-content:space-between;
+  padding:26px 56px 18px; border-bottom:3px solid var(--teal); }
+header.lh .brand { display:flex; align-items:center; gap:12px; }
+header.lh .wm { font-size:26px; font-weight:700; letter-spacing:.5px; color:var(--dark); }
+header.lh .tag { font-size:13px; color:#6b7a80; }
+.titleblock { padding:30px 56px 4px; }
+.titleblock h1.doc { font-size:30px; color:var(--dark); margin:0 0 10px; line-height:1.2; }
+.meta { font-size:12.5px; color:#6b7a80; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px;
+  padding:4px 10px; border-radius:999px; text-transform:uppercase; }
+.badge.conf { background:#e7f1f0; color:var(--dark); }
+.badge.draft { background:#fdf3e7; color:#9a5b14; border:1px solid #f0d6ad; }
+.content { padding:8px 56px 40px; }
+.content h1 { font-size:23px; color:var(--dark); border-bottom:1px solid #e6eaea;
+  padding-bottom:6px; margin:34px 0 14px; }
+.content h2 { font-size:19px; color:var(--dark); margin:28px 0 10px; }
+.content h3 { font-size:16px; color:#33474a; margin:22px 0 8px; }
+.content p { margin:10px 0; }
+.content ul,.content ol { margin:10px 0; padding-left:22px; }
+.content li { margin:4px 0; }
+.content a { color:var(--teal); }
+.content code { background:#f1f4f4; padding:1px 5px; border-radius:4px; font-size:13px;
+  font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+.content pre { background:#f5f7f7; border:1px solid #e6eaea; border-radius:6px;
+  padding:14px 16px; overflow:auto; }
+.content pre code { background:none; padding:0; }
+.content blockquote { margin:14px 0; padding:8px 18px; border-left:4px solid var(--teal);
+  background:#f6faf9; color:#42565a; }
+.content table { border-collapse:collapse; width:100%; margin:16px 0; font-size:13.5px; }
+.content th { background:var(--teal); color:#fff; text-align:left; padding:9px 12px; }
+.content td { border-bottom:1px solid #e6eaea; padding:8px 12px; vertical-align:top; }
+.content tr:nth-child(even) td { background:#f7faf9; }
+.content hr { border:0; border-top:1px solid #e6eaea; margin:26px 0; }
+footer.lh { border-top:1px solid #e6eaea; margin:0 56px; padding:14px 0 18px;
+  font-size:11.5px; line-height:1.5; color:#8a979d; }
+footer.lh .org { font-weight:600; color:#5a6a70; }
+footer.lh a { color:var(--teal); text-decoration:none; }
+@media print {
+  body { background:#fff; }
+  .page { box-shadow:none; margin:0; max-width:none; border-radius:0; }
+  header.lh, .titleblock, .content, footer.lh { padding-left:0; padding-right:0; }
+  header.lh, footer.lh { margin:0; }
+  .content h1, .content h2, .content h3 { page-break-after:avoid; }
+  .content table, .content pre, .content blockquote { page-break-inside:avoid; }
+  @page { size:A4; margin:18mm 16mm; }
+}
+</style></head>
+<body><div class="page">
+  <header class="lh">
+    <div class="brand"><svg width="34" height="34" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#1F6F6B"/><path d="M9 18c0-3 2-5 5-5s5 2 5 5M9.5 11.5c.8-1.2 2.3-2 4.5-2s3.7.8 4.5 2" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg><span class="wm">Faresay</span></div>
+    <span class="tag">Therapy, matched.</span>
+  </header>
+  <div class="titleblock">
+    <h1 class="doc">Go-To-Market Strategy (v1)</h1>
+    <div class="meta">
+      <span class="badge conf">Confidential</span>
+      <span>Faresay Ltd</span><span>·</span><span>25 June 2026</span>
+    </div>
+  </div>
+  <div class="content"><blockquote>
+<p>Companion to <code>business-plan.md</code>. The business plan explains <strong>why</strong> Faresay might work; this
+document explains <strong>how the first 100 → 1,000 → 10,000 paying clients arrive.</strong> Beachhead:
+English-speaking expatriates. CAC/price assumptions tie to <code>financial-model.md</code>. Personas:
+<code>customer-persona.md</code>. Directional — validate each number with real data.
+Last updated: [PLACEHOLDER: date]</p>
+<p><strong>The test this document must pass:</strong> the business plan lets a reader <em>understand</em> Faresay. This
+document should tell the founder <em>exactly what to do on Monday morning to get the first customer.</em></p>
+</blockquote>
+<hr />
+<h2 id="1-beachhead-customer">1. Beachhead customer</h2>
+<p><strong>English-speaking expatriates, 25–55, living overseas, paying privately</strong>, seeking therapy for
+<strong>stress, isolation, relationships, or cultural adjustment.</strong></p>
+<ul>
+<li><strong>First corridor (pick ONE to start):</strong> the city/country where the <strong>founder's network and presence
+  are strongest</strong> — candidate: <strong>Tokyo / Japan</strong> (founder is based there). One corridor, proven,
+  before a second. [PLACEHOLDER: confirm first corridor.]</li>
+<li><strong>Who they are in detail:</strong> see <code>customer-persona.md</code> (Sarah, Tokyo — the persona the team returns
+  to when marketing gets hard).</li>
+<li><strong>Why them:</strong> underserved for culturally-fluent English-language therapy, naturally cash-pay,
+  concentrated and reachable online, founder-fit.</li>
+</ul>
+<h2 id="2-positioning">2. Positioning</h2>
+<p><strong>"Therapy that understands international life."</strong></p>
+<ul>
+<li><strong>One-liner:</strong> Faresay helps English-speaking people abroad find a trusted therapist who <em>gets</em>
+  expat life — relocation, isolation, identity, belonging.</li>
+<li><strong>Message pillars:</strong> (1) <strong>cross-cultural understanding</strong>, (2) <strong>trust</strong> — every therapist
+  verified, licensed, interviewed, (3) <strong>English-speaking &amp; culturally fluent</strong>, (4) <strong>timezone-
+  friendly</strong> booking, (5) <strong>fair, transparent price.</strong></li>
+<li><strong>Not:</strong> a generic global therapy app; not crisis care; not "cheapest."</li>
+</ul>
+<h2 id="3-acquisition-channels-ranked-by-fit-cost-control">3. Acquisition channels (ranked by fit · cost · control)</h2>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Motion</th>
+<th>Cost</th>
+<th>Role in first 100</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Intent SEO</strong> ("English therapist Tokyo", "therapist for expats", "relocation stress")</td>
+<td>Founder-written corridor/intent landing pages</td>
+<td>Founder time</td>
+<td><strong>Primary</strong> — highest intent, compounding</td>
+</tr>
+<tr>
+<td><strong>Expat communities</strong> (Facebook groups, Reddit r/expats + city subs, Discord)</td>
+<td>Genuinely helpful posts, AMAs, answers — <em>not</em> ads</td>
+<td>Free</td>
+<td><strong>Primary</strong> — trust + referrals</td>
+</tr>
+<tr>
+<td><strong>LinkedIn — founder content</strong></td>
+<td>Founder narrative on expat mental health</td>
+<td>Founder time</td>
+<td>Trust, inbound, recruiting therapists</td>
+</tr>
+<tr>
+<td><strong>Therapist referrals</strong></td>
+<td>Therapists refer clients <em>and</em> therapists</td>
+<td>Rev-share/built-in</td>
+<td>Compounds supply + demand</td>
+</tr>
+<tr>
+<td><strong>Partnerships</strong> (relocation firms, international schools, employers, expat associations)</td>
+<td>Warm intros, content swaps, referral deals</td>
+<td>Founder time</td>
+<td>Scales after first 100</td>
+</tr>
+<tr>
+<td><strong>Paid search</strong> (small, measured)</td>
+<td>Google Ads on proven intent terms</td>
+<td>£300–500/mo cap</td>
+<td><strong>Only after</strong> organic proves conversion</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Principle: <strong>earn the first 100 with founder-led, low-cost, high-trust channels</strong> (SEO + community
++ referrals). Paid is a scaling tool you switch on <em>after</em> you know the funnel converts — not a
+crutch to find product-market fit.</p>
+</blockquote>
+<h2 id="4-cac-assumptions-tie-to-financial-modelmd">4. CAC assumptions (tie to <code>financial-model.md</code>)</h2>
+<ul>
+<li><strong>Stage-0 ceiling: blended CAC &lt; £100.</strong> Aim materially lower via organic/referral.</li>
+<li><strong>Why low CAC is non-negotiable:</strong> at an expat price of <strong>£120 × 15% ≈ £18/session (~£14.20 after
+  processing)</strong>, CAC must stay <strong>under ~£57 to pay back within 4 sessions</strong> (Stage-0 target). An
+  organic-heavy mix is the only way the 15% take pays back fast.</li>
+<li><strong>Funnel metrics to track per channel:</strong> <strong>cost per lead (CPL) → cost per booked consultation →
+  CAC → month-2 retention.</strong> A channel earns more budget only when its CAC + conversion clear the bar.</li>
+</ul>
+<h2 id="5-first-year-growth-the-100-1000-10000-motion">5. First-year growth — the 100 → 1,000 → 10,000 motion</h2>
+<p><strong>First 100 (Stage 0, ~6 months):</strong> one corridor, founder-led. Seed a small verified therapist panel
+→ publish corridor/intent SEO pages → show up helpfully in 3–5 expat communities → manual outreach
+to relocation contacts → first bookings. Gate: hit Stage 0 (100 paying clients, CAC &lt; £100, payback
+≤ ~4 sessions, retention &gt; 60% m2) <strong>before</strong> opening a second corridor.</p>
+<p><strong>First 1,000:</strong> replicate the proven playbook across <strong>2–3 more corridors</strong>; scale SEO surface area;
+turn on the <strong>referral flywheel</strong> (clients refer clients, therapists refer therapists); begin small,
+measured <strong>paid</strong> on the terms that converted; first <strong>partnership</strong> pilots.</p>
+<p><strong>First 10,000:</strong> multi-corridor brand for "therapy for globally mobile people"; partnerships at
+scale (relocation/employers/schools); paid scaled only where unit economics hold; referral + data +
+reputation moats compounding (see <code>business-plan.md</code> §12).</p>
+<h2 id="6-experiments-to-run">6. Experiments to run</h2>
+<p>Each experiment: <strong>hypothesis · channel · spend · metric · duration · decision rule.</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Experiment</th>
+<th>Hypothesis</th>
+<th>Spend</th>
+<th>Primary metric</th>
+<th>Run</th>
+<th>Decide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>Corridor/intent <strong>SEO pages</strong></td>
+<td>Expats search high-intent terms we can rank for</td>
+<td>Founder time</td>
+<td>Organic visitors → consult bookings</td>
+<td>8–12 wks</td>
+<td>Scale pages if booked-consults/page &gt; target</td>
+</tr>
+<tr>
+<td>E2</td>
+<td><strong>Expat-community value posts</strong></td>
+<td>Helpful presence drives trust + referrals</td>
+<td>Free</td>
+<td>Referral clicks → signups</td>
+<td>4–6 wks</td>
+<td>Double down on groups that convert; drop dead ones</td>
+</tr>
+<tr>
+<td>E3</td>
+<td><strong>LinkedIn founder narrative</strong></td>
+<td>Founder story builds inbound trust</td>
+<td>Founder time</td>
+<td>Inbound enquiries, follower→signup</td>
+<td>6–8 wks</td>
+<td>Keep if inbound CAC &lt; £100</td>
+</tr>
+<tr>
+<td>E4</td>
+<td><strong>Small Google Ads</strong> test</td>
+<td>Paid intent converts within CAC ceiling</td>
+<td>£300–500/mo</td>
+<td>CPL, CAC, payback sessions</td>
+<td>4–6 wks</td>
+<td>Scale if CAC &lt; ~£57; pause if &gt; £100</td>
+</tr>
+<tr>
+<td>E5</td>
+<td><strong>Therapist-referral incentive</strong></td>
+<td>Therapists bring clients + peers</td>
+<td>Rev-share</td>
+<td>Referred signups, referred-therapist joins</td>
+<td>8 wks</td>
+<td>Keep if referred-CAC &lt; organic blended</td>
+</tr>
+<tr>
+<td>E6</td>
+<td><strong>Relocation-firm partnership</strong> pilot</td>
+<td>A warm channel delivers qualified expats</td>
+<td>Founder time</td>
+<td>Referred consults, conversion</td>
+<td>8–12 wks</td>
+<td>Pursue if a partner yields repeatable referrals</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-criteria-for-success-failure">7. Criteria for success / failure</h2>
+<p><strong>Per channel (kill or scale):</strong>
+- <strong>Scale</strong> a channel when its <strong>CAC &lt; £100 (ideally &lt; £57)</strong>, it produces booked consultations, and
+  those clients <strong>retain &gt; 60% at month 2.</strong>
+- <strong>Kill / pause</strong> a channel when CAC stays <strong>&gt; £100</strong> after a defined spend/effort window, or it
+  produces leads that don't book or don't retain.</p>
+<p><strong>Stage-0 go/no-go (the master gate):</strong> proceed to corridor #2 <strong>only</strong> when, in corridor #1:
+<strong>100 paying clients · blended CAC &lt; £100 · payback ≤ ~4 sessions · month-2 retention &gt; 60% · 25
+verified therapists.</strong> If any miss → <strong>fix the funnel before spending to scale</strong>, don't paper over it
+with a second market.</p>
+<h2 id="8-monday-morning-playbook-getting-client-1-this-week">8. Monday-morning playbook — getting client #1 this week</h2>
+<ol>
+<li><strong>Pick the corridor</strong> and write it down (e.g. Tokyo). Everything below is for that one corridor.</li>
+<li><strong>Confirm 3–5 verified therapists</strong> are live and bookable in it (seed the panel; real, verified).</li>
+<li><strong>Publish one SEO landing page</strong> for the top intent term (e.g. "English-speaking therapist in
+   Tokyo") with the positioning from §2 and a clear booking CTA.</li>
+<li><strong>Post genuinely useful content</strong> (not an ad) in <strong>3 expat communities</strong> for that corridor,
+   answering a real question and mentioning Faresay where relevant.</li>
+<li><strong>Publish one LinkedIn post</strong> as the founder: why expat mental health is hard and what you're building.</li>
+<li><strong>DM 10 warm contacts</strong> (relocation agents, community admins, expat friends) asking them to share.</li>
+<li><strong>Instrument everything</strong> (Plausible + a simple CPL/booking tracker) so you can see what converted.</li>
+<li><strong>Reply fast</strong> to the first enquiries — response time <em>is</em> the product (trust). Book the first consult.</li>
+</ol>
+<h2 id="9-first-marketing-plan-operational-table-directional">9. First marketing plan (operational table — directional)</h2>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Budget</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Ads</td>
+<td>£300–500/month (cap, measured)</td>
+<td>~10 booked consults/mo once CAC proven</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>Founder time</td>
+<td>50 organic visitors/day to corridor pages</td>
+</tr>
+<tr>
+<td>LinkedIn</td>
+<td>Founder posts (2–3/wk)</td>
+<td>Trust + inbound enquiries</td>
+</tr>
+<tr>
+<td>Expat forums/communities</td>
+<td>Free</td>
+<td>Referrals + organic signups</td>
+</tr>
+<tr>
+<td>Therapist referrals</td>
+<td>Rev-share</td>
+<td>Compounding supply + demand</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>This becomes a full <strong>marketing plan</strong> (content calendar, ad campaigns, funnels, analytics) once the
+business is running and a channel is proven — that's a later, operational document, not this one.</p>
+</blockquote>
+<h2 id="10-linked-documents">10. Linked documents</h2>
+<ul>
+<li><code>business-plan.md</code> (why) · <code>customer-persona.md</code> (who) · <code>financial-model.md</code> (CAC/price math)</li>
+<li><code>market-research-synthesis.md</code> · <code>business-model-canvas.md</code></li>
+</ul></div>
+  <footer class="lh">
+    <div class="org">Faresay</div>
+    <div><a href="https://faresay.com">faresay.com</a> · <a href="mailto:enquiries@faresay.com">enquiries@faresay.com</a> · <a href="mailto:legal@faresay.com">legal@faresay.com</a></div>
+    <div style="margin-top:6px;">Confidential. This document and its contents are the property of Faresay and are intended solely for the named recipient.</div>
+  </footer>
+</div></body></html>

@@ -12,15 +12,14 @@ get approval, then make the change (or have Joel make it).
 - **DNS:** Cloudflare. **Site host:** Vercel. → Use **Cloudflare Email Routing** (free) for the
   forwards. It only adds MX/TXT records; it does **not** affect the Vercel site (A/CNAME for the
   web app are untouched).
-- **Destination mailbox: DEDICATED (chosen by Joel).** A new mailbox separate from Joel's
-  personal Gmail — e.g. `faresay.agent@gmail.com`, or a Google Workspace user on faresay.com.
-  This dedicated mailbox is the one that must be **connected to the Gmail tools** (repoint the
-  Claude Gmail connector to it), and is the **destination** for the Cloudflare forwards.
-  The agent does **not** create labels in or otherwise touch Joel's personal inbox.
+- **Destination mailbox: DEDICATED — `totallycosmicturtle@gmail.com`** (chosen by Joel; separate
+  from his personal Gmail). This mailbox is the Cloudflare-forwarding **destination** and is the
+  one that must be **connected to the Gmail tools** (point the Claude Gmail connector at it). The
+  agent does **not** touch Joel's personal inbox.
 
-  **Prerequisite order:** (1) create the dedicated mailbox → (2) repoint the Gmail connector to
-  it → (3) do the Cloudflare routing below → (4) agent creates `faresay/*` labels and begins
-  triage in the dedicated mailbox.
+  **Prerequisite order:** (1) Cloudflare Email Routing → forward `legal@`/`enquiries@` to
+  `totallycosmicturtle@gmail.com` → (2) point the Gmail connector at that mailbox → (3) agent
+  creates `faresay/*` labels and begins triage there.
 
 ## Primary path — Cloudflare Email Routing (Joel does this in the dashboard)
 
@@ -29,12 +28,15 @@ exact values and verifies delivery afterward.
 
 1. Cloudflare dashboard → select `faresay.com` → **Email** → **Email Routing** → enable.
    Cloudflare auto-adds the required **MX** and **TXT (SPF)** records — accept them.
-2. **Destination addresses:** add the agent mailbox address and click the Cloudflare
+2. **Destination addresses:** add `totallycosmicturtle@gmail.com` and click the Cloudflare
    verification link sent to it (the agent can read that verification email via the Gmail tools
    and surface the link to Joel).
 3. **Custom addresses:** create two routes —
-   - `legal@faresay.com` → **Send to** → agent mailbox
-   - `enquiries@faresay.com` → **Send to** → agent mailbox
+   - `legal@faresay.com` → **Send to** → `totallycosmicturtle@gmail.com`
+   - `enquiries@faresay.com` → **Send to** → `totallycosmicturtle@gmail.com`
+   - ⚠️ Check first for any **existing MX/SPF** records on faresay.com and resolve conflicts before
+     enabling (two MX setups will fight). Email Routing only adds MX + TXT — Vercel web records
+     (A/CNAME) are untouched.
 4. **DMARC (recommended):** add a TXT record `_dmarc.faresay.com` →
    `v=DMARC1; p=none; rua=mailto:legal@faresay.com` to start in monitoring mode.
 

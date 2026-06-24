@@ -45,6 +45,8 @@ META = {
     "business-plan.md": ("Business Plan", CONF),
     "gtm-strategy.md": ("Go-To-Market Strategy (v1)", CONF),
     "customer-persona.md": ("Customer Personas", CONF),
+    "validation-experiment.md": ("Validation Experiment", CONF),
+    "cross-border-legal-gate.md": ("Cross-Border Legal Gate", CONF),
     "market-research-synthesis.md": ("Market Research Synthesis", CONF),
     "business-model-canvas.md": ("Business Model Canvas", CONF),
     "product-requirements-document.md": ("Product Requirements Document", CONF),

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faresay — Validation Experiment — Setup Runbook</title><style>
+:root { --teal:#1F6F6B; --dark:#15514e; }
+* { box-sizing:border-box; }
+html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:#2b3338; line-height:1.6; margin:0; background:#eceff0; }
+.page { max-width:820px; margin:24px auto; background:#fff; padding:0 0 8px;
+  box-shadow:0 1px 6px rgba(0,0,0,.12); border-radius:6px; overflow:hidden; }
+header.lh { display:flex; align-items:center; justify-content:space-between;
+  padding:26px 56px 18px; border-bottom:3px solid var(--teal); }
+header.lh .brand { display:flex; align-items:center; gap:12px; }
+header.lh .wm { font-size:26px; font-weight:700; letter-spacing:.5px; color:var(--dark); }
+header.lh .tag { font-size:13px; color:#6b7a80; }
+.titleblock { padding:30px 56px 4px; }
+.titleblock h1.doc { font-size:30px; color:var(--dark); margin:0 0 10px; line-height:1.2; }
+.meta { font-size:12.5px; color:#6b7a80; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px;
+  padding:4px 10px; border-radius:999px; text-transform:uppercase; }
+.badge.conf { background:#e7f1f0; color:var(--dark); }
+.badge.draft { background:#fdf3e7; color:#9a5b14; border:1px solid #f0d6ad; }
+.content { padding:8px 56px 40px; }
+.content h1 { font-size:23px; color:var(--dark); border-bottom:1px solid #e6eaea;
+  padding-bottom:6px; margin:34px 0 14px; }
+.content h2 { font-size:19px; color:var(--dark); margin:28px 0 10px; }
+.content h3 { font-size:16px; color:#33474a; margin:22px 0 8px; }
+.content p { margin:10px 0; }
+.content ul,.content ol { margin:10px 0; padding-left:22px; }
+.content li { margin:4px 0; }
+.content a { color:var(--teal); }
+.content code { background:#f1f4f4; padding:1px 5px; border-radius:4px; font-size:13px;
+  font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+.content pre { background:#f5f7f7; border:1px solid #e6eaea; border-radius:6px;
+  padding:14px 16px; overflow:auto; }
+.content pre code { background:none; padding:0; }
+.content blockquote { margin:14px 0; padding:8px 18px; border-left:4px solid var(--teal);
+  background:#f6faf9; color:#42565a; }
+.content table { border-collapse:collapse; width:100%; margin:16px 0; font-size:13.5px; }
+.content th { background:var(--teal); color:#fff; text-align:left; padding:9px 12px; }
+.content td { border-bottom:1px solid #e6eaea; padding:8px 12px; vertical-align:top; }
+.content tr:nth-child(even) td { background:#f7faf9; }
+.content hr { border:0; border-top:1px solid #e6eaea; margin:26px 0; }
+footer.lh { border-top:1px solid #e6eaea; margin:0 56px; padding:14px 0 18px;
+  font-size:11.5px; line-height:1.5; color:#8a979d; }
+footer.lh .org { font-weight:600; color:#5a6a70; }
+footer.lh a { color:var(--teal); text-decoration:none; }
+@media print {
+  body { background:#fff; }
+  .page { box-shadow:none; margin:0; max-width:none; border-radius:0; }
+  header.lh, .titleblock, .content, footer.lh { padding-left:0; padding-right:0; }
+  header.lh, footer.lh { margin:0; }
+  .content h1, .content h2, .content h3 { page-break-after:avoid; }
+  .content table, .content pre, .content blockquote { page-break-inside:avoid; }
+  @page { size:A4; margin:18mm 16mm; }
+}
+</style></head>
+<body><div class="page">
+  <header class="lh">
+    <div class="brand"><svg width="34" height="34" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#1F6F6B"/><path d="M9 18c0-3 2-5 5-5s5 2 5 5M9.5 11.5c.8-1.2 2.3-2 4.5-2s3.7.8 4.5 2" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg><span class="wm">Faresay</span></div>
+    <span class="tag">Therapy, matched.</span>
+  </header>
+  <div class="titleblock">
+    <h1 class="doc">Validation Experiment — Setup Runbook</h1>
+    <div class="meta">
+      <span class="badge conf">Confidential</span>
+      <span>Faresay Ltd</span><span>·</span><span>25 June 2026</span>
+    </div>
+  </div>
+  <div class="content"><blockquote>
+<p>The hands-on steps to run the demand test in <code>validation-experiment.md</code>. <strong>Mode chosen:
+demand-only, corridor-agnostic</strong> — measure intent + price tolerance + CAC with <strong>no therapy
+delivered and zero legal exposure during the test.</strong> Assets live in <code>faresay/validation/</code>
+(<code>index.html</code> landing page, <code>funnel-tracker.csv</code>). Budget: ~£150 + a domain. Last updated: [PLACEHOLDER: date]</p>
+</blockquote>
+<hr />
+<h2 id="what-were-measuring-and-the-honest-promise">What we're measuring (and the honest promise)</h2>
+<ul>
+<li><strong>Intent</strong> — <code>Lead</code> event (early-list signup).</li>
+<li><strong>Price tolerance</strong> — <code>PriceIntent_120</code> event (clicked "Reserve my first session" at the £120 price).</li>
+<li><strong>CAC</strong> — cost per lead, organic vs paid.</li>
+</ul>
+<p>No session is delivered. Everyone who reserves is told honestly they're on a <strong>priority list</strong>, with
+<strong>no charge</strong>. This sidesteps the cross-border legal gate entirely for the test phase.</p>
+<h2 id="setup-checklist-an-afternoon">Setup checklist (≈ an afternoon)</h2>
+<h3 id="1-edit-the-landing-page-3-placeholders">1. Edit the landing page (3 placeholders)</h3>
+<p>Open <code>faresay/validation/index.html</code>, replace:
+- <code>PLAUSIBLE_DOMAIN</code> → the domain you'll deploy to (e.g. <code>try.faresay.com</code>).
+- <code>FORM_ENDPOINT</code> → your lead-capture POST URL (see step 3). <em>(Left as-is, the page still works and
+  shows the thank-you — it just won't store emails. Set it so you capture leads.)</em>
+- <code>[FOUNDER_NAME]</code> / <code>[FOUNDER_EMAIL]</code> → your name + a real reply address. (Swap the <code>JH</code> avatar
+  initials too, or drop in a real photo <code>&lt;img&gt;</code>.)</p>
+<h3 id="2-deploy-it-pick-one-all-free">2. Deploy it (pick one — all free)</h3>
+<ul>
+<li><strong>Netlify Drop</strong> (easiest): drag the <code>faresay/validation/</code> folder onto app.netlify.com/drop → instant URL.</li>
+<li><strong>Vercel:</strong> <code>vercel</code> in the folder, or import as a static project.</li>
+<li><strong>GitHub Pages / Cloudflare Pages:</strong> point at the folder.</li>
+<li>Optional: add a subdomain like <code>try.faresay.com</code> (CNAME to the host) so it's on-brand.</li>
+</ul>
+<h3 id="3-lead-capture-one-of">3. Lead capture (one of)</h3>
+<ul>
+<li><strong>Formspree</strong> (formspree.io) or <strong>Basin</strong> — create a form, paste its POST URL into <code>FORM_ENDPOINT</code>.
+  The page submits via fetch and shows the inline thank-you. Leads land in your inbox/dashboard.</li>
+<li><strong>Tally / Google Form</strong> — alternatively embed one and skip <code>FORM_ENDPOINT</code>.</li>
+</ul>
+<h3 id="4-analytics-plausible-you-already-use-it">4. Analytics — Plausible (you already use it)</h3>
+<ul>
+<li>Add the <strong>deploy domain</strong> as a site in Plausible.</li>
+<li>Create two <strong>custom-event goals</strong>: <code>Lead</code> and <code>PriceIntent_120</code> (and optionally <code>CTA_Hero</code>).</li>
+<li>That's it — the page already fires these events.</li>
+</ul>
+<h3 id="5-paid-traffic-google-ads-150-cap">5. Paid traffic — Google Ads (£150 cap)</h3>
+<ul>
+<li>New Search campaign, objective <strong>Leads</strong>, <strong>£5–10/day</strong> (≈ £150 over 3 weeks).</li>
+<li><strong>Conversion:</strong> import the Plausible <code>Lead</code> goal, or set a Google Ads conversion on the thank-you
+  state. Track <strong>cost per lead</strong> directly.</li>
+<li><strong>Geo:</strong> target English-speaking expat hubs (e.g. Japan, Singapore, UAE, Hong Kong, major EU
+  cities) — language: English.</li>
+<li><strong>Keywords (exact/phrase), broad-expat intent:</strong></li>
+<li><code>english speaking therapist abroad</code>, <code>therapist for expats</code>, <code>online therapy for expats</code>,
+    <code>expat therapy</code>, <code>english speaking counsellor abroad</code>, <code>therapy living abroad</code>,
+    <code>expat mental health</code>, <code>culture shock therapy</code>, <code>relocation stress therapy</code>.</li>
+<li><strong>Ad copy (starting point):</strong></li>
+<li>H: <em>Therapy that understands expat life</em> · <em>English-speaking, verified therapists</em></li>
+<li>D: <em>Living abroad is hard. Talk to a therapist who gets it — verified, English-speaking, in your timezone. Join the early list.</em></li>
+<li>Negative keywords: <code>free</code>, <code>jobs</code>, <code>training</code>, <code>course</code>, <code>salary</code>.</li>
+</ul>
+<h3 id="6-organic-traffic-founder-time-heed-the-rules">6. Organic traffic (founder time — heed the rules)</h3>
+<ul>
+<li><strong>Reddit/Facebook expat communities ban self-promo.</strong> Do NOT drop links. Build standing: answer
+  real questions for a week, then either (a) ask an admin's permission for one value-add post, or
+  (b) put the link only where rules allow (some subs have a "promo" day / classifieds thread).</li>
+<li><strong>LinkedIn:</strong> one founder post — why expat mental health is hard + the early-list link.</li>
+<li>Tag organic traffic with a UTM (e.g. <code>?utm_source=reddit</code>) so Plausible separates it from paid.</li>
+</ul>
+<h3 id="7-run-for-3-weeks-log-weekly-in-funnel-trackercsv">7. Run for ~3 weeks, log weekly in <code>funnel-tracker.csv</code></h3>
+<p>Fill organic vs paid each week; the OUTPUT rows compute conversion %, cost per lead, cost per
+price-intent.</p>
+<h2 id="decision-rules-set-now-dont-move-them">Decision rules (set now — don't move them)</h2>
+<ul>
+<li><strong>KILL (thesis):</strong> &lt; ~10 leads <strong>organically</strong> in 3 weeks → the cheap high-trust engine doesn't exist.</li>
+<li><strong>KILL (paid):</strong> paid <strong>cost-per-lead &gt; ~£40</strong> before any delivery → paid can't carry it.</li>
+<li><strong>KILL (price):</strong> leads sign up but <strong><code>PriceIntent_120</code> rate ≈ 0</strong> → £120 willingness-to-pay is false.</li>
+<li><strong>PASS:</strong> ≥ ~20 leads <strong>and</strong> Lead→Price-intent <strong>&gt; ~25%</strong> <strong>and</strong> blended cost-per-lead projects a
+  CAC <strong>&lt; ~£57</strong> → proceed.</li>
+</ul>
+<h2 id="if-it-passes-next-three-moves-in-order">If it PASSES — next three moves (in order)</h2>
+<ol>
+<li><strong>Cross-border legal memo</strong> for the cleanest corridor (<code>cross-border-legal-gate.md</code>) before any supply spend.</li>
+<li><strong>Seed 5–6 founding therapists</strong> who bring a client book; concentrate demand (<code>gtm-strategy.md</code>).</li>
+<li>Run the <strong>30-day operator plan</strong> (<code>gtm-strategy.md</code> §8) on the proven funnel.</li>
+</ol>
+<h2 id="ethics-safety-notes">Ethics / safety notes</h2>
+<ul>
+<li>Be honest: no charge, priority list, "not a crisis service" stated on the page and thank-you.</li>
+<li>Don't collect more data than email + (optional) country + free-text. Don't store anything sensitive.</li>
+<li>If a respondent signals crisis, reply pointing to local emergency/crisis resources — do not attempt support.</li>
+</ul>
+<h2 id="linked-documents">Linked documents</h2>
+<ul>
+<li><code>validation-experiment.md</code> (the why + kill/pass) · <code>gtm-strategy.md</code> (funnel + 30-day plan)</li>
+<li><code>cross-border-legal-gate.md</code> (corridor choice for after a pass) · <code>financial-model.md</code> (£120/CAC math)</li>
+<li>Assets: <code>faresay/validation/index.html</code> · <code>faresay/validation/funnel-tracker.csv</code></li>
+</ul></div>
+  <footer class="lh">
+    <div class="org">Faresay</div>
+    <div><a href="https://faresay.com">faresay.com</a> · <a href="mailto:enquiries@faresay.com">enquiries@faresay.com</a> · <a href="mailto:legal@faresay.com">legal@faresay.com</a></div>
+    <div style="margin-top:6px;">Confidential. This document and its contents are the property of Faresay and are intended solely for the named recipient.</div>
+  </footer>
+</div></body></html>

@@ -43,6 +43,8 @@ META = {
     "uk-crisis-safeguarding-policy.md": ("UK Crisis & Safeguarding Policy", DRAFT),
     "uk-security-data-protection-policy.md": ("UK Security & Data Protection Policy", DRAFT),
     "business-plan.md": ("Business Plan", CONF),
+    "gtm-strategy.md": ("Go-To-Market Strategy (v1)", CONF),
+    "customer-persona.md": ("Customer Personas", CONF),
     "market-research-synthesis.md": ("Market Research Synthesis", CONF),
     "business-model-canvas.md": ("Business Model Canvas", CONF),
     "product-requirements-document.md": ("Product Requirements Document", CONF),

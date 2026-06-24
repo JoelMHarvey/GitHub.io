@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faresay — Product Requirements Document</title><style>
+:root { --teal:#1F6F6B; --dark:#15514e; }
+* { box-sizing:border-box; }
+html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:#2b3338; line-height:1.6; margin:0; background:#eceff0; }
+.page { max-width:820px; margin:24px auto; background:#fff; padding:0 0 8px;
+  box-shadow:0 1px 6px rgba(0,0,0,.12); border-radius:6px; overflow:hidden; }
+header.lh { display:flex; align-items:center; justify-content:space-between;
+  padding:26px 56px 18px; border-bottom:3px solid var(--teal); }
+header.lh .brand { display:flex; align-items:center; gap:12px; }
+header.lh .wm { font-size:26px; font-weight:700; letter-spacing:.5px; color:var(--dark); }
+header.lh .tag { font-size:13px; color:#6b7a80; }
+.titleblock { padding:30px 56px 4px; }
+.titleblock h1.doc { font-size:30px; color:var(--dark); margin:0 0 10px; line-height:1.2; }
+.meta { font-size:12.5px; color:#6b7a80; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px;
+  padding:4px 10px; border-radius:999px; text-transform:uppercase; }
+.badge.conf { background:#e7f1f0; color:var(--dark); }
+.badge.draft { background:#fdf3e7; color:#9a5b14; border:1px solid #f0d6ad; }
+.content { padding:8px 56px 40px; }
+.content h1 { font-size:23px; color:var(--dark); border-bottom:1px solid #e6eaea;
+  padding-bottom:6px; margin:34px 0 14px; }
+.content h2 { font-size:19px; color:var(--dark); margin:28px 0 10px; }
+.content h3 { font-size:16px; color:#33474a; margin:22px 0 8px; }
+.content p { margin:10px 0; }
+.content ul,.content ol { margin:10px 0; padding-left:22px; }
+.content li { margin:4px 0; }
+.content a { color:var(--teal); }
+.content code { background:#f1f4f4; padding:1px 5px; border-radius:4px; font-size:13px;
+  font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+.content pre { background:#f5f7f7; border:1px solid #e6eaea; border-radius:6px;
+  padding:14px 16px; overflow:auto; }
+.content pre code { background:none; padding:0; }
+.content blockquote { margin:14px 0; padding:8px 18px; border-left:4px solid var(--teal);
+  background:#f6faf9; color:#42565a; }
+.content table { border-collapse:collapse; width:100%; margin:16px 0; font-size:13.5px; }
+.content th { background:var(--teal); color:#fff; text-align:left; padding:9px 12px; }
+.content td { border-bottom:1px solid #e6eaea; padding:8px 12px; vertical-align:top; }
+.content tr:nth-child(even) td { background:#f7faf9; }
+.content hr { border:0; border-top:1px solid #e6eaea; margin:26px 0; }
+footer.lh { border-top:1px solid #e6eaea; margin:0 56px; padding:14px 0 18px;
+  font-size:11.5px; line-height:1.5; color:#8a979d; }
+footer.lh .org { font-weight:600; color:#5a6a70; }
+footer.lh a { color:var(--teal); text-decoration:none; }
+@media print {
+  body { background:#fff; }
+  .page { box-shadow:none; margin:0; max-width:none; border-radius:0; }
+  header.lh, .titleblock, .content, footer.lh { padding-left:0; padding-right:0; }
+  header.lh, footer.lh { margin:0; }
+  .content h1, .content h2, .content h3 { page-break-after:avoid; }
+  .content table, .content pre, .content blockquote { page-break-inside:avoid; }
+  @page { size:A4; margin:18mm 16mm; }
+}
+</style></head>
+<body><div class="page">
+  <header class="lh">
+    <div class="brand"><svg width="34" height="34" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#1F6F6B"/><path d="M9 18c0-3 2-5 5-5s5 2 5 5M9.5 11.5c.8-1.2 2.3-2 4.5-2s3.7.8 4.5 2" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg><span class="wm">Faresay</span></div>
+    <span class="tag">Therapy, matched.</span>
+  </header>
+  <div class="titleblock">
+    <h1 class="doc">Product Requirements Document</h1>
+    <div class="meta">
+      <span class="badge conf">Confidential</span>
+      <span>Faresay Ltd</span><span>·</span><span>24 June 2026</span>
+    </div>
+  </div>
+  <div class="content"><blockquote>
+<p>Working draft. Consistent with <code>CONTEXT.md</code> (cash-pay therapy marketplace, 15% platform fee,
+UK now → US all-50-states, bootstrapped). ⚠️ Items tied to legal/clinical sign-off are flagged.
+Last updated: [PLACEHOLDER: date]</p>
+</blockquote>
+<h2 id="1-vision-overview">1. Vision &amp; overview</h2>
+<p>Faresay is a two-sided marketplace that connects people seeking therapy with vetted, licensed
+therapists, and handles discovery, matching, scheduling, secure video sessions, and payments.
+Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong>. The product must feel
+<strong>trustworthy, fast, and private</strong> — it handles sensitive mental-health data and must make the
+<strong>"not a crisis service"</strong> boundary unmistakable.</p>
+<h2 id="2-goals-non-goals">2. Goals &amp; non-goals</h2>
+<p><strong>Goals</strong>
+- Let a client find, book, and pay for a suitable licensed therapist with minimal friction.
+- Let a therapist get matched clients and run sessions with low admin, keeping 85% of the fee.
+- Enforce <strong>trust &amp; safety</strong>: verification, privacy, crisis signposting, compliance.
+- Support <strong>US multi-state</strong> operation (licensure tied to the client's location).</p>
+<p><strong>Non-goals (initial)</strong>
+- Insurance billing / claims (cash-pay only initially).
+- Faresay providing clinical care itself (clinicians are independent).
+- Crisis/emergency intervention (explicitly out of scope; signpost only).
+- Prescribing / medication management.</p>
+<h2 id="3-personas">3. Personas</h2>
+<ul>
+<li><strong>Client (self-pay adult):</strong> wants a good-fit therapist quickly, transparent price, easy booking.</li>
+<li><strong>Therapist (licensed independent):</strong> wants filled calendar, low admin, fair terms, autonomy.</li>
+<li><strong>Clinical/Trust-&amp;-Safety admin (Faresay):</strong> verifies providers, monitors safety, handles issues.</li>
+<li><strong>Ops/Compliance admin (Faresay):</strong> manages state coverage, licensure checks, payouts.</li>
+</ul>
+<h2 id="4-key-user-journeys">4. Key user journeys</h2>
+<ol>
+<li><strong>Client onboarding → match → book → pay → session → follow-up/rebook.</strong></li>
+<li><strong>Therapist application → verification/credentialing → profile live → receive bookings → get
+   paid out (session fee minus 15%).</strong></li>
+<li><strong>Safety path:</strong> risk signposting surfaced throughout; exclusion at screening for unsuitable
+   presentations; in-session crisis resources (see <code>crisis-safeguarding-policy.md</code>).</li>
+</ol>
+<h2 id="5-functional-requirements">5. Functional requirements</h2>
+<h3 id="51-client-side">5.1 Client-side</h3>
+<ul>
+<li>Account creation &amp; secure auth (MFA option); age/eligibility gate ⚠️ COUNSEL (minors policy).</li>
+<li><strong>Intake/preferences</strong>: needs, modality, therapist preferences (gender, language, specialism),
+  <strong>location/state capture</strong> (required for US licensure matching) ⚠️ COUNSEL.</li>
+<li><strong>Matching/discovery</strong>: browse + recommended matches; therapist profiles (credentials, specialisms,
+  verified badge, price, availability, reviews).</li>
+<li><strong>Booking &amp; calendar</strong>: real-time availability, time-zone aware, reminders, reschedule/cancel.</li>
+<li><strong>Payments</strong>: pay per session; transparent pricing; the 15% fee handled in the split ⚠️ COUNSEL on
+  how the fee is presented; receipts; cancellation/no-show rules per ToS.</li>
+<li><strong>Secure video sessions</strong> (HIPAA-eligible telehealth) ⚠️ SECURITY; in-session crisis resources.</li>
+<li><strong>Messaging</strong> (async, boundaried, non-emergency) with safety disclaimers.</li>
+<li><strong>Reviews/feedback</strong> and outcome measures (optional) per clinical governance.</li>
+<li><strong>Crisis signposting</strong> persistently accessible (988/911 US; 999/111/Samaritans UK) ⚠️ verify.</li>
+</ul>
+<h3 id="52-therapist-side">5.2 Therapist-side</h3>
+<ul>
+<li><strong>Application &amp; onboarding</strong>; document upload (licence, insurance, ID).</li>
+<li><strong>Credentialing/verification</strong>: licensure check in operating state(s), interstate-compact handling
+  (PSYPACT/Counseling/Social Work), background/DBS, insurance — with <strong>ongoing monitoring</strong> ⚠️.</li>
+<li><strong>Profile management</strong>; availability/calendar; service/pricing settings (within platform rules).</li>
+<li><strong>Session management</strong>: upcoming/past, secure video, notes link-out (clinician owns the record —
+  Faresay does not store the clinical record by default) ⚠️ COUNSEL/CLINICAL.</li>
+<li><strong>Earnings &amp; payouts</strong>: balance, payout schedule, statements, tax docs ⚠️.</li>
+<li><strong>Policy acknowledgement</strong>: Therapist Agreement, clinical governance, crisis/safeguarding.</li>
+</ul>
+<h3 id="53-admin-trust-safety">5.3 Admin / trust &amp; safety</h3>
+<ul>
+<li>Verification queue &amp; audit log; provider suspension/offboarding.</li>
+<li><strong>State-coverage controls</strong> (which states are live for booking) tied to legal roadmap.</li>
+<li>Incident/complaint logging; safeguarding workflow; reporting.</li>
+<li>Payments/refunds/chargeback handling.</li>
+</ul>
+<h2 id="6-non-functional-requirements">6. Non-functional requirements</h2>
+<ul>
+<li><strong>Security &amp; privacy</strong> (see <code>security-data-protection-policy.md</code>): encryption in transit/at rest,
+  RBAC, MFA, audit logging; data minimisation; PHI/special-category handling.</li>
+<li><strong>Compliance</strong>: UK GDPR/DPA 2018 now; HIPAA + state privacy on US launch ⚠️ COUNSEL; BAAs with
+  any PHI sub-processor (video, storage, payments-adjacent) ⚠️.</li>
+<li><strong>Reliability/availability</strong>: target [PLACEHOLDER: e.g. 99.9%]; resilient booking/video/payments.</li>
+<li><strong>Performance</strong>: fast match/search and booking; low-latency video.</li>
+<li><strong>Accessibility</strong>: WCAG 2.2 AA target; inclusive design for distressed users.</li>
+<li><strong>Auditability</strong>: trace verification, consent, payments, and safety actions.</li>
+<li><strong>Data residency</strong>: UK/EU vs US considerations ⚠️ COUNSEL/SECURITY.</li>
+</ul>
+<h2 id="7-us-specific-requirements">7. US-specific requirements</h2>
+<ul>
+<li><strong>Licensure-by-client-location</strong>: a client can only book a therapist licensed (or compact-
+  authorised) in the client's state at session time. Hard rule ⚠️ COUNSEL.</li>
+<li><strong>State on/off switches</strong> for booking, gated by legal qualification + provider coverage.</li>
+<li><strong>Informed consent to telehealth</strong> captured per state ⚠️ COUNSEL.</li>
+<li><strong>MSO/PC structure</strong> reflected in contracting/payment flows where required ⚠️ COUNSEL.</li>
+</ul>
+<h2 id="8-mvp-vs-later">8. MVP vs later</h2>
+<p><strong>MVP (UK first, then first US state cluster):</strong> account, intake, matching, profiles, booking,
+payments + 15% split, secure video, messaging, verification, crisis signposting, core admin.
+<strong>Later:</strong> advanced matching/ML, outcome analytics, employer/B2B, premium therapist tools,
+native apps, insurance (if model expands), broader state automation.</p>
+<h2 id="9-success-metrics">9. Success metrics</h2>
+<ul>
+<li><strong>Liquidity</strong>: % of client searches that result in a booking; therapist utilisation.</li>
+<li><strong>Acquisition/economics</strong>: CAC, CAC payback, sessions-per-client, retention/churn, LTV
+  (quantified in <code>financial-model.md</code>).</li>
+<li><strong>Quality/safety</strong>: client-reported outcomes/satisfaction, complaint/incident rate, verification
+  pass-rate, zero compliance breaches.</li>
+<li><strong>Marketplace health</strong>: supply/demand balance per live market.</li>
+</ul>
+<h2 id="10-dependencies-open-questions">10. Dependencies &amp; open questions</h2>
+<ul>
+<li>Payment processor with <strong>marketplace split + payouts</strong> and (where needed) BAA ⚠️.</li>
+<li><strong>HIPAA-eligible video</strong> vendor ⚠️ SECURITY.</li>
+<li>Licensure-verification / background-check vendor.</li>
+<li>⚠️ COUNSEL: minors in scope? fee presentation? clinical-record custody? per-state consent?</li>
+<li>⚠️ CLINICAL: screening/exclusion thresholds (see clinical-governance &amp; crisis-safeguarding).</li>
+</ul></div>
+  <footer class="lh">
+    <div class="org">Faresay</div>
+    <div><a href="https://faresay.com">faresay.com</a> · <a href="mailto:enquiries@faresay.com">enquiries@faresay.com</a> · <a href="mailto:legal@faresay.com">legal@faresay.com</a></div>
+    <div style="margin-top:6px;">Confidential. This document and its contents are the property of Faresay and are intended solely for the named recipient.</div>
+  </footer>
+</div></body></html>

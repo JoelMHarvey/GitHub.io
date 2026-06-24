@@ -1,10 +1,27 @@
 # Faresay — Financial Model
 
-> Working draft — **structure first; benchmark numbers pending market research** (the deep-research
-> run feeding the business plan). All figures below marked `[ASSUMPTION: …]` are placeholders to be
-> replaced with researched/observed values, then tuned to Faresay's reality. Bootstrapped lens:
-> the model optimises for **contribution-margin-positive growth and CAC payback**, not
-> blitz-scaling. Last updated: [PLACEHOLDER: date]
+> Working draft — structure + **directional benchmark ranges from research** (see
+> `market-research-synthesis.md`). Numbers are **starting ranges to validate**, not facts: the
+> research confirmed market *direction* but several specific unit-economics figures were unreliable,
+> so tune everything to Faresay's own UK data first. Bootstrapped lens: optimise for
+> **contribution-margin-positive growth and CAC payback**, not blitz-scaling.
+> Last updated: [PLACEHOLDER: date]
+
+## 0. Benchmark ranges (directional — validate before relying)
+| Driver | Starting range | Confidence | Note |
+|--------|----------------|-----------|------|
+| Cash-pay session price (P) | ~$100–200 | 🟡 directional | Use Faresay's actual UK price + intended US price |
+| Take rate (t) | **15%** | 🟢 fixed | Low vs rivals' 20–30% → volume/retention must carry it |
+| Sessions per client (S) | model 6–12 as a band | 🟡 estimate | Therapy courses vary widely; drive with retention |
+| Blended CAC | **treat as high** | ⚠️ unknown | No hard benchmark; cash-pay is paid-marketing heavy → model conservatively, push organic |
+| Payment processing | ~2.9% + fixed | 🟡 standard | Processor-dependent |
+| LTV:CAC target | ≥ 3 | — | Standard health-marketplace bar |
+| CAC payback target | ≤ a few sessions | — | The make-or-break test in cash-pay |
+
+> **Headline tension to model honestly:** a 15% take on, say, a $150 session = ~$22.50 net revenue
+> per session. If CAC is high and sessions/client is modest, payback is slow — so the model's job is
+> to find the **CAC × sessions-per-client** combinations where Faresay is contribution-positive, and
+> to show how much **organic/referral acquisition** is needed to get there.
 
 ## 1. Model philosophy
 Cash-pay marketplace. Revenue = **15% of session fees**. The whole model hinges on three driver

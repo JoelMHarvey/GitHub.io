@@ -9,6 +9,8 @@ Start with **`CONTEXT.md`** — the shared fact sheet every document is kept con
 | # | Document | File | Status |
 |---|----------|------|--------|
 | — | Shared fact sheet | `CONTEXT.md` | ✅ |
+| ★ | **Business Plan** | `business-plan.md` | ✅ |
+| ★ | Market Research Synthesis | `market-research-synthesis.md` | ✅ (directional) |
 | 1 | Business Model Canvas | `business-model-canvas.md` | ✅ |
 | 2 | Product Requirements Document | `product-requirements-document.md` | ✅ |
 | 3 | Therapist Agreement | `therapist-agreement.md` | ✅ ⚠️ counsel |
@@ -16,7 +18,7 @@ Start with **`CONTEXT.md`** — the shared fact sheet every document is kept con
 | 5 | Privacy Policy | `privacy-policy.md` | ✅ ⚠️ counsel |
 | 6 | Clinical Governance Policy | `clinical-governance-policy.md` | ✅ ⚠️ clinical |
 | 7 | Crisis & Safeguarding Policy | `crisis-safeguarding-policy.md` | ✅ ⚠️ clinical |
-| 8 | Financial Model | `financial-model.md` + `.csv` | 🧩 pending research |
+| 8 | Financial Model | `financial-model.md` + `.csv` | ✅ structure + benchmark ranges |
 | 9 | Risk Register | `risk-register.md` | ✅ |
 | 10 | Security & Data Protection Policy | `security-data-protection-policy.md` | ✅ ⚠️ counsel/security |
 

@@ -57,8 +57,9 @@ Professional, decent, frugal, persistent-but-polite. (See SKILL.md operating pri
 
 - Domain `faresay.com`: DNS on **Cloudflare**, site on **Vercel**. Email via **Cloudflare
   Email Routing** (free).
-- Mailbox decision: **dedicated Faresay mailbox** (not Joel's personal Gmail). The dedicated
-  mailbox must be the one connected to the Gmail tools.
+- Mailbox decision: **dedicated Faresay mailbox = `totallycosmicturtle@gmail.com`** (not Joel's
+  personal Gmail). This is the Cloudflare-forwarding destination and must be the mailbox connected
+  to the Gmail tools.
 - PR with this skill: Joel merges it himself (don't auto-merge or babysit).
 - **US business model (decided): cash-pay / out-of-network marketplace** (BetterHelp/Talkspace-
   style), 15% platform fee. Bootstrapped / internal — capital-efficient, no near-term raise.

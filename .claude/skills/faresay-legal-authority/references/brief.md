@@ -60,3 +60,9 @@ Professional, decent, frugal, persistent-but-polite. (See SKILL.md operating pri
 - Mailbox decision: **dedicated Faresay mailbox** (not Joel's personal Gmail). The dedicated
   mailbox must be the one connected to the Gmail tools.
 - PR with this skill: Joel merges it himself (don't auto-merge or babysit).
+- **US business model (decided): cash-pay / out-of-network marketplace** (BetterHelp/Talkspace-
+  style), 15% platform fee. Bootstrapped / internal — capital-efficient, no near-term raise.
+  → Counsel framing: position the 15% as a **technology/marketing platform fee** for software +
+  client acquisition, **not** a split of the clinical fee. Cash-pay (no insurance billing) is a
+  lighter regulatory posture, but CPOM/fee-splitting and per-state qualification still apply —
+  confirm with counsel how the 15% is best characterised per state.

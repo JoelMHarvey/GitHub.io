@@ -106,8 +106,14 @@ the draft. Nothing is sent or committed otherwise.
 
 The goal: `legal@faresay.com` and `enquiries@faresay.com` exist, both **forward to one agent
 mailbox** that the Gmail tools can read/draft/label. Faresay's domain is owned by Joel. The
-exact setup steps (WordPress.com / Google Workspace / other host, plus forwarding) are in
-`references/email-setup.md`. Do the setup once, with Joel, then operate the mailbox each session.
+exact setup steps (Cloudflare Email Routing → `totallycosmicturtle@gmail.com`, plus Resend
+send-as) are in `references/email-setup.md`. Status: **receiving live; send-as via Resend (finish
+by clicking the Gmail confirmation).**
+
+**Brand rule — all external outbound on Faresay letterhead.** Every external email Faresay sends
+must be built from the HTML letterhead at `assets/templates/email-letterhead.html` (Faresay
+wordmark + standard footer). Create outbound drafts as **HTML drafts** using that template, with the
+message slotted into `{{BODY_HTML}}`. Internal approval-summary notes to Joel may be plain text.
 
 ---
 

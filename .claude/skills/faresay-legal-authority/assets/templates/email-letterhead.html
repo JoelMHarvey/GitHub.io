@@ -1,0 +1,60 @@
+<!--
+  Faresay — Email Letterhead Template (HTML)
+  Standard for ALL external outbound email. Slot the message into {{BODY_HTML}} and fill the
+  {{PLACEHOLDERS}}. Email-client-safe: table layout + inline styles.
+
+  VISIBILITY: the header uses DARK text on white with a teal underline rule (no reliance on a
+  background fill — some clients strip background colours, which caused white-on-white).
+
+  LOGO/FAVICON: when a hosted/embedded icon is available, uncomment the <img> in the header.
+  Best embedded as an inline attachment (Content-ID), referenced as src="cid:faresay-logo".
+
+  BRAND VALUES:  Wordmark "Faresay" · Tagline "Therapy, matched." · Accent #1F6F6B (teal)
+-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f6;margin:0;padding:24px 0;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:#ffffff;border:1px solid #e6eaea;border-radius:8px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2b3338;">
+        <!-- Header / letterhead: dark text on white + teal underline (always visible) -->
+        <tr>
+          <td style="background:#ffffff;padding:22px 32px 18px;border-bottom:3px solid #1F6F6B;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="vertical-align:middle;">
+                  <!-- Favicon mark (inline SVG: teal circle + smile). SVG-stripping clients (Gmail web) drop it gracefully; the wordmark still reads. -->
+                  <svg width="28" height="28" viewBox="0 0 28 28" style="vertical-align:middle;margin-right:10px;" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#1F6F6B"/><path d="M9 18c0-3 2-5 5-5s5 2 5 5M9.5 11.5c.8-1.2 2.3-2 4.5-2s3.7.8 4.5 2" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  <span style="font-size:24px;font-weight:700;letter-spacing:0.5px;color:#15514e;vertical-align:middle;">Faresay</span>
+                </td>
+                <td align="right" style="font-size:13px;color:#6b7a80;vertical-align:middle;">Therapy, matched.</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <!-- Body -->
+        <tr>
+          <td style="padding:32px;font-size:15px;line-height:24px;color:#2b3338;">
+            {{BODY_HTML}}
+          </td>
+        </tr>
+        <!-- Signature -->
+        <tr>
+          <td style="padding:0 32px 28px 32px;font-size:15px;line-height:22px;color:#2b3338;">
+            <div style="margin-top:8px;">Kind regards,</div>
+            <div style="font-weight:700;margin-top:10px;">{{SENDER_NAME}}</div>
+            <div style="color:#5a6a70;">{{SENDER_TITLE}}, Faresay</div>
+            <div style="color:#5a6a70;"><a href="mailto:{{SENDER_EMAIL}}" style="color:#1F6F6B;text-decoration:none;">{{SENDER_EMAIL}}</a></div>
+          </td>
+        </tr>
+        <!-- Footer -->
+        <tr>
+          <td style="background:#f4f6f6;border-top:1px solid #e6eaea;padding:18px 32px;font-size:12px;line-height:18px;color:#8a979d;">
+            <div style="font-weight:600;color:#5a6a70;">Faresay</div>
+            <div><a href="https://faresay.com" style="color:#1F6F6B;text-decoration:none;">faresay.com</a> &nbsp;·&nbsp; <a href="mailto:legal@faresay.com" style="color:#1F6F6B;text-decoration:none;">legal@faresay.com</a> &nbsp;·&nbsp; <a href="mailto:enquiries@faresay.com" style="color:#1F6F6B;text-decoration:none;">enquiries@faresay.com</a></div>
+            <div style="margin-top:8px;">{{COMPANY_LEGAL_LINE}}</div>
+            <div style="margin-top:8px;color:#aab4b8;">This email and any attachments are confidential and intended solely for the addressee. If you are not the intended recipient, please notify us and delete this message.</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

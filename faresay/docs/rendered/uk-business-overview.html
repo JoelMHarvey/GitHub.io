@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Faresay — Document Index</title><style>
+<title>Faresay — UK Business Overview</title><style>
 :root { --teal:#1F6F6B; --dark:#15514e; }
 * { box-sizing:border-box; }
 html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -62,27 +62,87 @@ footer.lh a { color:var(--teal); text-decoration:none; }
     <span class="tag">Therapy, matched.</span>
   </header>
   <div class="titleblock">
-    <h1 class="doc">Document Index</h1>
+    <h1 class="doc">UK Business Overview</h1>
     <div class="meta">
       <span class="badge conf">Confidential</span>
       <span>Faresay Ltd</span><span>·</span><span>24 June 2026</span>
     </div>
   </div>
-  <div class="content"><p>Branded, print-ready versions of the Faresay business and policy documents. Open any document and use <em>Print → Save as PDF</em> for a client-ready file.</p><ul style="list-style:none;padding-left:0;line-height:2.4;"><li><a href="business-model-canvas.html">Business Model Canvas</a> <span class="badge conf">Confidential</span></li>
-<li><a href="business-plan.html">Business Plan</a> <span class="badge conf">Confidential</span></li>
-<li><a href="clinical-governance-policy.html">Clinical Governance Policy</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="crisis-safeguarding-policy.html">Crisis & Safeguarding Policy</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="financial-model.html">Financial Model</a> <span class="badge conf">Confidential</span></li>
-<li><a href="market-research-synthesis.html">Market Research Synthesis</a> <span class="badge conf">Confidential</span></li>
-<li><a href="privacy-policy.html">Privacy Policy</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="product-requirements-document.html">Product Requirements Document</a> <span class="badge conf">Confidential</span></li>
-<li><a href="risk-register.html">Risk Register</a> <span class="badge conf">Confidential</span></li>
-<li><a href="security-data-protection-policy.html">Security & Data Protection Policy</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="terms-of-service.html">Terms of Service</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="therapist-agreement.html">Therapist Agreement</a> <span class="badge draft">DRAFT — for professional sign-off</span></li>
-<li><a href="uk-business-overview.html">UK Business Overview</a> <span class="badge conf">Confidential</span></li>
-<li><a href="uk-legal-regulatory-brief.html">UK Legal & Regulatory Brief</a> <span class="badge conf">Confidential</span></li>
-<li><a href="uk-questions-for-solicitor.html">Questions for Solicitor — UK Launch</a> <span class="badge conf">Confidential</span></li></ul></div>
+  <div class="content"><blockquote>
+<p>One-page context for advisers. <strong>Preparatory material — not legal advice.</strong> UK launch scope only;
+US plans are deliberately excluded from this document.</p>
+</blockquote>
+<h2 id="what-faresay-is">What Faresay is</h2>
+<p>Faresay is a <strong>two-sided online marketplace</strong> that connects people seeking therapy with vetted,
+independent, <strong>UK-registered</strong> mental-health professionals. The platform provides discovery,
+matching, scheduling, secure video sessions, and payment handling. Therapists deliver the clinical
+work; Faresay provides the technology and the introduction.</p>
+<ul>
+<li><strong>What it is:</strong> a technology + marketing platform between independent therapists and self-pay clients.</li>
+<li><strong>What it is not:</strong> not a healthcare provider; not an employer of the therapists; not a crisis
+  service; no insurance billing; no prescribing; no NHS contract.</li>
+</ul>
+<h2 id="how-it-works">How it works</h2>
+<ol>
+<li>Client searches and is matched to a suitable therapist.</li>
+<li>Client books and pays through the platform (card, via Stripe).</li>
+<li>Therapist and client meet over secure video.</li>
+<li>Faresay retains a <strong>15% platform fee</strong> (10% for founding therapists) and pays the remainder to the
+   therapist. The fee is characterised as a <strong>platform/technology + marketing fee</strong>, not a share of
+   the clinician's professional fee.</li>
+</ol>
+<h2 id="who-the-therapists-are">Who the therapists are</h2>
+<p>Independent, self-employed practitioners who must hold membership of an appropriate UK professional
+body / <strong>PSA-accredited register</strong> (e.g. BACP, UKCP, NCPS) or statutory registration where relevant
+(e.g. HCPC for practitioner psychologists), and carry their own professional indemnity insurance.
+Faresay vets credentials before a profile goes live.</p>
+<h2 id="commercials-directional">Commercials (directional)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platform fee</td>
+<td>15%</td>
+<td>10% for founding therapists</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>Self-pay / private</td>
+<td>No insurance billing</td>
+</tr>
+<tr>
+<td>Client payment</td>
+<td>Per session, upfront</td>
+<td>Stripe Connect</td>
+</tr>
+<tr>
+<td>Therapist status</td>
+<td>Self-employed</td>
+<td>Not employed by Faresay</td>
+</tr>
+<tr>
+<td>Stage</td>
+<td>Pre-launch (UK)</td>
+<td>Companies House + counsel in progress</td>
+</tr>
+</tbody>
+</table>
+<h2 id="current-technology-stack-relevant-to-data-questions">Current technology stack (relevant to data questions)</h2>
+<ul>
+<li><strong>Auth:</strong> Clerk · <strong>Database:</strong> Neon Postgres (EU region) · <strong>Video:</strong> Daily.co · <strong>Email:</strong> Resend ·
+  <strong>Payments:</strong> Stripe.</li>
+<li>Several processors are <strong>US-headquartered</strong> — see the data-protection section of the UK Legal &amp;
+  Regulatory Brief for the international-transfer question.</li>
+</ul>
+<h2 id="the-single-biggest-open-dependency">The single biggest open dependency</h2>
+<p>UK regulatory and contractual structuring — confirmed by a solicitor — before taking live payments.
+This document set is the input to that conversation.</p></div>
   <footer class="lh">
     <div class="org">Faresay</div>
     <div><a href="https://faresay.com">faresay.com</a> · <a href="mailto:enquiries@faresay.com">enquiries@faresay.com</a> · <a href="mailto:legal@faresay.com">legal@faresay.com</a></div>

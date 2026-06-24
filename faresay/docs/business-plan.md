@@ -38,16 +38,25 @@ structuring** (CPOM / fee-splitting → MSO/friendly-PC), which is being progres
   `business-model-canvas.md`.
 
 ## 3. Market opportunity
-*(Directional — see synthesis for confidence. Use ranges, not point values, externally.)*
-- **TAM:** US total mental-health treatment market **~$118B (2025) → ~$159B (2030)**, ~6.9% CAGR.
-- **Growth vector:** tele-mental-health is among the fastest-growing telehealth segments
-  (telepsychiatry ~18% CAGR range to 2030); demand structurally elevated post-2021.
-- **SAM (Faresay):** US adults willing to **pay out of pocket** for telehealth therapy — a real but
-  **smaller, more price-sensitive** slice than the insurance-covered majority (see §5).
-- **SOM (initial):** clients in the first launch state-cluster who can be acquired at a CAC that
-  pays back within an acceptable number of sessions. Quantified in `financial-model.md`.
-- **Demand-constrained market:** the binding constraint for scaling players is **filling client
-  demand**, not recruiting therapists — this shapes the entire GTM (§7).
+*(Primary-source figures where available — see `market-research-synthesis.md` §0 for sources/
+confidence. Use ranges externally.)*
+- **Demand base (🟢 SAMHSA 2023):** **59.2M US adults (23%)** received mental-health treatment in
+  the past year — up 3.4M YoY. Large, growing, mainstream.
+- **Spend (🟢):** US behavioral-health spend **~$280B (2020)**; mental-health treatment spend
+  **~$126B (2021)** and rising faster than overall medical services. Broad TAM context (most of this
+  is not telehealth/cash-pay — see SAM).
+- **Structural shortage (🟢 HRSA):** behavioral-health **demand projected +49% by 2033 vs supply
+  +11%**; **40% (137M people) live in a Mental Health Professional Shortage Area** → durable
+  access gap that telehealth marketplaces exist to close.
+- **Pricing anchors (🟢):** cash-pay therapy **$100–200/session** (online often $60–100); Medicare
+  references ~$117 (90837) / ~$79 (90834). BetterHelp $260–400/mo; Talkspace $69–109/wk.
+- **SAM (Faresay):** US adults willing to **pay out of pocket** for telehealth therapy — real but
+  **smaller and more price-sensitive** than the insurance-covered majority (see §5).
+- **SOM (initial):** clients in the first launch state-cluster acquirable at a CAC that pays back
+  within an acceptable number of sessions. Quantified in `financial-model.md`.
+- **Demand-constrained at the platform level:** despite the macro provider shortage, the binding
+  constraint for scaling marketplaces is **acquiring paying clients**, not recruiting therapists —
+  this shapes the entire GTM (§7).
 
 ## 4. Competitive landscape
 Three distinct US models:

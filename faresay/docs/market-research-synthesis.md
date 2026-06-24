@@ -10,6 +10,28 @@
 - 🟢 **Confirmed** (passed multi-vote verification) · 🟡 **Directional** (search-surfaced, single
   source / unreliable rating) · 🔴 **Refuted/soft** (verifiers killed the specific figure)
 
+## 0. Primary-source firmed numbers (research pass 2 — higher confidence)
+These were pulled directly from official / primary sources and supersede the softer figures below.
+| Figure | Value | Source | Conf. |
+|--------|-------|--------|-------|
+| US adults who received mental-health treatment, past year (2023) | **59.2M (23.0% of adults)**, +3.4M YoY | SAMHSA NSDUH 2023 | 🟢 official |
+| Behavioral-health workforce gap | **demand +49% by 2033 vs supply +11%**; **40% (137M people)** live in a Mental Health HPSA | HRSA Bureau of Health Workforce 2025 | 🟢 official |
+| US behavioral-health spend | **~$280B (2020)**; MH+SUD treatment spend **$139.6B (2021)**, of which MH **$126.5B** | NJAMHAA; Health Affairs 2025 | 🟢 |
+| Medicare CY2025 conversion factor | **$32.35** (−2.83% YoY) | CMS CY2025 PFS Final Rule | 🟢 official |
+| Medicare therapy rate (national, approx.) | **90837 (60-min) ≈ $117** (3.63 RVU); **90834 (45-min) ≈ $79** (2.45 RVU) × CF, pre-locality | CMS RVUs × CF | 🟢 derived |
+| Cash-pay therapy price | **$100–200 typical** ($65–300+ range; online often $60–100; psychologists $150–250) | multiple consistent 2025 sources | 🟢 |
+| BetterHelp pricing | **$260–400/mo** (~$65–100/wk); **adding insurance in 30+ states (2026)** | BetterHelp / comparisons | 🟡→🟢 |
+| Talkspace pricing | **$69–109/wk** out-of-pocket; insurance copays ~$0–10 | Talkspace | 🟡→🟢 |
+| Grow Therapy take rate | **% of insurance payout, not publicly disclosed** (so "20–30%" is an estimate only) | Grow / provider guides | 🟡 |
+
+> **Strategic signal reinforced:** *both* major cash-pay players (BetterHelp **and** Talkspace) are
+> now bolting on **insurance** — independent confirmation that US demand is migrating in-network.
+> And the macro **provider shortage** (HRSA) coexists with platforms being **client-demand-
+> constrained**: clinicians are scarce nationally, but the scaling bottleneck for a marketplace is
+> still acquiring *paying clients*, not signing therapists.
+
+## Confidence legend (original pass-1 findings below)
+
 ## 1. Market size & growth
 - 🟢 **US total mental-health treatment market ≈ $118B (2025), projected ≈ $159B (2030), ~6.9%
   CAGR.** Broadest TAM anchor. (ResearchAndMarkets via BusinessWire.)

@@ -81,10 +81,26 @@ margin fund growth.
 3. What **state-rollout pace** is affordable given per-state compliance step-costs?
 4. Is **15%** sufficient, or are premium/B2B revenue lines needed to hit target margins?
 
-## 7. To complete after research
-- [ ] Fill P, S, r, CAC ranges from benchmarks (BetterHelp/Talkspace/marketplace data).
-- [ ] Build the CSV projection with the three scenarios.
-- [ ] Add a break-even / sensitivity table (CAC × sessions-per-client).
-- [ ] Reconcile compliance step-costs with the legal roadmap's phased state plan.
+## 7. The working calculator (`financial-model.csv`)
+`financial-model.csv` is now a **live scenario calculator** — open it in Google Sheets or Excel and
+the OUTPUT rows recompute as you edit the INPUTS. Three blocks:
+1. **Unit-economics calculator** — edit Base/Conservative/Stretch inputs (price, take, sessions/
+   client, CAC, processing, support); it computes contribution/session, LTV, LTV:CAC, CAC payback,
+   and the max affordable CAC for a 3:1 ratio.
+2. **Break-even frontier** — max affordable CAC across price × sessions-per-client.
+3. **Illustrative 12-month ramp** — a worked Base build showing the path and Y1 cash burn (~$103k).
 
-See `financial-model.csv` for the numeric skeleton (assumptions block + projection scaffold).
+### The headline finding (the honest one)
+At a **$130 cash-pay session and a 15% take, Faresay nets ~$19.50/session, ~$15.40 after card
+processing.** So over **8 sessions** the lifetime contribution is only **~$113** — meaning to hit a
+healthy **3:1 LTV:CAC the CAC must stay under ~$38**. Implications:
+- **The 15% cash-pay model is economically tight.** It works only with **low CAC** (organic, SEO,
+  referrals, therapist-invited clients) **or materially more sessions per client** (retention) **or
+  a higher price point**. Paid-acquisition-led growth at typical mental-health CACs will not pay back.
+- This is the quantitative case for the GTM emphasis on **retention + organic acquisition**, and a
+  data point for the **insurance-enablement / higher-take** option flagged in the business plan §5.
+
+### Still to tune (with Faresay's own data)
+- Replace P, S, CAC, fixed-cost, and ramp assumptions with Faresay's **actual UK numbers**.
+- Reconcile the fixed/compliance step-costs with the legal roadmap's phased state plan.
+- Add cohort-level retention accounting if you want monthly active-client precision.

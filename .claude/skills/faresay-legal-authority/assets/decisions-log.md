@@ -19,6 +19,17 @@ Format:
 
 <!-- entries below -->
 
+## 2026-06-24 — Email infra live + counsel outreach prepared
+- TYPE: draft / approval-request
+- WHAT: Mailbox live (totallycosmicturtle@gmail.com via Cloudflare; receiving confirmed). Resend
+  send-as legal@faresay.com confirmed. Created 7 faresay/* Gmail labels and the HTML letterhead.
+  Prepared EBG outreach as a letterhead HTML Gmail DRAFT to alerman@ebglaw.com (in Drafts, awaiting
+  Joel's approve+send; set From to legal@faresay.com). Nixon Gwilt & Cohen = web-form text provided
+  to Joel to submit (Cohen likely paid consult — get fee first).
+- COST: none yet (watch Cohen consult fee)
+- STATUS: awaiting Joel — approve/send EBG draft; submit Nixon Gwilt + Cohen forms
+- NEXT: On replies, triage into faresay/* labels and bring scope/fee comparisons for approval.
+
 ## 2026-06-23 — Phase 1 counsel: shortlist + chosen 3 + intake routes
 - TYPE: note
 - WHAT: Researched & shortlisted 5 firms; Joel chose the Recommended 3 — Epstein Becker Green

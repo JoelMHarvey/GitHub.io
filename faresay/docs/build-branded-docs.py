@@ -33,6 +33,9 @@ FAVICON_SVG = (
 DRAFT = "DRAFT — for professional sign-off"
 CONF = "Confidential"
 META = {
+    "uk-business-overview.md": ("UK Business Overview", CONF),
+    "uk-legal-regulatory-brief.md": ("UK Legal & Regulatory Brief", CONF),
+    "uk-questions-for-solicitor.md": ("Questions for Solicitor — UK Launch", CONF),
     "business-plan.md": ("Business Plan", CONF),
     "market-research-synthesis.md": ("Market Research Synthesis", CONF),
     "business-model-canvas.md": ("Business Model Canvas", CONF),

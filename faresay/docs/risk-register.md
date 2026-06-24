@@ -20,6 +20,7 @@ mitigations land (residual risk). ⚠️ flags cross-link to the policy/skill th
 | R-04 | **Telehealth consent / modality** non-compliance per state | 3 | 4 | 12 Med | Per-state informed consent capture; counsel review ⚠️ COUNSEL | Legal/Product |
 | R-05 | **Healthcare advertising** rules breached (claims, testimonials) | 2 | 3 | 6 Low | Marketing/legal review of claims; review controls | Marketing/Legal |
 | R-06 | **Regulatory change** (telehealth policy, state laws) outpaces compliance | 3 | 3 | 9 Med | Monitoring cadence; counsel relationship; agile state controls | Legal |
+| R-29 | **Corridor-choice / founder-convenience bias** — first expat corridor steered by where the founder lives (Tokyo/Japan) rather than the legally cleanest market; Japan's posture is conservative/unsettled and the UAE is hostile (criminal exposure for unlicensed practice), risking a legal dead-end and wasted spend | 4 | 4 | **16 High** | Choose the legally cleanest corridor first (e.g. Ireland / English-speaking EEA); gate corridor entry on a local legal memo ⚠️ COUNSEL (see `cross-border-legal-gate.md`) | Founder/Legal |
 
 ## B. Clinical & safety
 | ID | Risk | L | I | Rating | Mitigation | Owner |
@@ -56,17 +57,22 @@ mitigations land (residual risk). ⚠️ flags cross-link to the policy/skill th
 | R-24 | **Therapist churn / disintermediation** (clients & therapists go off-platform) | 3 | 3 | 9 Med | Non-circumvention terms; ongoing platform value (payments, admin, leads) | Product/Ops |
 | R-25 | **Key-person / capacity** risk (lean bootstrapped team) | 3 | 3 | 9 Med | Documentation; prioritisation; selective outsourcing | Founder |
 | R-26 | **Vendor dependency** (video, payments, hosting outage) | 2 | 3 | 6 Low | Reputable vendors; monitoring; contingency options | Engineering |
+| R-30 | **GTM funnel volume shortfall** — 100 paying clients implies ~16,700 targeted visitors (~90/day) from a brand-new domain in the planned window; SEO + anti-self-promo expat communities can't deliver that in 6 months, so Stage 0 likely misses on demand volume | 4 | 4 | **16 High** | Re-sequenced GTM (therapist-led referral + paid validation); rebased timeline 9–12 months; funnel instrumented from day 1 | Founder/Growth |
+| R-31 | **Founder single-point-of-failure / bandwidth** — solo bootstrapped founder must run supply + demand + product + per-corridor compliance + clinical simultaneously; predictable degradation of sales/retention work; key-person concentration (re-scores R-25 Higher) | 4 | 4 | **16 High** | Ruthless 60-day focus on clients + founding-therapist retention; line up clinical lead / fractional compliance; concentrate not over-seed | Founder |
 
 ## F. Reputational
 | ID | Risk | L | I | Rating | Mitigation | Owner |
 |----|------|---|---|--------|-----------|-------|
 | R-27 | **Safety incident or breach → trust collapse** in a trust-dependent category | 2 | 5 | 10 Med | Strong safety/privacy posture; transparent comms; incident playbook | Founder/Comms |
 | R-28 | **Negative reviews / poor matches** erode brand | 3 | 3 | 9 Med | Quality matching, feedback loops, responsive support | Product/Support |
+| R-32 | **Trust-at-zero (no reviews/brand at launch)** — "trust is the product" but the first ~30 clients must convert with zero reviews, zero brand and no track record in a high-stakes mental-health purchase | 3 | 4 | 12 Med | Founder-as-guarantee; money-back first session; therapist credentials/testimonials front-loaded; verified badges + intro videos | Founder/Growth |
 
 ---
 
 ### Top risks to watch (rating ≥ 15)
-- **R-01** fee-splitting/CPOM · **R-17** CAC>LTV · **R-22** cold-start · **R-16/R-12** data breach ·
-  **R-02** operating authority · **R-03** licensure gap · **R-07** client crisis.
-These map directly to the legal skill (R-01/02/03), the security & crisis policies (R-12/R-07), and
-the financial model / GTM sections of the business plan (R-17/R-22). Re-score quarterly.
+- **R-01** fee-splitting/CPOM · **R-29** corridor-choice bias · **R-17** CAC>LTV · **R-30** GTM funnel
+  volume shortfall · **R-31** founder single-point-of-failure · **R-22** cold-start ·
+  **R-16/R-12** data breach · **R-02** operating authority · **R-03** licensure gap · **R-07** client crisis.
+These map directly to the legal skill (R-01/02/03/29), the security & crisis policies (R-12/R-07), and
+the financial model / GTM sections of the business plan (R-17/R-22/R-30/R-31). Corridor-choice (R-29)
+also cross-links to `cross-border-legal-gate.md`. Re-score quarterly.

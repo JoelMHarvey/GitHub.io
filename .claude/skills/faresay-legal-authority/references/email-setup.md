@@ -40,14 +40,24 @@ exact values and verifies delivery afterward.
 4. **DMARC (recommended):** add a TXT record `_dmarc.faresay.com` →
    `v=DMARC1; p=none; rua=mailto:legal@faresay.com` to start in monitoring mode.
 
-### Sending *as* faresay.com (so replies look right)
+### Sending *as* faresay.com — CONFIGURED via Resend
+Cloudflare Email Routing is receive-only, so outbound send-as is handled by **Resend** (SMTP relay):
+- Gmail **"Send mail as" `legal@faresay.com`** in `totallycosmicturtle@gmail.com`, sending through
+  Resend SMTP (`smtp.resend.com`, port 465/587, username `resend`, password = Resend API key —
+  **the key lives in Gmail/Resend, NOT in this repo**).
+- `faresay.com` verified in Resend with DKIM + SPF in Cloudflare DNS (SPF merged into one record).
+- ⚠️ **Final step to complete send-as:** click the Gmail "Send Mail as" confirmation link that
+  Gmail emails to `legal@faresay.com` (it routes into the agent inbox). Until clicked, Gmail
+  cannot send from the alias.
+- Reminder: the Gmail **tools** still cannot send — every send is Joel's manual click on a
+  prepared draft. Resend only changes the *From* address.
 
-Cloudflare Email Routing is **receive/forward only** — it cannot send. Combined with the Gmail
-tools (which also cannot send), every outbound message is a draft Joel sends manually. For
-replies to appear **from** `legal@faresay.com`, set up Gmail **"Send mail as"** with that alias.
-That requires an SMTP sender for the alias (e.g. a transactional-email provider, or a Google
-Workspace mailbox on faresay.com). This is an optional polish step — flag it to Joel as a small
-follow-on, not a blocker for receiving and triaging mail.
+### Branding — all external outbound on Faresay letterhead
+Every external email sent from Faresay must use the **HTML letterhead** template at
+`assets/templates/email-letterhead.html` (Faresay wordmark header + standard footer with
+`legal@faresay.com`, faresay.com, and a confidentiality line). Internal approval-summary notes to
+Joel can be plain text. Drafts the agent prepares should be created as **HTML drafts** built from
+the letterhead, with the message body slotted in.
 
 ## Alternative — if the domain ever moves to Google Workspace
 

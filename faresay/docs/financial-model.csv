@@ -1,0 +1,29 @@
+SECTION,Item,Value,Unit,Notes
+ASSUMPTIONS,Avg session price (P),[ASSUMPTION],currency/session,Fill from research benchmark
+ASSUMPTIONS,Platform take rate (t),15,%,Fixed per CONTEXT
+ASSUMPTIONS,Net revenue per session (P*t),=P*0.15,currency,Derived
+ASSUMPTIONS,Sessions per client (S),[ASSUMPTION],count,From retention research
+ASSUMPTIONS,Monthly retention rate (r),[ASSUMPTION],%,From research
+ASSUMPTIONS,Blended CAC,[ASSUMPTION],currency,Make-or-break in cash-pay
+ASSUMPTIONS,Payment processing,[ASSUMPTION],% of GMV,Processor pricing (~2.9% + fixed)
+ASSUMPTIONS,Support+T&S cost per client,[ASSUMPTION],currency,Estimate
+ASSUMPTIONS,LTV (S*P*t*margin),=derived,currency,Derived
+ASSUMPTIONS,LTV:CAC,=LTV/CAC,ratio,Target >= 3
+ASSUMPTIONS,CAC payback,=CAC/(P*0.15),sessions,Target low
+,,,,
+PROJECTION,Month,M1,M2,...
+PROJECTION,New clients,[model],[model],fill
+PROJECTION,Active clients (w/ retention),[model],[model],fill
+PROJECTION,Sessions,[model],[model],=active*sessions/mo
+PROJECTION,GMV,[model],[model],=sessions*P
+PROJECTION,Net revenue (15%),[model],[model],=GMV*0.15
+PROJECTION,Variable costs (CAC+processing),[model],[model],fill
+PROJECTION,Contribution,[model],[model],=netrev-variable
+PROJECTION,Fixed + compliance step-costs,[model],[model],Phase per state cluster
+PROJECTION,EBITDA,[model],[model],=contribution-fixed
+PROJECTION,Cash / runway,[model],[model],running
+,,,,
+SCENARIOS,Scenario,CAC,Sessions/client,Growth
+SCENARIOS,Conservative,[ASSUMPTION],[ASSUMPTION],[ASSUMPTION]
+SCENARIOS,Base,[ASSUMPTION],[ASSUMPTION],[ASSUMPTION]
+SCENARIOS,Stretch,[ASSUMPTION],[ASSUMPTION],[ASSUMPTION]

@@ -65,26 +65,41 @@ footer.lh a { color:var(--teal); text-decoration:none; }
     <h1 class="doc">Product Requirements Document</h1>
     <div class="meta">
       <span class="badge conf">Confidential</span>
-      <span>Faresay Ltd</span><span>·</span><span>24 June 2026</span>
+      <span>Faresay Ltd</span><span>·</span><span>25 June 2026</span>
     </div>
   </div>
   <div class="content"><blockquote>
 <p>Working draft. Consistent with <code>CONTEXT.md</code> (cash-pay therapy marketplace, 15% platform fee,
-UK now → US all-50-states, bootstrapped). ⚠️ Items tied to legal/clinical sign-off are flagged.
+UK first → English-speaking expatriates worldwide → broader markets (incl. the US) later,
+bootstrapped). ⚠️ Items tied to legal/clinical sign-off are flagged.
 Last updated: [PLACEHOLDER: date]</p>
 </blockquote>
 <h2 id="1-vision-overview">1. Vision &amp; overview</h2>
 <p>Faresay is a two-sided marketplace that connects people seeking therapy with vetted, licensed
 therapists, and handles discovery, matching, scheduling, secure video sessions, and payments.
-Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong>. The product must feel
+Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong> (10% for founding therapists;
+therapist keeps 85%, or up to 90% as a founding therapist). The product must feel
 <strong>trustworthy, fast, and private</strong> — it handles sensitive mental-health data and must make the
 <strong>"not a crisis service"</strong> boundary unmistakable.</p>
+<p><strong>Trust is the core product.</strong> The primary promise is that every therapist is manually verified —
+licensed, identity-verified, interviewed, and quality-reviewed — with reviews, response times, and
+a transparent experience surfaced to clients. <strong>Matching (fit) sits on top of trust</strong>, not the
+other way round.</p>
+<p><strong>Beachhead.</strong> After the UK home market, the near-term focus is <strong>internationally mobile,
+English-speaking professionals</strong> (e.g. Japan, Singapore, Hong Kong, the UAE, Thailand, Vietnam, and
+across Europe) seeking culturally-compatible therapists who understand relocation stress, isolation,
+identity, and belonging. Broader markets — including the US and its multi-state machinery — are a
+<strong>later, optional phase</strong> (see §7), not the near-term build.</p>
 <h2 id="2-goals-non-goals">2. Goals &amp; non-goals</h2>
 <p><strong>Goals</strong>
 - Let a client find, book, and pay for a suitable licensed therapist with minimal friction.
-- Let a therapist get matched clients and run sessions with low admin, keeping 85% of the fee.
-- Enforce <strong>trust &amp; safety</strong>: verification, privacy, crisis signposting, compliance.
-- Support <strong>US multi-state</strong> operation (licensure tied to the client's location).</p>
+- Let a therapist get matched clients and run sessions with low admin, keeping 85% of the fee
+  (up to 90% as a founding therapist).
+- Make <strong>trust visible and verifiable</strong>: manual verification, identity checks, interviews, quality
+  review, reviews, response times — surfaced on every profile.
+- Serve <strong>internationally mobile, English-speaking clients</strong>: timezone-aware scheduling,
+  cross-cultural/multilingual matching, and country-correct crisis signposting.
+- Enforce <strong>trust &amp; safety</strong>: verification, privacy, crisis signposting, compliance.</p>
 <p><strong>Non-goals (initial)</strong>
 - Insurance billing / claims (cash-pay only initially).
 - Faresay providing clinical care itself (clinicians are independent).
@@ -92,10 +107,14 @@ Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong>. Th
 - Prescribing / medication management.</p>
 <h2 id="3-personas">3. Personas</h2>
 <ul>
-<li><strong>Client (self-pay adult):</strong> wants a good-fit therapist quickly, transparent price, easy booking.</li>
-<li><strong>Therapist (licensed independent):</strong> wants filled calendar, low admin, fair terms, autonomy.</li>
+<li><strong>Client (self-pay adult, often an expatriate):</strong> internationally mobile English-speaking
+  professional living abroad; wants a culturally-compatible, good-fit therapist who understands
+  relocation stress and isolation, in their own timezone, with a transparent price and easy booking.</li>
+<li><strong>Therapist (licensed independent):</strong> wants filled calendar, low admin, fair terms, autonomy;
+  may have cross-cultural / expat experience and work across timezones.</li>
 <li><strong>Clinical/Trust-&amp;-Safety admin (Faresay):</strong> verifies providers, monitors safety, handles issues.</li>
-<li><strong>Ops/Compliance admin (Faresay):</strong> manages state coverage, licensure checks, payouts.</li>
+<li><strong>Ops/Compliance admin (Faresay):</strong> manages market coverage, licensure/registration checks,
+  cross-border permissibility flags, payouts.</li>
 </ul>
 <h2 id="4-key-user-journeys">4. Key user journeys</h2>
 <ol>
@@ -110,23 +129,41 @@ Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong>. Th
 <ul>
 <li>Account creation &amp; secure auth (MFA option); age/eligibility gate ⚠️ COUNSEL (minors policy).</li>
 <li><strong>Intake/preferences</strong>: needs, modality, therapist preferences (gender, language, specialism),
-  <strong>location/state capture</strong> (required for US licensure matching) ⚠️ COUNSEL.</li>
-<li><strong>Matching/discovery</strong>: browse + recommended matches; therapist profiles (credentials, specialisms,
-  verified badge, price, availability, reviews).</li>
-<li><strong>Booking &amp; calendar</strong>: real-time availability, time-zone aware, reminders, reschedule/cancel.</li>
-<li><strong>Payments</strong>: pay per session; transparent pricing; the 15% fee handled in the split ⚠️ COUNSEL on
-  how the fee is presented; receipts; cancellation/no-show rules per ToS.</li>
-<li><strong>Secure video sessions</strong> (HIPAA-eligible telehealth) ⚠️ SECURITY; in-session crisis resources.</li>
+  <strong>country-of-residence capture</strong> (required for crisis signposting, timezone, and cross-border
+  licensure flagging) ⚠️ COUNSEL.</li>
+<li><strong>Cross-cultural / multilingual preferences</strong>: languages spoken, countries/cultures of experience,
+  and expat-relevant specialisms (relocation stress, isolation, identity, belonging) — used as
+  matching inputs (see §5.4).</li>
+<li><strong>Matching/discovery</strong>: browse + recommended matches; therapist profiles lead with <strong>trust
+  surfaces</strong> (verification badges; credentials body + number verified; identity-verified;
+  interviewed; quality-reviewed; reviews; typical response time), then fit (specialisms, languages,
+  cultural experience, price, availability).</li>
+<li><strong>Booking &amp; calendar</strong>: <strong>timezone-aware scheduling</strong> — availability and all times shown in the
+  client's locale, with therapist↔client timezone differences handled explicitly; real-time
+  availability, reminders, reschedule/cancel.</li>
+<li><strong>Payments</strong>: pay per session; transparent pricing; the 15% fee (10% founding) handled in the
+  split ⚠️ COUNSEL on how the fee is presented; multi-currency display considerations for overseas
+  clients ⚠️ COUNSEL; receipts; cancellation/no-show rules per ToS.</li>
+<li><strong>Secure video sessions</strong> (privacy-compliant telehealth) ⚠️ SECURITY; in-session crisis resources.</li>
 <li><strong>Messaging</strong> (async, boundaried, non-emergency) with safety disclaimers.</li>
 <li><strong>Reviews/feedback</strong> and outcome measures (optional) per clinical governance.</li>
-<li><strong>Crisis signposting</strong> persistently accessible (988/911 US; 999/111/Samaritans UK) ⚠️ verify.</li>
+<li><strong>Crisis signposting</strong> persistently accessible and <strong>resolved to the client's country of
+  residence</strong> (e.g. 999/111/Samaritans UK; country-correct equivalents elsewhere — must not default
+  to a single UK/US list) ⚠️ verify / ⚠️ COUNSEL.</li>
 </ul>
 <h3 id="52-therapist-side">5.2 Therapist-side</h3>
 <ul>
-<li><strong>Application &amp; onboarding</strong>; document upload (licence, insurance, ID).</li>
-<li><strong>Credentialing/verification</strong>: licensure check in operating state(s), interstate-compact handling
-  (PSYPACT/Counseling/Social Work), background/DBS, insurance — with <strong>ongoing monitoring</strong> ⚠️.</li>
-<li><strong>Profile management</strong>; availability/calendar; service/pricing settings (within platform rules).</li>
+<li><strong>Application &amp; onboarding</strong>; document upload (licence/registration, insurance, ID).</li>
+<li><strong>Credentialing/verification</strong> (the trust engine): manual licensure/registration check against the
+  therapist's regulatory body (e.g. BACP/UKCP/HCPC in the UK ⚠️ verify), credentials body + number
+  verified, <strong>identity verification</strong>, <strong>structured interview</strong>, <strong>quality review</strong>, background/DBS,
+  insurance — with <strong>ongoing monitoring</strong>; verification outcomes drive the client-facing trust
+  badges in §5.1 ⚠️.</li>
+<li><strong>Cross-cultural profile fields</strong>: languages spoken, countries/cultures of practice and lived
+  experience, expat-relevant specialisms; therapist's registration <strong>jurisdiction</strong> captured for
+  cross-border permissibility flagging (see §5.4, §7).</li>
+<li><strong>Profile management</strong>; <strong>timezone-aware</strong> availability/calendar; service/pricing settings
+  (within platform rules).</li>
 <li><strong>Session management</strong>: upcoming/past, secure video, notes link-out (clinician owns the record —
   Faresay does not store the clinical record by default) ⚠️ COUNSEL/CLINICAL.</li>
 <li><strong>Earnings &amp; payouts</strong>: balance, payout schedule, statements, tax docs ⚠️.</li>
@@ -135,35 +172,72 @@ Clients pay out of pocket; Faresay takes a <strong>15% platform fee</strong>. Th
 <h3 id="53-admin-trust-safety">5.3 Admin / trust &amp; safety</h3>
 <ul>
 <li>Verification queue &amp; audit log; provider suspension/offboarding.</li>
-<li><strong>State-coverage controls</strong> (which states are live for booking) tied to legal roadmap.</li>
+<li><strong>Market-coverage controls</strong> (which client countries / corridors are live for booking) tied to
+  the legal roadmap; UK live first, expat corridors enabled as cross-border permissibility is
+  confirmed (see §7).</li>
+<li><strong>Cross-border permissibility flags</strong>: per client-country × therapist-jurisdiction corridor, with
+  ⚠️ COUNSEL review status — block or warn where teletherapy is not confirmed permissible.</li>
 <li>Incident/complaint logging; safeguarding workflow; reporting.</li>
 <li>Payments/refunds/chargeback handling.</li>
+</ul>
+<h3 id="54-matching-engine">5.4 Matching engine</h3>
+<ul>
+<li><strong>Trust first</strong>: only verified, in-good-standing therapists are eligible to surface; trust state
+  is a gate, not a tie-breaker.</li>
+<li><strong>Fit on top of trust</strong>, weighting cross-cultural/multilingual signals: shared/known languages,
+  countries/cultures of experience, expat-relevant specialisms (relocation stress, isolation,
+  identity, belonging), modality and preference fit.</li>
+<li><strong>Timezone feasibility</strong>: rank by realistic overlap between the client's locale and the
+  therapist's availability; surface times in the client's timezone.</li>
+<li><strong>Cross-border gating</strong>: matches respect the §5.3 permissibility flag for the client-country ×
+  therapist-jurisdiction corridor ⚠️ COUNSEL.</li>
 </ul>
 <h2 id="6-non-functional-requirements">6. Non-functional requirements</h2>
 <ul>
 <li><strong>Security &amp; privacy</strong> (see <code>security-data-protection-policy.md</code>): encryption in transit/at rest,
   RBAC, MFA, audit logging; data minimisation; PHI/special-category handling.</li>
-<li><strong>Compliance</strong>: UK GDPR/DPA 2018 now; HIPAA + state privacy on US launch ⚠️ COUNSEL; BAAs with
-  any PHI sub-processor (video, storage, payments-adjacent) ⚠️.</li>
+<li><strong>Compliance</strong>: UK GDPR/DPA 2018 now (see <code>uk-legal-regulatory-brief.md</code>); cross-border data
+  flows for overseas (expat) clients ⚠️ COUNSEL; HIPAA + US state privacy only if/when the US phase
+  is pursued ⚠️ COUNSEL; data-processing agreements (and BAAs where a US footprint applies) with any
+  special-category sub-processor (video, storage, payments-adjacent) ⚠️.</li>
 <li><strong>Reliability/availability</strong>: target [PLACEHOLDER: e.g. 99.9%]; resilient booking/video/payments.</li>
 <li><strong>Performance</strong>: fast match/search and booking; low-latency video.</li>
 <li><strong>Accessibility</strong>: WCAG 2.2 AA target; inclusive design for distressed users.</li>
 <li><strong>Auditability</strong>: trace verification, consent, payments, and safety actions.</li>
 <li><strong>Data residency</strong>: UK/EU vs US considerations ⚠️ COUNSEL/SECURITY.</li>
 </ul>
-<h2 id="7-us-specific-requirements">7. US-specific requirements</h2>
+<h2 id="7-cross-border-jurisdiction-requirements">7. Cross-border &amp; jurisdiction requirements</h2>
+<h3 id="71-near-term-uk-expat-corridors">7.1 Near-term (UK + expat corridors)</h3>
 <ul>
-<li><strong>Licensure-by-client-location</strong>: a client can only book a therapist licensed (or compact-
-  authorised) in the client's state at session time. Hard rule ⚠️ COUNSEL.</li>
-<li><strong>State on/off switches</strong> for booking, gated by legal qualification + provider coverage.</li>
-<li><strong>Informed consent to telehealth</strong> captured per state ⚠️ COUNSEL.</li>
-<li><strong>MSO/PC structure</strong> reflected in contracting/payment flows where required ⚠️ COUNSEL.</li>
+<li><strong>Cross-border licensure capture</strong>: capture the <strong>client's country of residence</strong> and the
+  <strong>therapist's registration/jurisdiction</strong>; every match carries this pair.</li>
+<li><strong>Permissibility flag (do not assume)</strong>: cross-border teletherapy permissibility must be checked
+  <strong>per corridor</strong> — do <strong>not</strong> assert it is automatically allowed. Surface a ⚠️ COUNSEL status per
+  client-country × therapist-jurisdiction pair and block/warn where unconfirmed.</li>
+<li><strong>Corridor on/off switches</strong> for booking, gated by legal qualification + provider coverage; UK
+  domestic live first, expat corridors enabled as cleared.</li>
+<li><strong>Informed consent to teletherapy</strong> captured per corridor ⚠️ COUNSEL.</li>
 </ul>
+<h3 id="72-later-optional-us-multi-state-phase">7.2 Later / optional (US multi-state phase)</h3>
+<blockquote>
+<p>Pursued only if/when the US phase is taken on — <strong>not</strong> the near-term build.
+- <strong>Licensure-by-client-location</strong>: a client can only book a therapist licensed (or compact-
+  authorised, e.g. PSYPACT / counseling / social-work compacts) in the client's state at session
+  time. Hard rule ⚠️ COUNSEL.
+- <strong>State on/off switches</strong> for booking, gated by legal qualification + provider coverage.
+- <strong>Informed consent to telehealth</strong> captured per state ⚠️ COUNSEL.
+- <strong>MSO / friendly-PC structure</strong> reflected in contracting/payment flows where required ⚠️ COUNSEL.
+- <strong>HIPAA + 50-state privacy</strong> machinery and BAAs ⚠️ COUNSEL/SECURITY.</p>
+</blockquote>
 <h2 id="8-mvp-vs-later">8. MVP vs later</h2>
-<p><strong>MVP (UK first, then first US state cluster):</strong> account, intake, matching, profiles, booking,
-payments + 15% split, secure video, messaging, verification, crisis signposting, core admin.
+<p><strong>MVP (UK first, then English-speaking expat corridors):</strong> account, intake (incl. country of
+residence + cross-cultural preferences), trust-first matching, profiles with verification/trust
+surfaces, <strong>timezone-aware</strong> booking, payments + 15% split (10% founding), secure video, messaging,
+manual verification (licence/registration, identity, interview, quality review), <strong>country-correct</strong>
+crisis signposting, cross-border permissibility flagging, core admin.
 <strong>Later:</strong> advanced matching/ML, outcome analytics, employer/B2B, premium therapist tools,
-native apps, insurance (if model expands), broader state automation.</p>
+native apps, insurance (if model expands), and the <strong>US multi-state phase</strong> (§7.2:
+licensure-by-state, MSO/friendly-PC, PSYPACT/state compacts, HIPAA + 50-state privacy) if pursued.</p>
 <h2 id="9-success-metrics">9. Success metrics</h2>
 <ul>
 <li><strong>Liquidity</strong>: % of client searches that result in a booking; therapist utilisation.</li>
@@ -171,14 +245,20 @@ native apps, insurance (if model expands), broader state automation.</p>
   (quantified in <code>financial-model.md</code>).</li>
 <li><strong>Quality/safety</strong>: client-reported outcomes/satisfaction, complaint/incident rate, verification
   pass-rate, zero compliance breaches.</li>
-<li><strong>Marketplace health</strong>: supply/demand balance per live market.</li>
+<li><strong>Trust</strong>: verification pass-rate, % of profiles with full trust surfaces, median response time.</li>
+<li><strong>Marketplace health</strong>: supply/demand balance per live market (UK + expat corridors).</li>
 </ul>
 <h2 id="10-dependencies-open-questions">10. Dependencies &amp; open questions</h2>
 <ul>
-<li>Payment processor with <strong>marketplace split + payouts</strong> and (where needed) BAA ⚠️.</li>
-<li><strong>HIPAA-eligible video</strong> vendor ⚠️ SECURITY.</li>
-<li>Licensure-verification / background-check vendor.</li>
-<li>⚠️ COUNSEL: minors in scope? fee presentation? clinical-record custody? per-state consent?</li>
+<li>Payment processor with <strong>marketplace split + payouts</strong>, international payouts and multi-currency
+  handling, and (where a US footprint applies) BAA ⚠️.</li>
+<li><strong>Privacy-compliant video</strong> vendor ⚠️ SECURITY (HIPAA-eligible only required if US phase pursued).</li>
+<li>Licensure/registration-verification / background-check vendor (UK regulatory bodies first).</li>
+<li><strong>Timezone &amp; locale</strong> library / source of truth for client-locale time display.</li>
+<li><strong>Country crisis-resource directory</strong> to drive country-correct signposting (see
+  <code>crisis-safeguarding-policy.md</code> / <code>uk-crisis-safeguarding-policy.md</code>).</li>
+<li>⚠️ COUNSEL: minors in scope? fee presentation? clinical-record custody? <strong>per-corridor
+  cross-border teletherapy permissibility &amp; consent?</strong> (UK basis: <code>uk-legal-regulatory-brief.md</code>.)</li>
 <li>⚠️ CLINICAL: screening/exclusion thresholds (see clinical-governance &amp; crisis-safeguarding).</li>
 </ul></div>
   <footer class="lh">

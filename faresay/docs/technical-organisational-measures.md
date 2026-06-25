@@ -58,7 +58,7 @@ This document is **Annex 2** to the [Data Processing Agreement](data-processing-
 
 - **Data protection by design and default** is applied to new features (e.g. cookieless analytics; SMS used only for appointment reminders).
 - **Policies:** this annex is supported by the [Security & Data Protection Policy](security-data-protection-policy.md), [Clinical Governance Policy](clinical-governance-policy.md) and [Crisis & Safeguarding Policy](crisis-safeguarding-policy.md).
-- **ICO registration:** Faresay is registered (or registering) with the ICO and pays the data-protection fee. *Registration in progress — number to follow on issue.*
+- **ICO registration:** Faresay is registered (or registering) with the ICO and pays the data-protection fee. *ICO registration applied for 26 June 2026 — registration number to follow.*
 
 ---
 

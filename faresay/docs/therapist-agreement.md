@@ -1,4 +1,4 @@
-> ⚠️ DRAFT v0.1 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: 26 June 2026
 
 # Faresay Therapist Agreement
 
@@ -12,7 +12,7 @@ By clicking to accept, signing, or by providing services through the Faresay pla
 
 ### 1.1 Parties
 
-1.1.1 **"Faresay"** means [PLACEHOLDER: registered entity name], a company [PLACEHOLDER: company type / registration number] whose registered office is at [PLACEHOLDER: registered address] (also referred to as **"we"**, **"us"**, **"our"**, and the **"Platform Operator"**).
+1.1.1 **"Faresay"** means Faresay Ltd, a private limited company registered in England and Wales under company number 17302034 whose registered office is at 167-169 Great Portland Street, London W1W 5PF (also referred to as **"we"**, **"us"**, **"our"**, and the **"Platform Operator"**).
 
 > ⚠️ COUNSEL: For the US market this party may be the management services organisation ("MSO") entity rather than the UK operating company, and a separate professional entity ("friendly PC" / professional corporation) may be the contracting or supervising entity in corporate-practice states. Confirm the correct contracting party per jurisdiction before execution. See clause 2.6.
 

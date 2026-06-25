@@ -13,9 +13,9 @@ It is a living document, reviewed at least annually and on material change.
 
 ## Controller / Processor identity
 
-- **Organisation:** Faresay — Faresay (company formation in progress — number to follow).
-- **Registered address:** to be confirmed.
-- **ICO registration number:** to be confirmed.
+- **Organisation:** Faresay Ltd (company number 17302034).
+- **Registered address:** 167-169 Great Portland Street, London W1W 5PF.
+- **ICO registration number:** applied for 26 June 2026 — registration number to follow.
 - **Data protection contact:** Joel Harvey, Founder — support@faresay.com.
 
 ---

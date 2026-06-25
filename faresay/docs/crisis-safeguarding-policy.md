@@ -1,4 +1,4 @@
-> ⚠️ DRAFT v0.1 — for clinical advisor + legal review. NOT clinical or legal advice. Must be validated by a qualified clinical/safeguarding lead before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for clinical advisor + legal review. NOT clinical or legal advice. Must be validated by a qualified clinical/safeguarding lead before use. Last updated: 26 June 2026
 
 # Faresay — Crisis & Safeguarding Policy
 
@@ -244,7 +244,7 @@ This policy covers the following risk presentations. ⚠️ CLINICAL — definit
 
 13.1 This policy will be reviewed at least **annually**, and additionally after any serious incident (§12), after any material change in law or professional guidance, and before entering a new jurisdiction. ⚠️ CLINICAL / ⚠️ COUNSEL — confirm cadence and owner.
 
-13.2 **Owner:** [PLACEHOLDER: Safeguarding Lead]. **Next review due:** [PLACEHOLDER: date].
+13.2 **Owner:** [PLACEHOLDER: Safeguarding Lead]. **Next review due:** 26 June 2026.
 
 13.3 **Version control.** Material changes should be versioned and the "Last updated" date refreshed. This is **DRAFT v0.1** and must not be operationalised until validated by a qualified clinical/safeguarding lead and reviewed by counsel.
 

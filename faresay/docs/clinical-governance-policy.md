@@ -1,4 +1,4 @@
-> ⚠️ DRAFT v0.1 — for clinical advisor + legal review. NOT clinical or legal advice. Must be validated by a qualified clinical lead before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for clinical advisor + legal review. NOT clinical or legal advice. Must be validated by a qualified clinical lead before use. Last updated: 26 June 2026
 
 # Faresay Clinical Governance Policy
 

@@ -5,7 +5,7 @@
 > research confirmed market *direction* but several specific unit-economics figures were unreliable,
 > so tune everything to Faresay's own UK data first. Bootstrapped lens: optimise for
 > **contribution-margin-positive growth and CAC payback**, not blitz-scaling.
-> Last updated: [PLACEHOLDER: date]
+> Last updated: 26 June 2026
 
 ## 0. Benchmark ranges (directional — validate before relying)
 | Driver | Starting range | Confidence | Note |

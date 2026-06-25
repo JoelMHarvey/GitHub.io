@@ -2,7 +2,7 @@
 
 > Working draft. Consistent with `CONTEXT.md` (cash-pay therapy marketplace, 15% platform fee,
 > UK now → US all-50-states, bootstrapped). ⚠️ Items tied to legal/clinical sign-off are flagged.
-> Last updated: [PLACEHOLDER: date]
+> Last updated: 26 June 2026
 
 ## 1. Vision & overview
 Faresay is a two-sided marketplace that connects people seeking therapy with vetted, licensed

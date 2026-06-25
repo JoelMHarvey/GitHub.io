@@ -3,7 +3,7 @@
 > Working draft. Consistent with `CONTEXT.md`. Living document — review at least quarterly and on
 > any material change. Scoring: Likelihood (L) and Impact (I) each 1–5; Rating = L×I
 > (1–8 Low · 9–14 Medium · 15–25 High). Owners are roles, not named individuals yet.
-> Last updated: [PLACEHOLDER: date]
+> Last updated: 26 June 2026
 
 ## How to use
 Each risk has an ID, category, description, L, I, Rating, mitigation(s), and owner. Re-score after

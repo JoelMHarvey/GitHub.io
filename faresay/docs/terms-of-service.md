@@ -1,8 +1,8 @@
-> ⚠️ DRAFT v0.1 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: 26 June 2026
 
 # Faresay — Terms of Service
 
-These Terms of Service ("**Terms**") govern your access to and use of the Faresay marketplace platform, including our website, applications, and related services (together, the "**Platform**"). The Platform is operated by [PLACEHOLDER: registered entity name], a company registered in [PLACEHOLDER: jurisdiction of incorporation] with registered office at [PLACEHOLDER: registered address] ("**Faresay**", "**we**", "**us**", "**our**").
+These Terms of Service ("**Terms**") govern your access to and use of the Faresay marketplace platform, including our website, applications, and related services (together, the "**Platform**"). The Platform is operated by Faresay Ltd, a company registered in [PLACEHOLDER: jurisdiction of incorporation] with registered office at 167-169 Great Portland Street, London W1W 5PF ("**Faresay**", "**we**", "**us**", "**our**").
 
 Please read these Terms carefully. They apply to you whether you are located in the United Kingdom or, where and when the Platform is made available, in the United States.
 
@@ -267,8 +267,8 @@ Please read these Terms carefully. They apply to you whether you are located in 
 
 If you have questions about these Terms, contact us at:
 
-- **Entity:** [PLACEHOLDER: registered entity name]
-- **Address:** [PLACEHOLDER: registered address]
+- **Entity:** Faresay Ltd
+- **Address:** 167-169 Great Portland Street, London W1W 5PF
 - **Email:** [PLACEHOLDER: contact email, e.g. enquiries@ / legal@]
 
 For urgent or emergency situations, do **not** contact us — see Section 3.

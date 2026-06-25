@@ -1,4 +1,4 @@
-> ⚠️ DRAFT v0.1 — for legal/privacy counsel review. NOT legal advice. Counsel must finalise before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for legal/privacy counsel review. NOT legal advice. Counsel must finalise before use. Last updated: 26 June 2026
 
 # Faresay Privacy Policy
 
@@ -14,11 +14,11 @@ Because Faresay is a mental-health service, much of the information we handle is
 
 **Faresay** ("Faresay", "we", "us", "our") provides the technology platform through which clients discover, book and pay for sessions with independent licensed mental-health professionals ("therapists" or "clinicians").
 
-- **Controller legal entity:** [PLACEHOLDER: registered controller legal name]
-- **Registered address:** [PLACEHOLDER: registered address]
-- **Company registration number:** [PLACEHOLDER: company number]
-- **ICO registration number (UK):** [PLACEHOLDER: ICO registration number]
-- **Data Protection Officer / privacy contact:** [PLACEHOLDER: DPO or privacy contact name and email]
+- **Controller legal entity:** Faresay Ltd
+- **Registered address:** 167-169 Great Portland Street, London W1W 5PF
+- **Company registration number:** 17302034
+- **ICO registration number (UK):** applied for 26 June 2026 — registration number to follow
+- **Data Protection Officer / privacy contact:** Joel Harvey, Founder — support@faresay.com
 
 ⚠️ **COUNSEL — controller vs processor / joint-controller mapping.** Faresay provides the platform; the clinician provides the clinical service and owns the clinical relationship and clinical record (see [CONTEXT.md] / [Therapist Agreement](therapist-agreement.md)). The respective data-protection roles must be confirmed:
 - For **account, marketplace, payment, device and usage data**, Faresay is likely the **controller**.
@@ -250,7 +250,7 @@ Where HIPAA applies to Faresay's US operations, a separate **HIPAA Notice of Pri
 ## 17. Contact & updates
 
 **Privacy / data-protection contact:** [PLACEHOLDER: privacy contact name, email, postal address]
-**Data Protection Officer (if appointed):** [PLACEHOLDER: DPO name and contact]
+**Data Protection Officer (if appointed):** None appointed — no statutory DPO required at current scale; data-protection contact: Joel Harvey, support@faresay.com
 **UK / EU representative (if required) ⚠️ COUNSEL:** [PLACEHOLDER: representative details]
 **US privacy contact ⚠️ COUNSEL:** [PLACEHOLDER: US contact / toll-free number where required]
 

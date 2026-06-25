@@ -4,7 +4,7 @@
 > cash-pay / out-of-network, **15% platform fee**. Market figures are research-grounded but
 > **directional** — see `market-research-synthesis.md` for confidence tags and sources; refresh
 > hard numbers from primary sources before any external/investor use.
-> Last updated: [PLACEHOLDER: date]
+> Last updated: 26 June 2026
 
 ---
 

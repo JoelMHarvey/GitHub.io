@@ -4,7 +4,7 @@
 > 15 confirmed / 10 killed). Confidence tags below reflect that verification. **Magnitudes from
 > market-sizing reports are directional only** — several specific $-figures were refuted as
 > inconsistent across sources, so treat ranges, not point values, as reliable. Verify any number
-> before putting it in front of investors. Last updated: [PLACEHOLDER: date]
+> before putting it in front of investors. Last updated: 26 June 2026
 
 ## Confidence legend
 - 🟢 **Confirmed** (passed multi-vote verification) · 🟡 **Directional** (search-surfaced, single

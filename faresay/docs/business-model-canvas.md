@@ -2,7 +2,7 @@
 
 > Working draft. Consistent with `CONTEXT.md` (cash-pay therapy marketplace, 15% platform fee,
 > UK now → US all-50-states, bootstrapped). Market-sizing figures in the business plan / financial
-> model supersede any rough numbers here. Last updated: [PLACEHOLDER: date]
+> model supersede any rough numbers here. Last updated: 26 June 2026
 
 Faresay is a **two-sided marketplace**, so segments, value props, and channels are split between
 **Clients** (people seeking therapy) and **Therapists** (licensed providers).

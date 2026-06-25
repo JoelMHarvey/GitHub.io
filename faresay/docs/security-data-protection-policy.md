@@ -1,4 +1,4 @@
-> ⚠️ DRAFT v0.1 — for security + legal review. NOT legal advice. Must be validated before use. Last updated: [PLACEHOLDER: date]
+> ⚠️ DRAFT v0.1 — for security + legal review. NOT legal advice. Must be validated before use. Last updated: 26 June 2026
 
 # Faresay Security & Data Protection Policy
 
@@ -57,7 +57,7 @@ Faresay's leadership (founder/management) is ultimately accountable for informat
 
 ### 3.2 Key roles
 - **Security Lead** — [PLACEHOLDER: named individual]. Owns this policy, the risk treatment plan, vendor security review, incident response coordination, and the security roadmap. In an early-stage bootstrapped company this may initially be a founder; ⚠️ **SECURITY** — confirm whether a fractional/virtual CISO or external security advisor is engaged.
-- **Data Protection Officer (DPO) / privacy lead** — [PLACEHOLDER: DPO or privacy contact]. ⚠️ **COUNSEL** — confirm whether a statutory **DPO is required** under UK GDPR Art 37 (likely triggered by large-scale processing of special-category health data) and, if so, appoint and register the DPO with the ICO. The DPO/privacy lead owns DPIAs, records of processing (Art 30), data-subject rights handling, and the ICO relationship.
+- **Data Protection Officer (DPO) / privacy lead** — Joel Harvey, Founder — support@faresay.com. ⚠️ **COUNSEL** — confirm whether a statutory **DPO is required** under UK GDPR Art 37 (likely triggered by large-scale processing of special-category health data) and, if so, appoint and register the DPO with the ICO. The DPO/privacy lead owns DPIAs, records of processing (Art 30), data-subject rights handling, and the ICO relationship.
 - **HIPAA Security Official & Privacy Official (US)** — ⚠️ **COUNSEL** — the HIPAA Security Rule requires a designated **Security Official** (45 CFR §164.308(a)(2)) and the Privacy Rule a **Privacy Official**; these must be named before US launch if Faresay is a covered entity or business associate.
 - **All personnel** — responsible for following this policy, completing training, reporting incidents promptly, and protecting credentials and devices.
 
@@ -287,7 +287,7 @@ Faresay's security programme is structured to align over time with a recognised 
 
 | Version | Date | Author | Notes |
 |---|---|---|---|
-| v0.1 (DRAFT) | [PLACEHOLDER: date] | [PLACEHOLDER: author] | Initial draft for security + legal review. |
+| v0.1 (DRAFT) | 26 June 2026 | [PLACEHOLDER: author] | Initial draft for security + legal review. |
 
 ---
 

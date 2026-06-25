@@ -132,7 +132,7 @@ This DPA is governed by the laws of **England and Wales** and subject to the exc
 ## Annex 1 — Details of Processing
 
 - **Controller:** the Customer (therapist / practice).
-- **Processor:** Faresay — Faresay — legal entity, company number, registered address and ICO number to be inserted on incorporation/registration (in progress).
+- **Processor:** Faresay Ltd, a company registered in England and Wales (company number 17302034), registered office 167-169 Great Portland Street, London W1W 5PF.
 - **Subject matter, duration, nature, purpose:** as Section 2.
 - **Categories of Data Subject:** the Customer's clients; the Customer's staff/associates where applicable.
 - **Categories of Personal Data:** name, email, phone; date of birth (optional); appointment dates/times; session/booking history; payment metadata (card details are handled by Stripe — Faresay does not store card numbers); messages between Customer and client; client intake/consent responses; **special-category health data** (mental-health information the Customer or client records).

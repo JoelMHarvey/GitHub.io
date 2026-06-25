@@ -45,6 +45,11 @@ META = {
     "clinical-governance-policy.md": ("Clinical Governance Policy", DRAFT),
     "crisis-safeguarding-policy.md": ("Crisis & Safeguarding Policy", DRAFT),
     "security-data-protection-policy.md": ("Security & Data Protection Policy", DRAFT),
+    "data-processing-agreement.md": ("Data Processing Agreement (Art 28)", DRAFT),
+    "technical-organisational-measures.md": ("Technical & Organisational Measures (Annex 2)", DRAFT),
+    "sub-processor-list.md": ("Sub-processor List (Annex 3)", DRAFT),
+    "record-of-processing-activities.md": ("Record of Processing Activities (Art 30)", DRAFT),
+    "data-protection-impact-assessment.md": ("Data Protection Impact Assessment (Art 35)", DRAFT),
 }
 # Internal/meta docs — skip (not client-facing deliverables).
 SKIP = {"CONTEXT.md", "HANDOFF.md", "README.md"}

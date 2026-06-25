@@ -42,6 +42,8 @@ META = {
     "uk-clinical-governance-policy.md": ("UK Clinical Governance Policy", DRAFT),
     "uk-crisis-safeguarding-policy.md": ("UK Crisis & Safeguarding Policy", DRAFT),
     "uk-security-data-protection-policy.md": ("UK Security & Data Protection Policy", DRAFT),
+    "pp-uk-business-overview.md": ("Faresay — UK Business Overview", CONF),
+    "pp-uk-legal-brief.md": ("Faresay — UK Legal Brief & Questions", CONF),
     "business-plan.md": ("Business Plan", CONF),
     "gtm-strategy.md": ("Go-To-Market Strategy (v1)", CONF),
     "customer-persona.md": ("Customer Personas", CONF),

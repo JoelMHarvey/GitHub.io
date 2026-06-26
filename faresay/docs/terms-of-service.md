@@ -1,251 +1,246 @@
-> ⚠️ DRAFT v0.1 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: 26 June 2026
+> ⚠️ DRAFT v0.2 — for legal counsel review. NOT legal advice. Counsel must finalise before use. Last updated: 26 June 2026
 
 # Faresay — Terms of Service
 
-These Terms of Service ("**Terms**") govern your access to and use of the Faresay marketplace platform, including our website, applications, and related services (together, the "**Platform**"). The Platform is operated by Faresay Ltd, a company registered in [PLACEHOLDER: jurisdiction of incorporation] with registered office at 167-169 Great Portland Street, London W1W 5PF ("**Faresay**", "**we**", "**us**", "**our**").
+These Terms of Service ("**Terms**") govern your subscription to and use of Faresay's practice-management software, including our website, applications, and related services (together, the "**Service**"). The Service is operated by Faresay Ltd, a company registered in England & Wales (company number 17302034) with registered office at 167-169 Great Portland Street, London W1W 5PF ("**Faresay**", "**we**", "**us**", "**our**").
 
-Please read these Terms carefully. They apply to you whether you are located in the United Kingdom or, where and when the Platform is made available, in the United States.
+Please read these Terms carefully. They form a business-to-business agreement between Faresay and you, the mental-health professional or practice that subscribes to the Service (the "**Customer**", "**you**", "**your**"). They apply to Customers in the United Kingdom and, where and when the Service is made available, in other markets.
 
-⚠️ COUNSEL — Confirm the contracting entity for each market (UK operating entity now; US commercial entity / MSO, and the relationship to any "friendly PC", on US launch — see `business-model-canvas.md` and the friendly-PC structure in `CONTEXT.md`). These Terms may need a market-specific or jurisdiction-specific addendum or version.
+⚠️ COUNSEL — Confirm the contracting entity for each market (UK operating entity now; any additional entity on later-market launch — see `business-model-canvas.md`). These Terms may need a market-specific or jurisdiction-specific addendum or version. Faresay's relationship to its Customers is that of a software supplier; the previous marketplace/intermediary framing has been removed throughout.
 
 ---
 
 ## 1. Acceptance of these Terms
 
-1.1 By creating an account, accessing, or using the Platform, you confirm that you have read, understood, and agree to be bound by these Terms and by any documents expressly incorporated by reference (including our Privacy Policy — see `privacy-policy.md`). If you do not agree, you must not use the Platform.
+1.1 By creating an account, subscribing to, accessing, or using the Service, you confirm that you have read, understood, and agree to be bound by these Terms and by any documents expressly incorporated by reference (including our Privacy Policy — see `privacy-policy.md` — and the Data Processing Agreement — see `data-processing-agreement.md`). If you do not agree, you must not use the Service.
 
-1.2 If you are using the Platform on behalf of another person, you represent that you are authorised to accept these Terms on their behalf. ⚠️ COUNSEL — confirm whether use on behalf of another adult is permitted at all, and how it interacts with consent and confidentiality.
+1.2 You confirm that you are subscribing **in the course of a business** (whether as a sole trader, partnership, or company) and not as a consumer, and that you are authorised to enter into these Terms. If you are subscribing on behalf of an organisation, you represent that you are authorised to bind that organisation, and "you" refers to that organisation.
 
-1.3 We may require you to affirmatively accept these Terms (for example, by clicking "I agree") before you can use certain features. Your continued use of the Platform constitutes ongoing acceptance.
+1.3 We may require you to affirmatively accept these Terms (for example, by clicking "I agree") before you can use certain features. Your continued use of the Service constitutes ongoing acceptance.
 
 ---
 
 ## 2. Description of the Service
 
-2.1 **Faresay is a marketplace.** The Platform connects clients ("**you**", "**Client**") with independent, licensed mental-health professionals ("**Therapists**") and provides technology and supporting services that facilitate discovery, scheduling, communication, and payment.
+2.1 **Faresay is practice-management software.** The Service is a software-as-a-service (SaaS) platform that an independent, appropriately registered mental-health professional subscribes to in order to run their own private practice — managing clients, scheduling appointments, holding secure video sessions, taking card payments, sending reminders, and keeping practice records.
 
-2.2 **Faresay does NOT itself provide clinical, therapy, counselling, medical, or healthcare services.** Faresay is **not** a healthcare provider, a medical practice, or a provider of mental-health treatment. Faresay does not practise psychology, psychotherapy, counselling, social work, or medicine, and does not supervise, direct, or control the clinical judgement of any Therapist.
+2.2 **Faresay does NOT provide clinical, therapy, counselling, medical, or healthcare services.** Faresay is **not** a healthcare provider, a medical practice, a provider of mental-health treatment, a directory, a matching or referral service, or a marketplace. Faresay does not practise psychology, psychotherapy, counselling, social work, or medicine, does not supply, introduce, or acquire clients for you, and does not supervise, direct, or control your clinical judgement.
 
-2.3 Therapists are **independent** practitioners. They are not employees or agents of Faresay. The clinical relationship — including all assessment, diagnosis, treatment, advice, and the clinical record — is **between you and your Therapist**, not between you and Faresay. See Section 7.
+2.3 **You bring your own clients and run your own practice.** The clinical relationship, the client relationship, and the clinical record are **between you and your client**. Your clients are your clients, not Faresay's. Faresay is not a party to your engagement with any client and does not hold or own the clinical record. See Section 6.
 
-2.4 The services Faresay provides are **technology and marketing platform services**: software, a searchable directory and matching tools, scheduling, secure messaging, video-session facilitation, payment processing, and client-acquisition and support functions. ⚠️ COUNSEL — this characterisation is material to corporate-practice-of-medicine / corporate-practice-of-psychology and fee-splitting analysis (see `CONTEXT.md`); confirm wording with US healthcare-regulatory counsel.
+2.4 The Service Faresay provides is **software and supporting technology**: tools for client and contact management, scheduling, secure messaging, video-session hosting, reminders, card-payment processing, and practice records. ⚠️ COUNSEL — Faresay's role is that of a software supplier and (for the payment facility) a technology provider, not a clinical, referral, or intermediary service; confirm the wording aligns with the product as built (see `product-requirements-document.md`).
 
-2.5 We do not guarantee that any particular Therapist will be available, suitable, or a good match for you, that any course of therapy will achieve any particular outcome, or that you will be matched at all.
+2.5 We do not guarantee that the Service will meet every need of your practice, or that any particular feature will be available indefinitely. We may add, change, or remove features over time, and will give reasonable notice of any material reduction in functionality.
 
 ---
 
 ## 3. NOT AN EMERGENCY OR CRISIS SERVICE
 
-> ## ⚠️ THE PLATFORM IS NOT FOR EMERGENCIES OR CRISES.
+> ## ⚠️ THE SERVICE IS NOT FOR EMERGENCIES OR CRISES.
 >
-> **Faresay and the Platform are NOT an emergency service, crisis line, or suicide-prevention service.** Therapists on the Platform are not available for emergency, urgent, or crisis response, and messages or bookings made through the Platform are **not** monitored for emergencies.
+> **Faresay and the Service are NOT an emergency service, crisis line, or suicide-prevention service.** The Service is practice-management software for scheduled, non-urgent care delivered by you. Faresay does **not** monitor client communications or bookings for emergencies, and messages or bookings made through the Service are not monitored on your behalf.
 >
-> **If you are experiencing a medical or mental-health emergency, are in crisis, or are at risk of harming yourself or others, do NOT use the Platform. Get help immediately:**
->
-> **United States**
-> - Call or text **988** (Suicide & Crisis Lifeline)
-> - Call **911** for any life-threatening emergency
+> **If you or a client is experiencing a medical or mental-health emergency, is in crisis, or is at risk of harm, do NOT rely on the Service. Get help immediately:**
 >
 > **United Kingdom**
 > - Call **999** for any life-threatening emergency
-> - Call **111** for urgent (non-life-threatening) NHS help
+> - Call **NHS 111** (select the mental-health option) for urgent help
 > - Call the **Samaritans** free on **116 123** (24 hours a day)
+> - Text **SHOUT** to **85258** (free, 24/7)
 >
-> If you are outside these countries, contact your local emergency services.
+> If you are outside the United Kingdom, contact your local emergency services.
 
-⚠️ COUNSEL / ⚠️ CLINICAL — Verify all numbers and service descriptions before publication, and confirm they match the `crisis-safeguarding-policy.md`. Confirm 988 (US), 111 (UK NHS), and Samaritans 116 123 details and any region-specific equivalents.
+⚠️ COUNSEL / ⚠️ CLINICAL — Verify all numbers and service descriptions before publication, and confirm they match the `crisis-safeguarding-policy.md`. Confirm 999, NHS 111 mental-health routing, Samaritans 116 123, and SHOUT 85258 details and any region-specific equivalents.
 
-3.1 You acknowledge that the Platform is intended for non-urgent mental-health support delivered by Therapists on a scheduled basis, and that response times for messages and bookings are not immediate.
+3.1 You acknowledge that the Service supports non-urgent care delivered by you on a scheduled basis, that response times for messages and bookings are not immediate, and that crisis handling, risk assessment, and safeguarding rest with you as the clinician (see Section 6).
 
 ---
 
-## 4. Eligibility and Age
+## 4. Eligibility
 
-4.1 The Platform is intended for **adults**. You must be at least 18 years old (or the age of majority in your jurisdiction, if higher) to create an account and use the Platform.
+4.1 The Service is for **professional use** by appropriately qualified practitioners. To subscribe and use the Service to deliver care, you must be a mental-health professional appropriately registered and entitled to practise in the United Kingdom — a current member of an appropriate professional body or PSA-accredited register (for example BACP, UKCP, NCPS, or BPS), or, where your profession is statutorily regulated, holding the relevant statutory registration.
 
-4.2 **Minors.** ⚠️ COUNSEL / ⚠️ CLINICAL — Confirm whether services to minors will be offered at all and, if so, the consent model (parental/guardian consent, age thresholds for independent consent which vary by US state and within the UK, e.g. Gillette/Fraser considerations), verification, and safeguarding requirements. Until finalised, this draft assumes **adults only** and minors are out of scope.
+4.2 You must maintain that registration in good standing, hold your own professional indemnity insurance, and comply with your professional body's standards and applicable law throughout your use of the Service.
 
-4.3 By using the Platform, you represent and warrant that you meet the eligibility requirements and that the information you provide is accurate.
+4.3 By subscribing, you represent and warrant that you meet these eligibility requirements and that the information you provide is accurate. We may ask you to evidence your registration and insurance, and may suspend or terminate your account under Section 17 if you cease to meet these requirements. ⚠️ COUNSEL / ⚠️ CLINICAL — confirm what registration and insurance checks Faresay performs at onboarding and on renewal (see `clinical-governance-policy.md` and `therapist-agreement.md`); align the representations here with what is actually done.
 
-4.4 **Location.** Therapists must be appropriately licensed in the jurisdiction where you are located at the time of a session. You agree to provide accurate location information and to inform your Therapist if your location changes, because this may affect whether they can lawfully provide services to you. ⚠️ COUNSEL — ties to US per-state licensure and interstate compacts (PSYPACT, Counseling Compact, Social Work Licensure Compact) per `CONTEXT.md`.
+4.4 **Location and licensure.** You are responsible for ensuring you are lawfully entitled to provide your services to each client in the place where the client is located at the time of a session, including any cross-border or remote-care requirements. Faresay does not assess or guarantee your entitlement to practise in any location. ⚠️ COUNSEL — confirm wording for any later non-UK markets.
 
 ---
 
 ## 5. Accounts and Registration
 
-5.1 To use most features you must create an account. You agree to provide accurate, current, and complete information and to keep it up to date.
+5.1 To use the Service you must create an account. You agree to provide accurate, current, and complete information and to keep it up to date.
 
-5.2 You are responsible for safeguarding your login credentials and for all activity that occurs under your account. Notify us promptly at [PLACEHOLDER: security/support contact] if you suspect any unauthorised use.
+5.2 You are responsible for safeguarding your login credentials and for all activity that occurs under your account, including the activity of any associate or staff member to whom you grant access. Notify us promptly at [PLACEHOLDER: security/support contact] if you suspect any unauthorised use.
 
-5.3 You may not share your account, create an account using false information, or create an account on behalf of another person without authorisation.
+5.3 You may not share your account credentials, create an account using false information, or permit access by anyone not authorised by you. You are responsible for ensuring anyone you authorise complies with these Terms.
 
 5.4 We may refuse, suspend, or terminate accounts in accordance with Section 17.
 
 ---
 
-## 6. The Therapist Relationship
+## 6. Your Practice and Your Clients
 
-6.1 Therapists are **independent licensed professionals** who use the Platform to offer their services. They are solely responsible for the mental-health and clinical services they provide, including their professional judgement, the suitability and quality of care, their compliance with applicable licensing, professional, and ethical standards, and the maintenance of their clinical records.
+6.1 **You run your own practice.** As an independent professional, you — and not Faresay — are solely responsible for the mental-health and clinical services you provide, including your professional judgement, the suitability, safety, and quality of care, your compliance with applicable licensing, professional, and ethical standards, and the maintenance, retention, and security of your clinical records.
 
-6.2 **The clinical relationship is between you and your Therapist.** Faresay is not a party to that relationship. Faresay's role is limited to facilitating discovery, matching, scheduling, communication, and payment, and providing the supporting technology.
+6.2 **The client relationship is yours.** Faresay is not a party to the relationship between you and your client. Faresay's role is limited to providing the software you use to run your practice. Your clients are your clients; we do not acquire, introduce, refer, allocate, or match clients to you, and we make no claim to the client relationship or the clinical record.
 
-6.3 Faresay does not control or guarantee the qualifications, licensure status, conduct, advice, or performance of any Therapist beyond any onboarding and verification steps we describe. ⚠️ COUNSEL / ⚠️ CLINICAL — confirm what verification and credentialing Faresay does perform and represent (see `clinical-governance-policy.md` and `therapist-agreement.md`); align the representations here with what is actually done, to avoid creating liability.
+6.3 **Crisis, risk, and safeguarding.** You are responsible for crisis handling, risk assessment, safeguarding, and signposting clients to appropriate UK services. The Service is not a substitute for, and does not perform, any of these clinical responsibilities (see Section 3).
 
-6.4 Any agreement for clinical services, including any therapist-specific terms, informed-consent forms, or notices, is between you and the Therapist. Where there is a conflict between these Terms and a Therapist's clinical engagement documents on a clinical matter, the Therapist's clinical documents govern that clinical matter.
-
----
-
-## 7. Informed Consent to Telehealth
-
-7.1 The Platform supports the delivery of services by remote/telehealth means (for example, video, voice, or messaging). Telehealth has benefits and limitations and may not be appropriate for every person or condition.
-
-7.2 Before or at the start of services, your Therapist is responsible for obtaining your **informed consent to telehealth** as required by applicable law and professional standards, including explaining the nature, benefits, risks, and limitations of remote care, alternatives, confidentiality, and what to do in an urgent situation.
-
-7.3 By using the Platform to receive remote services, you acknowledge that care may be delivered remotely and that you may be asked to provide separate informed consent to your Therapist.
-
-⚠️ COUNSEL / ⚠️ CLINICAL — Telehealth informed-consent requirements vary significantly by US state and differ in the UK. Confirm whether consent is captured by the Therapist, by the Platform, or both; whether a Platform-level telehealth consent is required; and the exact required disclosures per jurisdiction. Do not finalise this section without counsel and a clinical advisor.
+6.4 **Your engagement documents govern care.** Any agreement for clinical services, including your own client terms, informed-consent forms, and notices, is between you and your client. Where there is a conflict between these Terms and your clinical engagement documents on a clinical matter, your clinical documents govern that clinical matter.
 
 ---
 
-## 8. No Professional Relationship with Faresay; Medical Disclaimer
+## 7. Telehealth and Remote Care
 
-8.1 **No clinician–client relationship is formed with Faresay.** Nothing on the Platform, and no interaction with Faresay or its staff, creates a clinician–client, doctor–patient, therapeutic, or other professional relationship between you and Faresay.
+7.1 The Service supports the delivery of care by remote/telehealth means (for example, video, voice, or messaging). Telehealth has benefits and limitations and may not be appropriate for every client or condition.
 
-8.2 **Faresay does not provide medical or clinical advice.** Content made available by Faresay (such as general information, directory listings, or self-help material) is for general informational purposes only and is **not** a substitute for professional diagnosis, advice, or treatment. Always seek the advice of a qualified professional regarding any mental- or physical-health condition. Never disregard or delay seeking professional advice because of something accessed through the Platform.
+7.2 As the treating professional, **you** are responsible for determining whether remote care is appropriate and for obtaining your client's **informed consent to telehealth** as required by applicable law and professional standards, including explaining the nature, benefits, risks, and limitations of remote care, alternatives, confidentiality, and what to do in an urgent situation. Faresay does not capture telehealth consent on your behalf.
 
-8.3 Faresay does not recommend or endorse any specific Therapist, treatment, opinion, or course of action. Reliance on any information made available through the Platform is at your own risk.
+7.3 Faresay provides the technology that enables remote sessions; it does not direct or assess the clinical appropriateness of delivering any particular care remotely.
 
----
-
-## 9. Pricing and Payments
-
-9.1 **Session fees.** Therapists set or agree the fees for their sessions, which are displayed to you before you book. The fee model is **cash-pay / out-of-network**: you pay out of pocket for sessions. ⚠️ COUNSEL — confirm fee-setting mechanics (Therapist-set vs Platform-set vs banded) and how this interacts with fee-splitting/CPOM analysis (see `CONTEXT.md`).
-
-9.2 **Insurance.** Faresay does not bill insurance in the initial model. You are responsible for the full session fee. If you wish to seek reimbursement from an insurer, that is a matter between you and your insurer.
-
-9.3 **Platform fee.** Faresay's marketplace take rate is **15%**, which is built into the model as a **technology and marketing platform fee** for the software, discovery, scheduling, payment, and client-acquisition services we provide. The 15% is not a split of the Therapist's professional fee. ⚠️ COUNSEL — confirm exactly how the 15% is presented to Clients (e.g., embedded in the displayed price vs shown as a separate line) and that the presentation is consistent with the fee characterisation in `CONTEXT.md` and applicable fee-splitting law.
-
-9.4 **Payment processing.** Payments are processed through a third-party payment provider. By providing payment details, you authorise us (or our payment provider) to charge the applicable fees. You agree to the payment provider's terms. ⚠️ COUNSEL — identify provider and confirm flow of funds, especially under any MSO/friendly-PC structure.
-
-9.5 **Taxes.** Prices are exclusive of any applicable taxes unless stated otherwise. You are responsible for any taxes that apply to you. ⚠️ COUNSEL — confirm VAT (UK) and US sales/tax treatment.
-
-9.6 **Cancellations and rescheduling.** You may cancel or reschedule a booked session up to [PLACEHOLDER: cancellation window, e.g. 24 hours] before the session start time without charge. Cancellations or reschedules made within the cancellation window may be subject to a charge of up to [PLACEHOLDER: cancellation fee / full session fee], as disclosed at booking. ⚠️ COUNSEL — confirm the policy and that it is fairly disclosed (UK consumer-protection considerations below).
-
-9.7 **No-shows.** If you fail to attend a booked session without cancelling within the permitted window, you may be charged up to the full session fee. ⚠️ COUNSEL — confirm.
-
-9.8 **Refunds.** Refunds are handled as follows: [PLACEHOLDER: refund policy]. Where a session is not delivered due to the Therapist's or the Platform's fault, you will not be charged or will be refunded the session fee. ⚠️ COUNSEL — confirm refund policy and reconcile with UK consumer cancellation rights (e.g., Consumer Rights Act 2015 and Consumer Contracts Regulations 2013, including how the right to cancel interacts with services that begin within the cooling-off period) and US state requirements.
+⚠️ COUNSEL / ⚠️ CLINICAL — Confirm telehealth informed-consent requirements applicable to UK practitioners and that responsibility for capturing consent sits with the Customer (clinician), consistent with `clinical-governance-policy.md`. Do not finalise this section without counsel and a clinical advisor.
 
 ---
 
-## 10. Client Responsibilities and Acceptable Use
+## 8. No Professional Relationship with Faresay; Software Disclaimer
+
+8.1 **No clinician–client relationship is formed with Faresay.** Nothing on or about the Service, and no interaction with Faresay or its staff, creates a clinician–client, doctor–patient, therapeutic, or other professional clinical relationship between Faresay and you or your clients. Our relationship with you is that of software supplier and Customer.
+
+8.2 **Faresay does not provide clinical or professional advice.** Any general information, guidance, or materials Faresay makes available (for example, product help, templates, or best-practice notes) are for general informational purposes only and are **not** clinical, legal, regulatory, or professional advice, and are not a substitute for your own professional judgement. You are responsible for ensuring your practice complies with applicable law and professional standards.
+
+8.3 Faresay does not recommend or endorse any particular treatment, opinion, or course of action in respect of any client. Reliance on any information made available through the Service is at your own risk.
+
+---
+
+## 9. Subscription, Fees, and Payments
+
+9.1 **Subscription.** The Service is offered on **monthly subscription plans**, billed monthly in advance through our payment provider, Stripe. The applicable plans, tiers, and prices are disclosed in-product before you subscribe. Your subscription is a **software fee** for access to the Service.
+
+9.2 **Card-payment commission.** Where you use the Service to take card payments from your clients, Faresay charges a **small commission** on each card payment processed, in addition to your subscription fee and the underlying Stripe processing fees. This commission is a **fee for the payment-processing facility within the software**. It is **not** a marketplace fee, a referral fee, a take rate on your practice, or any share, split, or cut of your professional or clinical fee. You set your own fees, own your clients, and receive your fees less only the processor fees and this commission. The commission rate is disclosed in-product before you enable payments. ⚠️ COUNSEL — confirm how the subscription fee and the processing commission are each presented to Customers and that the presentation is consistent with the characterisation in `financial-model.md` and `business-model-canvas.md`.
+
+9.3 **No share of clinical fees.** For the avoidance of doubt, Faresay takes no percentage of, and does not split, your session or clinical fees. Faresay's revenue from you consists only of (a) the software subscription and (b) the card-payment processing commission described above.
+
+9.4 **Payment processing.** Card payments are processed through Stripe (or another third-party payment provider we notify to you). By providing payment details and enabling payments, you authorise us and our payment provider to charge the applicable subscription fees and to deduct the processing commission and processor fees from amounts collected. You agree to the payment provider's terms. ⚠️ COUNSEL — confirm the flow of funds and the payment provider's contracting and settlement model.
+
+9.5 **Taxes.** Prices are exclusive of any applicable taxes (including VAT) unless stated otherwise. You are responsible for any taxes that apply to you, including any VAT chargeable on your own services to your clients. ⚠️ COUNSEL — confirm UK VAT treatment of the subscription and the processing commission.
+
+9.6 **Billing changes and non-payment.** We may change subscription prices or the commission rate on reasonable prior notice, effective from your next billing period; continued use after the change takes effect constitutes acceptance, and if you do not agree you may cancel under Section 17. If a payment fails, we may suspend access to paid features until amounts due are paid.
+
+9.7 **Client charges, cancellations, and refunds.** Any fees you charge your clients, and any cancellation, no-show, or refund policy you apply to them, are **set and operated by you** as part of your own practice. Faresay does not set, mandate, or adjudicate your client-facing pricing or cancellation terms. ⚠️ COUNSEL — confirm that client-facing consumer-protection obligations (e.g. Consumer Rights Act 2015 and Consumer Contracts Regulations 2013) rest with the Customer as the supplier of services to consumers, and that Faresay's terms make this clear.
+
+---
+
+## 10. Customer Responsibilities and Acceptable Use
 
 10.1 You agree to:
-- (a) provide accurate information, including accurate location and any information reasonably needed for safe care;
-- (b) treat Therapists and Faresay staff with respect;
-- (c) attend booked sessions or cancel in accordance with Section 9; and
-- (d) use the Platform only for lawful purposes and in accordance with these Terms.
+- (a) provide accurate registration, insurance, and account information and keep it up to date;
+- (b) use the Service only to run a lawful, properly registered practice;
+- (c) discharge your clinical, safeguarding, and data-protection responsibilities (Sections 6 and 11); and
+- (d) use the Service only for lawful purposes and in accordance with these Terms.
 
 10.2 You agree **not** to:
-- (a) use the Platform for any emergency or crisis (see Section 3);
-- (b) impersonate any person or misrepresent your identity, age, or location;
-- (c) record, copy, or distribute sessions or communications without consent and lawful basis;
-- (d) harass, abuse, threaten, or harm any person;
-- (e) attempt to gain unauthorised access to the Platform, interfere with its operation, introduce malicious code, or scrape or harvest data;
-- (f) circumvent the Platform to arrange or pay for services off-platform in order to avoid fees, where prohibited; ⚠️ COUNSEL — confirm enforceability and wording of any anti-circumvention provision;
-- (g) use the Platform to infringe the rights of others or to post unlawful, defamatory, or infringing content; or
-- (h) use the Platform in violation of any applicable law or regulation.
+- (a) rely on the Service for any emergency or crisis (see Section 3);
+- (b) provide false information about your identity, registration, or entitlement to practise;
+- (c) use the Service if you are not, or cease to be, appropriately registered and insured;
+- (d) misuse client data or process it other than in accordance with your obligations as controller and the Data Processing Agreement;
+- (e) attempt to gain unauthorised access to the Service, interfere with its operation, introduce malicious code, or scrape or harvest data;
+- (f) resell, sublicense, or make the Service available to any third party except your own clients and authorised associates in the ordinary course of your practice;
+- (g) use the Service to infringe the rights of others or to store or transmit unlawful, defamatory, or infringing content; or
+- (h) use the Service in violation of any applicable law or regulation.
 
-10.3 We may remove content and suspend or terminate access for breach of this Section.
-
----
-
-## 11. Intellectual Property
-
-11.1 The Platform and all software, text, graphics, logos, trademarks, and other content provided by Faresay (excluding Therapist content and your content) are owned by or licensed to Faresay and protected by intellectual-property laws. "Faresay" and our logos are our trademarks.
-
-11.2 We grant you a limited, non-exclusive, non-transferable, revocable licence to access and use the Platform for your personal, non-commercial use in accordance with these Terms. No other rights are granted.
-
-11.3 **Your content.** You retain ownership of content you submit. You grant Faresay a non-exclusive, worldwide, royalty-free licence to host, store, and use your content solely as necessary to operate and provide the Platform and as described in our Privacy Policy. ⚠️ COUNSEL — ensure this licence does not extend to clinical-record content in a way that conflicts with the Therapist owning the clinical record (see `CONTEXT.md`) or with health-privacy law.
-
-11.4 You must not use Faresay's intellectual property without our prior written consent.
+10.3 We may suspend or terminate access, and remove unlawful content, for breach of this Section.
 
 ---
 
-## 12. Third-Party Providers and Links
+## 11. Data Protection
 
-12.1 The Platform relies on and may link to third-party services (for example, payment processors, video providers, and other vendors). Therapists are themselves independent third-party providers (see Sections 2 and 6).
+11.1 **Roles.** In respect of your clients' personal data (including special-category health data) processed through the Service, **you are the controller and Faresay is the processor**, acting only on your documented instructions under the Data Processing Agreement (`data-processing-agreement.md`), which forms part of these Terms. In respect of your account, billing, and product-usage data, Faresay acts as an **independent controller**, as described in our Privacy Policy (`privacy-policy.md`).
 
-12.2 We are not responsible for the acts, omissions, content, products, or services of any third party, including Therapists, and your dealings with them are at your own risk and subject to their terms. Inclusion of a link or provider is not an endorsement.
+11.2 **Your controller duties.** As controller of your clients' data, you are responsible for establishing a lawful basis and an Article 9 condition for processing special-category health data, providing privacy information to your clients, handling data-subject rights requests, and otherwise complying with the UK GDPR and the Data Protection Act 2018.
 
----
+11.3 **Faresay's processor duties.** Faresay will process your clients' personal data only on your documented instructions and in accordance with the Data Processing Agreement, including the technical and organisational measures and the sub-processor terms described there.
 
-## 13. Disclaimers of Warranties
-
-13.1 To the fullest extent permitted by law, the Platform is provided "**as is**" and "**as available**", without warranties of any kind, whether express, implied, or statutory, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
-
-13.2 We do not warrant that the Platform will be uninterrupted, error-free, secure, or free of harmful components, or that any defect will be corrected.
-
-13.3 **Faresay makes no warranty regarding clinical services.** Because Faresay does not provide clinical services, we make no representation or warranty as to the quality, suitability, safety, or outcome of any service provided by any Therapist.
-
-13.4 **Statutory rights.** ⚠️ COUNSEL — In the UK and certain US jurisdictions, some warranties and consumer rights cannot lawfully be excluded. This Section must be qualified so it does not purport to exclude rights that cannot be excluded (e.g., under the UK Consumer Rights Act 2015). Counsel to add appropriate "nothing in these Terms affects your statutory rights" wording and jurisdiction carve-outs.
+11.4 Both parties will comply with the UK GDPR and the Data Protection Act 2018. ⚠️ COUNSEL — confirm the controller/processor split mirrors the Data Processing Agreement and Record of Processing Activities exactly.
 
 ---
 
-## 14. Limitation of Liability
+## 12. Intellectual Property
 
-14.1 To the fullest extent permitted by law, Faresay and its officers, directors, employees, and agents will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of profits, revenue, data, goodwill, or other intangible losses, arising out of or relating to your use of (or inability to use) the Platform.
+12.1 The Service and all software, text, graphics, logos, trademarks, and other content provided by Faresay (excluding your content and your clients' content) are owned by or licensed to Faresay and protected by intellectual-property laws. "Faresay" and our logos are our trademarks.
 
-14.2 To the fullest extent permitted by law, Faresay's total aggregate liability arising out of or relating to these Terms or the Platform will not exceed the greater of (a) the total platform fees you paid to Faresay in the [PLACEHOLDER: e.g. 12] months before the event giving rise to the claim, or (b) [PLACEHOLDER: monetary cap]. ⚠️ COUNSEL — set the cap and confirm enforceability per jurisdiction.
+12.2 We grant you a limited, non-exclusive, non-transferable, revocable licence to access and use the Service to run your practice in accordance with these Terms for the term of your subscription. No other rights are granted.
 
-14.3 **Clinical services.** Faresay is not liable for the clinical services provided by Therapists, who are independent and solely responsible for their services (Section 6).
+12.3 **Your content and client data.** You and your clients retain ownership of the content and data you and they submit. You grant Faresay a non-exclusive, worldwide, royalty-free licence to host, store, and process that content **solely as necessary to provide the Service and as instructed by you under the Data Processing Agreement**, and not for any independent purpose. This licence does not give Faresay any ownership of, or independent right to use, the clinical record, which remains yours. ⚠️ COUNSEL — confirm this licence is limited to provision of the Service and does not conflict with the controller/processor split or health-privacy law.
 
-14.4 **Carve-outs.** ⚠️ COUNSEL — Nothing in these Terms limits or excludes liability that cannot lawfully be limited or excluded, including (UK) liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, and any other liability that cannot be excluded under applicable law. Counsel to confirm the precise carve-outs for the UK and each US state.
-
----
-
-## 15. Indemnification
-
-15.1 To the fullest extent permitted by law, you agree to indemnify and hold harmless Faresay and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to (a) your breach of these Terms, (b) your misuse of the Platform, or (c) your violation of any law or the rights of any third party. ⚠️ COUNSEL — confirm scope and enforceability against consumers (some jurisdictions limit consumer indemnities).
+12.4 You must not use Faresay's intellectual property without our prior written consent.
 
 ---
 
-## 16. Dispute Resolution; Arbitration and Class-Action Waiver; Governing Law
+## 13. Third-Party Providers and Links
 
-16.1 **Informal resolution.** Before bringing a formal claim, you agree to contact us at [PLACEHOLDER: disputes contact] and attempt to resolve the dispute informally for at least [PLACEHOLDER: e.g. 30] days.
+13.1 The Service relies on and may integrate with third-party services (for example, our payment provider, video infrastructure, email/SMS delivery, and hosting). The current sub-processors are listed at `sub-processor-list.md`.
 
-16.2 **Governing law and venue.** These Terms and any dispute arising out of them are governed by the laws of [PLACEHOLDER: governing law], and the courts of [PLACEHOLDER: venue] will have jurisdiction, except where mandatory local consumer law provides otherwise. ⚠️ COUNSEL — set governing law and venue separately for the UK and the US; confirm that consumers retain the protection of mandatory laws of their home jurisdiction.
-
-16.3 **Arbitration (US).** ⚠️ COUNSEL — For US users, counsel may include a binding arbitration agreement (e.g., under the Federal Arbitration Act), specifying the arbitration provider and rules, seat/venue at [PLACEHOLDER: arbitration venue], a delegation clause, costs, and an opt-out mechanism. The enforceability and required form of any arbitration clause is highly jurisdiction-specific and must be drafted by counsel. **This draft does not contain an operative arbitration agreement.**
-
-16.4 **Class-action waiver (US).** ⚠️ COUNSEL — Any waiver of class, collective, or representative actions, and any jury-trial waiver, must be drafted and validated by US counsel for enforceability and required prominence/formatting. **This draft does not contain an operative class-action waiver.**
-
-16.5 **UK consumers.** ⚠️ COUNSEL — Mandatory arbitration and class-action waivers are generally **not** appropriate or enforceable against UK consumers. UK consumers should retain the right to bring proceedings in their local courts. Counsel to ensure UK terms do not include unfair or unenforceable dispute clauses (Consumer Rights Act 2015 fairness rules).
+13.2 We are not responsible for the acts, omissions, content, products, or services of any third party beyond our own obligations under these Terms and the Data Processing Agreement, and your use of any third-party service is subject to that provider's terms. Inclusion of a provider or link is not an endorsement.
 
 ---
 
-## 17. Suspension and Termination
+## 14. Disclaimers of Warranties
 
-17.1 You may stop using the Platform and close your account at any time, subject to settling any amounts due and to your Therapist's separate clinical/discharge arrangements.
+14.1 To the fullest extent permitted by law, the Service is provided "**as is**" and "**as available**", without warranties of any kind, whether express, implied, or statutory, including implied warranties of satisfactory quality, fitness for a particular purpose, and non-infringement, save that the Service will be supplied with reasonable care and skill.
 
-17.2 We may suspend or terminate your access, with or without notice, if (a) you breach these Terms, (b) we are required to do so by law, (c) we reasonably believe your use poses a risk to others or to the Platform, or (d) we discontinue the Platform or a feature.
+14.2 We do not warrant that the Service will be uninterrupted, error-free, secure, or free of harmful components, or that any defect will be corrected, although we will use reasonable efforts to maintain availability and security.
 
-17.3 On termination, the licences granted to you end. Sections that by their nature should survive (including Sections 8, 11, 13, 14, 15, 16, and 18) survive termination.
+14.3 **Faresay makes no warranty regarding the care you deliver.** Because Faresay does not provide clinical services, we make no representation or warranty as to the suitability, safety, quality, or outcome of any care you deliver using the Service. That care is your sole responsibility.
 
-17.4 ⚠️ COUNSEL / ⚠️ CLINICAL — Termination must not abruptly cut off care in a clinically unsafe way. Coordinate with `clinical-governance-policy.md` and the Therapist's continuity-of-care obligations so that clients are signposted appropriately.
+14.4 **Statutory rights.** ⚠️ COUNSEL — Even in a business-to-business contract, certain terms (for example, as to supply with reasonable care and skill) may be implied by law and cannot all be excluded. This Section must be qualified so it does not purport to exclude liabilities that cannot lawfully be excluded; counsel to add appropriate carve-out wording.
+
+---
+
+## 15. Limitation of Liability
+
+15.1 To the fullest extent permitted by law, Faresay and its officers, directors, employees, and agents will not be liable for any indirect, incidental, special, consequential, or exemplary damages, or for any loss of profits, revenue, anticipated savings, data, goodwill, or other intangible losses, arising out of or relating to your use of (or inability to use) the Service.
+
+15.2 To the fullest extent permitted by law, Faresay's total aggregate liability arising out of or relating to these Terms or the Service in any 12-month period will not exceed the **total subscription and commission fees you paid to Faresay in the 12 months** before the event giving rise to the claim. ⚠️ COUNSEL — confirm the cap and its enforceability in a B2B context.
+
+15.3 **The care you provide.** Faresay is not liable for the care you provide, your clinical decisions, your compliance with professional or regulatory standards, or your discharge of your duties as data controller — all of which are your sole responsibility (Sections 6 and 11).
+
+15.4 **Carve-outs.** ⚠️ COUNSEL — Nothing in these Terms limits or excludes liability that cannot lawfully be limited or excluded, including liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation, and any other liability that cannot be excluded under applicable law. Counsel to confirm the precise carve-outs.
+
+---
+
+## 16. Indemnification
+
+16.1 To the fullest extent permitted by law, you agree to indemnify and hold harmless Faresay and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to (a) your breach of these Terms, (b) your provision of care or operation of your practice, (c) your processing of personal data as controller, or (d) your violation of any law or the rights of any third party (including your clients). ⚠️ COUNSEL — confirm scope and enforceability in a B2B context.
+
+---
+
+## 17. Suspension, Termination, and Your Data
+
+17.1 **Cancellation by you.** Paid plans renew automatically each month until cancelled. You may cancel at any time through your account; cancellation takes effect at the end of the then-current paid month, and you remain liable for fees accrued up to that point.
+
+17.2 **Suspension or termination by us.** We may suspend or terminate your access, with or without notice, if (a) you breach these Terms, (b) you cease to meet the eligibility requirements in Section 4, (c) we are required to do so by law, (d) we reasonably believe your use poses a risk to others, to your clients' data, or to the Service, or (e) we discontinue the Service or a feature on reasonable notice.
+
+17.3 **Export and deletion of your data.** On termination, you may export and keep your data, after which we delete or return it in accordance with the Data Processing Agreement. You remain responsible, as controller, for retaining the clinical record for the period your professional standards and applicable law require.
+
+17.4 **Survival.** On termination, the licences granted to you end. Sections that by their nature should survive (including Sections 8, 11, 12, 14, 15, 16, 18, and the relevant terms of the Data Processing Agreement) survive termination.
+
+17.5 ⚠️ COUNSEL / ⚠️ CLINICAL — Termination must not abruptly cut off your ability to retrieve records needed for continuity and retention. Coordinate with `clinical-governance-policy.md` and the Data Processing Agreement so that the Customer can export client and clinical data before deletion.
 
 ---
 
 ## 18. Changes to these Terms
 
-18.1 We may update these Terms from time to time. If we make material changes, we will provide reasonable notice (for example, by email or an in-Platform notice) before they take effect.
+18.1 We may update these Terms from time to time. If we make material changes, we will provide reasonable notice (for example, by email or an in-product notice) before they take effect.
 
-18.2 Changes take effect on the date stated in the updated Terms. Your continued use of the Platform after the effective date constitutes acceptance. If you do not agree, you must stop using the Platform. ⚠️ COUNSEL — confirm change-of-terms mechanics meet consumer-protection requirements in each market.
+18.2 Changes take effect on the date stated in the updated Terms. Your continued use of the Service after the effective date constitutes acceptance. If you do not agree, you may cancel under Section 17. ⚠️ COUNSEL — confirm change-of-terms mechanics for a B2B subscription.
 
 ---
 
 ## 19. Miscellaneous
 
-19.1 **Entire agreement.** These Terms, together with documents incorporated by reference, are the entire agreement between you and Faresay regarding the Platform and supersede prior agreements on that subject.
+19.1 **Entire agreement.** These Terms, together with the Privacy Policy, the Data Processing Agreement, and any other documents incorporated by reference, are the entire agreement between you and Faresay regarding the Service and supersede prior agreements on that subject. Where there is any inconsistency, the order of precedence is: the Data Processing Agreement (on data-processing matters), then these Terms, then any in-product or supplementary documents.
 
 19.2 **Severability.** If any provision is held unenforceable, the remaining provisions remain in effect, and the unenforceable provision will be modified to the minimum extent necessary.
 
@@ -253,23 +248,31 @@ Please read these Terms carefully. They apply to you whether you are located in 
 
 19.4 **Assignment.** You may not assign these Terms without our consent. We may assign these Terms in connection with a merger, acquisition, or sale of assets, subject to applicable law.
 
-19.5 **No agency.** Nothing in these Terms creates any partnership, joint venture, agency, or employment relationship between you and Faresay, or between Faresay and any Therapist.
+19.5 **No agency.** Nothing in these Terms creates any partnership, joint venture, agency, or employment relationship between you and Faresay. You act as an independent professional running your own practice.
 
 19.6 **Force majeure.** We are not liable for any failure or delay caused by events beyond our reasonable control.
 
-19.7 **Notices.** We may provide notices to you by email or through the Platform. You may contact us as set out in Section 20.
+19.7 **Notices.** We may provide notices to you by email or through the Service. You may contact us as set out in Section 21.
 
-19.8 **Language.** ⚠️ COUNSEL — confirm whether localised/translated versions are needed and which language governs.
+19.8 **Third-party rights.** Except as expressly stated, a person who is not a party to these Terms has no right under the Contracts (Rights of Third Parties) Act 1999 to enforce any of its terms. ⚠️ COUNSEL — confirm.
 
 ---
 
-## 20. Contact
+## 20. Governing Law and Jurisdiction
+
+20.1 These Terms, and any dispute or claim arising out of or in connection with them or their subject matter, are governed by the laws of **England & Wales**, and the courts of **England & Wales** have exclusive jurisdiction. ⚠️ COUNSEL — set governing law and venue for any later non-UK markets, and confirm whether any market-specific addendum is required.
+
+20.2 **Informal resolution.** Before bringing a formal claim, you agree to contact us at [PLACEHOLDER: disputes contact] and attempt to resolve the dispute informally for at least [PLACEHOLDER: e.g. 30] days.
+
+---
+
+## 21. Contact
 
 If you have questions about these Terms, contact us at:
 
-- **Entity:** Faresay Ltd
-- **Address:** 167-169 Great Portland Street, London W1W 5PF
-- **Email:** [PLACEHOLDER: contact email, e.g. enquiries@ / legal@]
+- **Entity:** Faresay Ltd (company number 17302034)
+- **Address:** 167-169 Great Portland Street, London W1W 5PF, England & Wales
+- **Email:** [PLACEHOLDER: contact email, e.g. legal@ / enquiries@]
 
 For urgent or emergency situations, do **not** contact us — see Section 3.
 

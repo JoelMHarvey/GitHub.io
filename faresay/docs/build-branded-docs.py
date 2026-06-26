@@ -44,6 +44,7 @@ META = {
     "sub-processor-list.md": ("Sub-processor List (Annex 3)", DRAFT),
     "record-of-processing-activities.md": ("Record of Processing Activities (Art 30)", DRAFT),
     "data-protection-impact-assessment.md": ("Data Protection Impact Assessment (Art 35)", DRAFT),
+    "competitor-comparison.md": ("Competitor Feature Comparison", CONF),
 }
 # Internal/meta docs — skip (not client-facing deliverables).
 SKIP = {"CONTEXT.md", "HANDOFF.md", "README.md"}

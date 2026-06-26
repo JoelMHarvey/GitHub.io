@@ -1,14 +1,14 @@
 <svg width="560" height="170" viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faresay">
-  <g transform="translate(10,12) scale(0.72)" fill="#ffffff">
-    <path transform="rotate(-58 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(58 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(-34 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(34 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(-20 100 150)" d="M100 150 C80 134 76 96 100 56 C124 96 120 134 100 150 Z"/>
-    <path transform="rotate(20 100 150)"  d="M100 150 C80 134 76 96 100 56 C124 96 120 134 100 150 Z"/>
-    <path transform="rotate(-8 100 150)" d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path transform="rotate(8 100 150)"  d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path d="M100 150 C88 138 88 112 100 82 C112 112 112 138 100 150 Z"/>
+  <defs>
+    <mask id="cutW" maskUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="200" height="200" fill="#fff"/>
+      <path d="M72 96 C84 118 116 118 128 96" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round"/>
+      <path d="M84 74 C92 66 108 66 116 74" fill="none" stroke="#000" stroke-width="7.5" stroke-linecap="round"/>
+    </mask>
+  </defs>
+  <g transform="translate(2,4) scale(0.8)">
+    <path fill="#ffffff" mask="url(#cutW)" d="M70 26 h60 a44 44 0 0 1 44 44 v36 a44 44 0 0 1 -44 44 h-30
+      l-26 24 a4 4 0 0 1 -6.6 -3.2 l1.6 -20.8 h0 a44 44 0 0 1 -39 -44 v-36 a44 44 0 0 1 44 -44 Z"/>
   </g>
-  <text x="180" y="103" font-family="Fraunces, Georgia, serif" font-size="76" font-weight="600" letter-spacing="-1" fill="#ffffff">faresay</text>
+  <text x="178" y="103" font-family="Fraunces, Georgia, serif" font-size="76" font-weight="600" letter-spacing="-1" fill="#ffffff">faresay</text>
 </svg>

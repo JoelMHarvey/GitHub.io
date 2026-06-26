@@ -1,0 +1,16 @@
+<svg width="480" height="480" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faresay soft pattern">
+  <defs>
+    <pattern id="soft" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(6)">
+      <rect width="120" height="120" fill="#f0faf7"/>
+      <g fill="none" stroke="#7fcab8" stroke-width="2.4" stroke-opacity="0.45" stroke-linecap="round">
+        <path d="M40 56 C48 70 64 70 72 56"/>
+        <path d="M-10 116 C-2 130 14 130 22 116"/>
+        <path d="M98 116 C106 130 122 130 130 116"/>
+      </g>
+      <circle cx="56" cy="22" r="2.6" fill="#7fcab8" fill-opacity="0.4"/>
+      <circle cx="6" cy="82" r="2.6" fill="#7fcab8" fill-opacity="0.4"/>
+      <circle cx="106" cy="82" r="2.6" fill="#7fcab8" fill-opacity="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="480" fill="url(#soft)"/>
+</svg>

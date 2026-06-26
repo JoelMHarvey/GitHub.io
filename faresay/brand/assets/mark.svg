@@ -1,30 +1,13 @@
-<svg width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faresay lotus mark">
+<svg width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faresay mark">
   <defs>
-    <radialGradient id="flHalo" cx="50%" cy="55%" r="55%">
-      <stop offset="0%" stop-color="#7fc4b8" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#7fc4b8" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="flPetal" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="fsT" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#2f9183"/><stop offset="100%" stop-color="#217567"/>
     </linearGradient>
-    <linearGradient id="flPetalLight" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#57b3a4"/><stop offset="100%" stop-color="#2f9183"/>
-    </linearGradient>
   </defs>
-  <circle cx="100" cy="118" r="78" fill="url(#flHalo)"/>
-  <g fill="url(#flPetal)">
-    <path transform="rotate(-58 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(58 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(-34 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-    <path transform="rotate(34 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z"/>
-  </g>
-  <g fill="url(#flPetalLight)">
-    <path transform="rotate(-20 100 150)" d="M100 150 C80 134 76 96 100 56 C124 96 120 134 100 150 Z"/>
-    <path transform="rotate(20 100 150)"  d="M100 150 C80 134 76 96 100 56 C124 96 120 134 100 150 Z"/>
-  </g>
-  <g fill="#bfe6df">
-    <path transform="rotate(-8 100 150)" d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path transform="rotate(8 100 150)"  d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path d="M100 150 C88 138 88 112 100 82 C112 112 112 138 100 150 Z"/>
-  </g>
+  <!-- soft speech bubble (squircle + gentle tail) -->
+  <path fill="url(#fsT)" d="M70 26 h60 a44 44 0 0 1 44 44 v36 a44 44 0 0 1 -44 44 h-30
+    l-26 24 a4 4 0 0 1 -6.6 -3.2 l1.6 -20.8 h0 a44 44 0 0 1 -39 -44 v-36 a44 44 0 0 1 44 -44 Z"/>
+  <!-- calm 'say' — a gentle smile/breath -->
+  <path d="M72 96 C84 118 116 118 128 96" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+  <path d="M84 74 C92 66 108 66 116 74" fill="none" stroke="#ffffff" stroke-width="7.5" stroke-linecap="round" stroke-opacity="0.55"/>
 </svg>

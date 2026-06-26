@@ -57,7 +57,7 @@ def build_pngs():
     if not os.path.exists(CHROME):
         print("  ! Chrome not found — skipping PNG export"); return
     for name, w, h in [("logo-primary", 560, 170), ("mark", 160, 160), ("logo-mono-black", 560, 170),
-                       ("logo-mono-white", 560, 170), ("favicon", 120, 120), ("pattern-petals", 480, 480)]:
+                       ("logo-mono-white", 560, 170), ("favicon", 120, 120), ("pattern-soft", 480, 480)]:
         out = os.path.join(PNG, name + "@3x.png")
         subprocess.run([CHROME, "--headless", "--disable-gpu", "--hide-scrollbars",
                         "--default-background-color=00000000", "--force-device-scale-factor=3",

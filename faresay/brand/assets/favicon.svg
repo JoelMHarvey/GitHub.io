@@ -1,12 +1,6 @@
 <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Faresay icon">
-  <rect width="120" height="120" rx="28" fill="#217567"/>
-  <g transform="translate(60,86) scale(0.42) translate(-100,-150)" fill="#ffffff" fill-opacity="0.92">
-    <path transform="rotate(-58 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z" fill-opacity="0.6"/>
-    <path transform="rotate(58 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z" fill-opacity="0.6"/>
-    <path transform="rotate(-34 100 150)" d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z" fill-opacity="0.78"/>
-    <path transform="rotate(34 100 150)"  d="M100 150 C76 132 70 86 100 40 C130 86 124 132 100 150 Z" fill-opacity="0.78"/>
-    <path transform="rotate(-8 100 150)" d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path transform="rotate(8 100 150)"  d="M100 150 C86 138 84 108 100 74 C116 108 114 138 100 150 Z"/>
-    <path d="M100 150 C88 138 88 112 100 82 C112 112 112 138 100 150 Z"/>
-  </g>
+  <defs><linearGradient id="fv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2f9183"/><stop offset="100%" stop-color="#217567"/></linearGradient></defs>
+  <rect width="120" height="120" rx="28" fill="url(#fv)"/>
+  <path d="M44 64 C52 80 68 80 76 64" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M52 47 C57 41 63 41 68 47" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-opacity="0.55"/>
 </svg>

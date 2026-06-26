@@ -24,9 +24,11 @@ The lotus mark beside the lowercase **faresay** wordmark.
 ![Primary logo](../assets/logo-primary.svg)
 
 ### The mark
-A lotus — opening, calm, breathing. It is also our breathing animation on the homepage. The mark may be used alone as an app icon, avatar or favicon.
+A soft speech bubble with a gentle smile — *Fare·**say***: being heard, calmly. It reads at any size, static or animated, and may be used alone as an app icon, avatar or favicon.
 
-![Lotus mark](../assets/mark.svg)
+![Faresay mark](../assets/mark.svg)
+
+> The breathing **lotus** on the homepage is a separate **motion motif** — a calming on-page animation, *not* the logo. Never use a static lotus frame as a mark.
 
 ### Monochrome
 For single-colour printing, embossing, watermarks, and dark/light backgrounds. Never recolour the gradient mark to a flat brand tint — use these.
@@ -92,9 +94,9 @@ Two families, doing two jobs.
 
 ## 6. Brand patterns
 
-A faint, tileable lotus-petal motif for backgrounds, section breaks, email headers and packaging. Keep it **very low contrast** — a texture, never a focal point. Teal line petals (brand-300) on sand/cream.
+A faint, tileable motif of soft smile/breath arcs and dots for backgrounds, section breaks, email headers and packaging. Keep it **very low contrast** — a texture, never a focal point. Teal lines (brand-300) on sand/cream.
 
-![Petal pattern](../assets/pattern-petals.svg)
+![Soft pattern](../assets/pattern-soft.svg)
 
 ---
 

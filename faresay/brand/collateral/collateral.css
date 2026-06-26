@@ -1,0 +1,78 @@
+/* Faresay sales collateral — print/layout on top of the design-system tokens.
+   Each piece links ../design-system/styles.css then this file. */
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  font-family: var(--font-sans, Inter, system-ui, sans-serif);
+  color: var(--color-sand-900);
+  background: var(--color-sand-100);
+  line-height: 1.55;
+}
+@page { size: A4; margin: 0; }
+
+/* A page = one A4 sheet. */
+.page {
+  width: 210mm;
+  height: 297mm;
+  margin: 12mm auto;
+  background: var(--color-sand-50);
+  padding: 18mm 16mm;
+  box-shadow: 0 2px 14px rgba(25,62,57,.12);
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+.page:last-child { page-break-after: auto; }
+@media print { .page { margin: 0; box-shadow: none; } }
+
+/* Decorative soft orbs (very subtle). */
+.orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; z-index: 0; }
+.orb-brand { background: var(--color-brand-100); }
+.orb-coral { background: var(--color-coral-100); }
+.page > * { position: relative; z-index: 1; }
+
+/* Brand bits */
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .mark { width: 34px; height: 34px; }
+.wordmark { font-family: var(--font-display, Fraunces, Georgia, serif); font-weight: 700; font-size: 26px; color: var(--color-brand-900); letter-spacing: -.5px; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-coral-600); }
+
+h1, h2, h3 { font-family: var(--font-display, Fraunces, Georgia, serif); color: var(--color-brand-900); margin: 0; line-height: 1.1; }
+h1 { font-size: 42px; font-weight: 600; }
+h2 { font-size: 26px; font-weight: 600; margin: 0 0 4px; }
+h3 { font-size: 17px; font-weight: 600; }
+p { margin: 8px 0; }
+.lede { font-size: 18px; color: var(--color-sand-700); line-height: 1.55; }
+.muted { color: var(--color-sand-500); }
+.small { font-size: 12.5px; }
+.accent { color: var(--color-brand-600); }
+strong { color: var(--color-sand-900); }
+
+.card { background: #fff; border: 1px solid var(--color-sand-200); border-radius: var(--radius-lg, 16px); padding: 18px 20px; }
+.grid { display: grid; gap: 14px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.icon { font-size: 22px; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: var(--radius-pill, 999px); }
+.pill-brand { background: var(--color-brand-50); color: var(--color-brand-700); border: 1px solid var(--color-brand-200); }
+.pill-coral { background: var(--color-coral-50); color: var(--color-coral-600); border: 1px solid var(--color-coral-200); }
+
+.cta { display: inline-block; background: var(--color-brand-600); color: #fff; font-weight: 600; padding: 12px 26px; border-radius: var(--radius-pill, 999px); text-decoration: none; }
+.stat { background: #fff; border: 1px solid var(--color-sand-200); border-radius: var(--radius-md, 12px); padding: 14px 16px; }
+.stat .n { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--color-brand-900); }
+.stat .l { font-size: 12px; color: var(--color-sand-500); margin-top: 2px; }
+
+.band { background: var(--color-brand-900); color: #fff; border-radius: var(--radius-lg, 16px); padding: 22px 24px; }
+.band h2, .band h3 { color: #fff; }
+.band .lede { color: var(--color-brand-100); }
+
+.foot { position: absolute; bottom: 12mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; font-size: 11px; color: var(--color-sand-400); border-top: 1px solid var(--color-sand-200); padding-top: 8px; }
+ul.ticks { list-style: none; padding: 0; margin: 8px 0; }
+ul.ticks li { padding: 3px 0 3px 22px; position: relative; }
+ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--color-brand-600); font-weight: 700; }
+table.rate { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.rate th { text-align: left; color: var(--color-sand-500); font-weight: 600; padding: 8px 10px; background: var(--color-sand-100); }
+table.rate td { padding: 8px 10px; border-bottom: 1px solid var(--color-sand-100); }

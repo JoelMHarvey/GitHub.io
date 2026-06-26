@@ -33,12 +33,6 @@ FAVICON_SVG = (
 DRAFT = "DRAFT — for professional sign-off"
 CONF = "Confidential"
 META = {
-    "business-plan.md": ("Business Plan", CONF),
-    "market-research-synthesis.md": ("Market Research Synthesis", CONF),
-    "business-model-canvas.md": ("Business Model Canvas", CONF),
-    "product-requirements-document.md": ("Product Requirements Document", CONF),
-    "risk-register.md": ("Risk Register", CONF),
-    "financial-model.md": ("Financial Model", CONF),
     "privacy-policy.md": ("Privacy Policy", DRAFT),
     "terms-of-service.md": ("Terms of Service", DRAFT),
     "therapist-agreement.md": ("Therapist Agreement", DRAFT),
@@ -120,7 +114,7 @@ def doc_html(title, status, body_html):
 <body><div class="page">
   <header class="lh">
     <div class="brand">{FAVICON_SVG}<span class="wm">Faresay</span></div>
-    <span class="tag">Therapy, matched.</span>
+    <span class="tag">Practice software for therapists.</span>
   </header>
   <div class="titleblock">
     <h1 class="doc">{title}</h1>

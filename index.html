@@ -2,55 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lost Phone</title>
+  <title>Joel Harvey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Joel Harvey — projects and research.">
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f6f6f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #22303c;
+      color: #d8e0e7;
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 2rem;
-      text-align: center;
     }
-    .card {
-      max-width: 480px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    h1 { margin-top: 0; }
-    a {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      color: #0066cc;
+    main { max-width: 560px; width: 100%; }
+    h1 { color: #fff; font-size: 2rem; margin: 0 0 0.3rem; }
+    .tagline { color: #8fa3b3; margin: 0 0 2rem; }
+    .links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .links a {
+      display: block;
+      background: #33465a;
+      border-radius: 10px;
+      padding: 0.9rem 1.2rem;
+      color: #fff;
       text-decoration: none;
+      transition: background 0.15s;
     }
+    .links a:hover { background: #3d5570; }
+    .links a span { display: block; color: #8fa3b3; font-size: 0.85rem; margin-top: 0.15rem; }
+    footer { margin-top: 2.5rem; font-size: 0.8rem; color: #6b7d8c; }
+    footer a { color: #8fa3b3; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>📱 Lost Phone</h1>
-    <p>This phone belongs to <strong>Joel</strong>.</p>
-    <p>If you’ve found it, I’d really appreciate it if you could get in touch.</p>
+  <main>
+    <h1>Joel Harvey</h1>
+    <p class="tagline">Projects &amp; research.</p>
 
-    <p>
-      📧 Email:<br>
-      <a href="mailto:joelharvey@me.com">joelharvey@me.com</a>
-    </p>
+    <div class="links">
+      <a href="https://research.joelmharvey.com">
+        🧠 Research Hub
+        <span>Men's mental health research library — collect, read, cite, ask.</span>
+      </a>
+      <a href="https://github.com/JoelMHarvey">
+        💻 GitHub
+        <span>Code and works in progress.</span>
+      </a>
+      <a href="mailto:joelharvey@me.com">
+        📧 Contact
+        <span>joelharvey@me.com</span>
+      </a>
+    </div>
 
-    <p>
-      💬 WhatsApp / Signal:<br>
-      <a href="https://wa.me/819060231807">+819060231807 …</a>
-    </p>
-
-    <p style="margin-top:2rem;font-size:0.9rem;color:#666;">
-      日本語でもご連絡いただけます
-      
-      Thank you for being a decent human.
-    </p>
-  </div>
+    <footer>
+      <a href="/lostphone/">📱 Found my phone?</a>
+    </footer>
+  </main>
 </body>
 </html>

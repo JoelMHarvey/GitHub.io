@@ -4,46 +4,240 @@
   <meta charset="UTF-8">
   <title>Writing — Joel Harvey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Joel Harvey — screenplays, fiction, memoir and poetry. A working catalogue of thirty years of writing.">
   <style>
+    :root {
+      --paper: #F7F5F0; --ink: #22252E; --ink-soft: #5C6270; --line: #DDD8CC;
+      --line-soft: #E9E5DB; --hanko: #C0392B; --hanko-ink: #FFFFFF;
+      --indigo: #6B7590; --card: #FFFFFF;
+      --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #171A22; --ink: #E8E4DA; --ink-soft: #9AA0AE; --line: #333845;
+        --line-soft: #262B36; --hanko: #E05A48; --hanko-ink: #171A22;
+        --indigo: #8A93B0; --card: #1E222C;
+      }
+    }
     * { box-sizing: border-box; }
     body {
-      font-family: Georgia, "Times New Roman", serif;
-      background: #f6f4ef; color: #2b2b28; margin: 0; padding: 2rem 1.2rem;
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--serif); font-size: 17px; line-height: 1.6;
     }
-    main { max-width: 640px; margin: 0 auto; }
-    h1 { margin: 0 0 0.2rem; font-weight: 600; }
-    .crumb { font-family: -apple-system, sans-serif; color: #8a857a; margin: 0 0 2rem; font-size: 0.9rem; }
-    .crumb a { color: #6a675f; }
-    h2 { font-size: 1.05rem; border-bottom: 1px solid #ddd8cc; padding-bottom: 0.3rem; margin: 2rem 0 0.8rem; }
-    a { color: #4a5f52; }
-    .work { margin: 0.9rem 0; }
-    .work .title { font-style: italic; }
-    .work .kind { font-family: -apple-system, sans-serif; font-size: 0.78rem; color: #8a857a;
-                  text-transform: uppercase; letter-spacing: 0.06em; }
-    .note { color: #8a857a; font-size: 0.9rem; }
+    .page { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+    header { padding: 56px 0 36px; border-bottom: 1px solid var(--line); }
+    .crumb { font-family: var(--sans); font-size: 0.9rem; margin: 0 0 28px; }
+    .crumb a { color: var(--ink-soft); text-decoration: none; }
+    .crumb a:hover { color: var(--hanko); }
+    .eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-soft); margin: 0 0 18px;
+    }
+    h1 {
+      font-size: clamp(34px, 6.5vw, 56px); line-height: 1.05; margin: 0 0 20px;
+      font-weight: 600; letter-spacing: -0.015em; text-wrap: balance;
+    }
+    h1 .seal {
+      display: inline-block; background: var(--hanko); color: var(--hanko-ink);
+      font-size: 0.38em; font-family: var(--mono); letter-spacing: 0.1em;
+      padding: 6px 10px; border-radius: 3px; vertical-align: middle;
+      transform: rotate(-3deg) translateY(-8px);
+    }
+    .lede { max-width: 58ch; color: var(--ink-soft); font-size: 19px; margin: 0 0 32px; }
+    .counts { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); }
+    .count { padding: 16px 32px 4px 0; margin-right: 32px; }
+    .count b {
+      display: block; font-family: var(--mono); font-size: 30px; font-weight: 600;
+      font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+    }
+    .count span {
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+
+    section { padding-top: 52px; }
+    h2 {
+      font-size: 15px; font-family: var(--mono); font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+      margin: 0 0 6px; display: flex; align-items: baseline; gap: 12px;
+    }
+    h2::after { content: ""; flex: 1; border-top: 1px solid var(--line); transform: translateY(-4px); }
+    .section-note { margin: 0 0 26px; color: var(--ink-soft); font-size: 15.5px; max-width: 62ch; }
+
+    .selected { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .selected { grid-template-columns: 1fr; } }
+    .fcard {
+      background: var(--card); border: 1px solid var(--line); border-radius: 4px;
+      padding: 24px 24px 22px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .fcard.lead { grid-column: 1 / -1; }
+    .fcard h3 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+    .fcard .kind {
+      font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--indigo);
+    }
+    .fcard p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+    .ledger-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+    th {
+      text-align: left; font-family: var(--sans); font-size: 11.5px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+      font-weight: 600; padding: 10px 18px 10px 0; border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    td { padding: 11px 18px 11px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+    td.title-cell { font-weight: 600; }
+    td.meta {
+      font-family: var(--mono); font-size: 13px; color: var(--ink-soft);
+      white-space: nowrap; font-variant-numeric: tabular-nums;
+    }
+    td.note-cell { color: var(--ink-soft); font-size: 14.5px; min-width: 200px; }
+
+    .elsewhere a { color: var(--hanko); }
+    .rights {
+      margin-top: 26px; padding: 18px 20px; background: var(--card);
+      border: 1px solid var(--line); border-radius: 4px;
+      color: var(--ink-soft); font-size: 15px;
+    }
+
+    footer {
+      margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
+      font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); line-height: 1.9;
+    }
+    footer .k { color: var(--ink); font-weight: 600; }
+    footer a { color: var(--ink-soft); }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Writing</h1>
-    <p class="crumb"><a href="/">← joelmharvey.com</a></p>
+  <div class="page">
+    <header>
+      <p class="crumb"><a href="/">&larr; joelmharvey.com</a></p>
+      <p class="eyebrow">Joel Harvey &middot; Tokyo</p>
+      <h1>Everything written.<br>One desk. <span class="seal">葉</span></h1>
+      <p class="lede">Thirty years of stories, screenplays, poems and memoir — gathered from
+        six scattered archives into a single catalogue.</p>
+      <div class="counts">
+        <div class="count"><b>8</b><span>Screenplays</span></div>
+        <div class="count"><b>40+</b><span>Poems</span></div>
+        <div class="count"><b>250</b><span>Pieces catalogued</span></div>
+        <div class="count"><b>1</b><span>Novel in progress</span></div>
+      </div>
+    </header>
 
-    <h2>Zen</h2>
-    <p>Daily koans, teachings, and verses on the
-      <!-- TODO(joel): paste your Substack publication URL into the href below -->
-      <a href="#">Zen Substack</a>.</p>
+    <section>
+      <h2>Selected work</h2>
+      <p class="section-note">The pieces closest to finished.</p>
+      <div class="selected">
+        <div class="fcard lead">
+          <span class="kind">Novella &amp; two screenplay adaptations</span>
+          <h3>The Listening Box</h3>
+          <p>A memory-transmission device, a hikikomori nephew, Tokyo. Grew out of
+            “The Shoe Box” and the <em>Parting Gift</em> world. Revised manuscript, story
+            bible and eleven built scenes, with <em>Corvid 26</em> and <em>Felix</em> Act 1
+            adapted for the screen alongside it.</p>
+        </div>
+        <div class="fcard">
+          <span class="kind">Novel &middot; ~25,000 words, with screenplay</span>
+          <h3>A Fresh Start</h3>
+          <p>The largest single manuscript, revised in parallel with its own screenplay
+            adaptation.</p>
+        </div>
+        <div class="fcard">
+          <span class="kind">Life writing &middot; 2,000 words</span>
+          <h3>Becoming Unstuck</h3>
+          <p>Bangkok airport, a stolen wallet, the kindness of strangers, and a job in
+            Tokyo at the end of it.</p>
+        </div>
+        <div class="fcard">
+          <span class="kind">Short fiction &middot; 1,956 words</span>
+          <h3>Corvid 26</h3>
+          <p>Three-strand literary science fiction: a grieving scientist, crows that know
+            too much, and an AI translator.</p>
+        </div>
+        <div class="fcard">
+          <span class="kind">Feature screenplay &middot; 2018–2024</span>
+          <h3>Humane (ELFS)</h3>
+          <p>The most-iterated script in the drawer — six years of drafts on a dark
+            speculative premise.</p>
+        </div>
+      </div>
+    </section>
 
-    <h2>In progress</h2>
-    <div class="work">
-      <span class="title">The Listening Box</span>
-      <div class="kind">Novel</div>
-    </div>
-    <div class="work">
-      <span class="title">A Fresh Start</span>
-      <div class="kind">Screenplay</div>
-    </div>
-    <p class="note">Manuscripts aren't published here while work is under
-       submission — most journals and competitions require first rights.</p>
-  </main>
+    <section>
+      <h2>Screenplays</h2>
+      <div class="ledger-wrap">
+        <table>
+          <tr><th>Title</th><th>Latest draft</th><th>Note</th></tr>
+          <tr><td class="title-cell">Humane (ELFS)</td><td class="meta">2024</td><td class="note-cell">Feature. Six years of drafts; pitch document written</td></tr>
+          <tr><td class="title-cell">The Box</td><td class="meta">2024</td><td class="note-cell">Feature, in two versions</td></tr>
+          <tr><td class="title-cell">Fillet Mignon</td><td class="meta">2024</td><td class="note-cell">Feature</td></tr>
+          <tr><td class="title-cell">Corvid 26</td><td class="meta">2026</td><td class="note-cell">Adapted from the short story; submission format</td></tr>
+          <tr><td class="title-cell">Felix — Act 1</td><td class="meta">2026</td><td class="note-cell">First act of the <em>Listening Box</em> adaptation</td></tr>
+          <tr><td class="title-cell">A Fresh Start</td><td class="meta">2026</td><td class="note-cell">Adapted alongside the novel</td></tr>
+          <tr><td class="title-cell">Serapeum</td><td class="meta">2018</td><td class="note-cell">Full script with a one-page pitch</td></tr>
+          <tr><td class="title-cell">the emperor</td><td class="meta">2018</td><td class="note-cell">Earlier work</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Prose</h2>
+      <div class="ledger-wrap">
+        <table>
+          <tr><th>Title</th><th>Form</th><th>Note</th></tr>
+          <tr><td class="title-cell">Parting Gift</td><td class="meta">Novel</td><td class="note-cell">John, May, the device, the whales. The central long work</td></tr>
+          <tr><td class="title-cell">The Shoe Box</td><td class="meta">Short story</td><td class="note-cell"><em>Parting Gift</em> compressed into a single chapter — 1,030 words</td></tr>
+          <tr><td class="title-cell">Corvid 26</td><td class="meta">Short story</td><td class="note-cell">Grief, crows, and a machine translator — 1,956 words</td></tr>
+          <tr><td class="title-cell">Someone Else’s Shoes</td><td class="meta">Short story</td><td class="note-cell">&mdash;</td></tr>
+          <tr><td class="title-cell">Almost Abducted</td><td class="meta">Short story</td><td class="note-cell">2026</td></tr>
+          <tr><td class="title-cell">Becoming Unstuck</td><td class="meta">Life writing</td><td class="note-cell">Bangkok, a stolen wallet, and the way out — 2,000 words</td></tr>
+          <tr><td class="title-cell">The Memoir</td><td class="meta">Memoir</td><td class="note-cell">In fragments — an opening, a middle, an ending. Fifty-five houses is the arc</td></tr>
+          <tr><td class="title-cell">Why Vipassana Is Truth</td><td class="meta">Essay</td><td class="note-cell">Twenty-two years of practice, reckoned with</td></tr>
+          <tr><td class="title-cell">Letter to The Times</td><td class="meta">Essay</td><td class="note-cell">On monochrome phones</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Poetry</h2>
+      <p class="section-note">Forty-plus poems written across Tokyo, Singapore and London.
+        Enough for a pamphlet: pick fifteen, order them, and the collection exists. These are
+        the ones it would be built around.</p>
+      <div class="ledger-wrap">
+        <table>
+          <tr><th>Poem</th><th>Register</th></tr>
+          <tr><td class="title-cell">Don’t Mourn Me</td><td class="note-cell">Pre-mortem; a whole life compressed. The anchor poem</td></tr>
+          <tr><td class="title-cell">Mum</td><td class="note-cell">Cambodia. Unflinching and tender at once</td></tr>
+          <tr><td class="title-cell">The In-Between</td><td class="note-cell">2018. Sober, and rebuilding</td></tr>
+          <tr><td class="title-cell">Sangha</td><td class="note-cell">Community against tribalism</td></tr>
+          <tr><td class="title-cell">Hold Fast</td><td class="note-cell">The refrain that threads the whole body of work</td></tr>
+          <tr><td class="title-cell">Tokyo &middot; Komorebi &middot; August Balcony Sunrise</td><td class="note-cell">The Japan sequence — four haiku, ending in Siena</td></tr>
+          <tr><td class="title-cell">Quantum Leap as a Sonnet</td><td class="note-cell">A jumping spider, a house move, and a galaxy. The wildcard</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="elsewhere">
+      <h2>Published &amp; elsewhere</h2>
+      <p class="section-note">Daily koans, teachings and verses — and the haiku from the Japan
+        sequence — go out on
+        <a href="https://nervy05peak.substack.com">nervy05peak.substack.com</a>.</p>
+      <div class="rights">
+        Full texts aren’t posted here. Most journals and competitions require first
+        publication rights, and a public web page counts as publication — so the work
+        stays off this site while it’s under submission. For a manuscript,
+        <a href="mailto:joelmharvey@gmail.com">get in touch</a>.
+      </div>
+    </section>
+
+    <footer>
+      <span class="k">Catalogue</span> — 250 pieces, six archives, one desk.<br>
+      <span class="k">Joel Harvey</span> · Tokyo · <a href="/">joelmharvey.com</a>
+    </footer>
+  </div>
 </body>
 </html>

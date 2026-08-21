@@ -25,6 +25,21 @@ The Research Hub goes on `research.joelmharvey.com` separately — see
 `mens-health-research/DEPLOY.md` in the projects repo (one CNAME record to
 Fly.io; doesn't interact with any of the above).
 
+## Mission Control on `ops.joelmharvey.com`
+
+The footer links to the Vercel-generated URL because that is what currently
+resolves. To move it to a subdomain: add `ops.joelmharvey.com` under the
+Vercel project's **Settings → Domains**, add the CNAME record Vercel gives you
+(`cname.vercel-dns.com`), then change the one `href` in `index.html`. Nothing
+else on this site depends on it.
+
+The link is `rel="nofollow"`, which asks crawlers not to follow it — it does
+not stop them, and it does nothing about anyone reading the page source. This
+repo is public, so treat that URL as public knowledge. What actually protects
+the dashboard is `OPS_PASSWORD` on the Vercel project; the app refuses to
+start without it (`ops/test_auth.py` in the projects repo pins that), so a
+misconfigured deployment returns 500 rather than serving the cost model.
+
 ## Site layout
 
 - `/` — homepage (links to Research Hub, GitHub, contact)
@@ -35,3 +50,6 @@ Fly.io; doesn't interact with any of the above).
   anyway. If you'd rather keep the card at the root, don't merge this.
 - `/faresay/` — existing Faresay documents (unchanged; note this repo is
   public, so these are publicly reachable).
+- `/writing/` — the writing catalogue.
+- Footer → **Mission Control** — the private ops dashboard, hosted on Vercel,
+  not part of this site. Password-protected; see above.

@@ -51,5 +51,8 @@ misconfigured deployment returns 500 rather than serving the cost model.
 - `/faresay/` — existing Faresay documents (unchanged; note this repo is
   public, so these are publicly reachable).
 - `/writing/` — the writing catalogue.
+- `/italian/` — Forza Italiano!, the A1 grammar drill app. Self-contained
+  static page; progress is kept in the visitor's own localStorage, so there is
+  no account, no server and nothing to sign in to.
 - Footer → **Mission Control** — the private ops dashboard, hosted on Vercel,
   not part of this site. Password-protected; see above.

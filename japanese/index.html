@@ -701,6 +701,7 @@ function renderHome() {
     const b = document.createElement("button");
     const acc = catAccuracy(k);
     b.className = "chip" + (selected.has(k) ? " on" : "") + (acc !== null && acc < 70 ? " weak" : "");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     b.innerHTML = BANK[k].label + (acc !== null ? `<span class="pct">${acc}%</span>` : "");
     b.onclick = () => {
       if (selected.has(k)) { if (selected.size > 1) selected.delete(k); }
@@ -794,6 +795,7 @@ function nextQ() {
     qt.innerHTML = "🔊 …（聞いてください）";
     speak(item.q);
   } else {
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     qt.innerHTML = ruby(item.q).replace(/___/g, '<span class="blank">____</span>');
   }
   $("qTrans").textContent = !isKaiwa && item.en && item.en !== "—" ? "“" + item.en + "”" : "";
@@ -810,6 +812,7 @@ function nextQ() {
   opts.forEach(o => {
     const b = document.createElement("button");
     b.className = "ans";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     b.innerHTML = ruby(o);
     b.dataset.val = o;
     b.onclick = () => answer(o, b);
@@ -841,6 +844,7 @@ function answer(choice, btn) {
   if (isKaiwa) {
     const qt = $("qText");
     qt.classList.remove("hiddenline");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     qt.innerHTML = ruby(item.q);
     $("qTrans").textContent = item.en ? item.en : "";
   }
@@ -867,6 +871,7 @@ function answer(choice, btn) {
     game.streak = 0;
     game.misses.push(item);
     if (btn) btn.classList.add("wrong");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     v.innerHTML = (choice === null ? "時間切れ！ ⏰" : OOPS[Math.floor(Math.random() * OOPS.length)]) +
       `<span class="fix">→ <strong>${ruby(item.a)}</strong>${item.note ? " · " + item.note : ""}</span>`;
     v.classList.add("bad");
@@ -896,6 +901,7 @@ function finish() {
     const p = Math.round(100 * c.ok / c.n);
     const row = document.createElement("div");
     row.className = "catbar";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     row.innerHTML = `<span class="name">${labelOf(k)}</span>
       <span class="track"><span class="fill ${p >= 80 ? "" : p >= 50 ? "mid" : "low"}" style="width:${p}%"></span></span>
       <span class="val">${p}%</span>`;
@@ -909,6 +915,7 @@ function finish() {
   g.misses.forEach(m => {
     const d = document.createElement("div");
     d.className = "miss";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     d.innerHTML = `<span class="mq">${ruby(m.q).replace(/___/g, "____")}</span> → <span class="ma">${ruby(m.a)}</span>` +
       (m.kind === "kaiwa" && m.en ? `<span class="mn">${m.en}</span>` : (m.en && m.en !== "—" ? `<span class="mn">“${m.en}”</span>` : "")) +
       (m.note ? `<span class="mn">${m.note}</span>` : "");

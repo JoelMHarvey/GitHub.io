@@ -509,6 +509,7 @@ function renderHome() {
     const b = document.createElement("button");
     const acc = catAccuracy(k);
     b.className = "chip" + (selected.has(k) ? " on" : "") + (acc !== null && acc < 70 ? " weak" : "");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     b.innerHTML = BANK[k].label + (acc !== null ? `<span class="pct">${acc}%</span>` : "");
     b.onclick = () => {
       if (selected.has(k)) { if (selected.size > 1) selected.delete(k); }
@@ -581,6 +582,7 @@ function nextQ() {
   game.locked = false;
   const item = game.deck[game.i];
   $("catLabel").textContent = BANK[item.cat].label;
+  // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
   $("qText").innerHTML = item.q.replace(/___/g, '<span class="blank">____</span>');
   $("qTrans").textContent = item.en ? "“" + item.en + "”" : "";
   $("qNote").textContent = "";
@@ -641,6 +643,7 @@ function answer(choice, btn) {
     game.streak = 0;
     game.misses.push(item);
     if (btn) btn.classList.add("wrong");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     v.innerHTML = (choice === null ? "Tempo scaduto! ⏰" : OOPS[Math.floor(Math.random() * OOPS.length)]) +
       `<span class="fix">→ <strong>${item.a}</strong>${item.note ? " · " + item.note : ""}</span>`;
     v.classList.add("bad");
@@ -669,6 +672,7 @@ function finish() {
     const p = Math.round(100 * c.ok / c.n);
     const row = document.createElement("div");
     row.className = "catbar";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     row.innerHTML = `<span class="name">${BANK[k].label}</span>
       <span class="track"><span class="fill ${p >= 80 ? "" : p >= 50 ? "mid" : "low"}" style="width:${p}%"></span></span>
       <span class="val">${p}%</span>`;
@@ -682,6 +686,7 @@ function finish() {
   g.misses.forEach(m => {
     const d = document.createElement("div");
     d.className = "miss";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
     d.innerHTML = `<span class="mq">${m.q.replace(/___/g, "____")}</span> → <span class="ma">${m.a}</span>` +
       (m.en ? `<span class="mn">“${m.en}”</span>` : "") +
       (m.note ? `<span class="mn">${m.note}</span>` : "");

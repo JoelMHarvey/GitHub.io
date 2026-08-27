@@ -5,131 +5,154 @@
   <title>Joel Harvey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Joel Harvey — projects, research, and writing.">
+  <script src="/gate.js"></script>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; }
+    :root {
+      --bg: #1b2733; --bg2: #22303c; --card: #2c3d4d; --card-hi: #35495c;
+      --line: #3d5570; --ink: #e8eef3; --mut: #8fa3b3; --dim: #6b7d8c;
+      --accent: #e8b04b;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #22303c;
-      color: #d8e0e7;
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+      background:
+        radial-gradient(1100px 500px at 85% -10%, #2c3d4d 0%, transparent 60%),
+        radial-gradient(900px 600px at -10% 110%, #253646 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink); min-height: 100vh;
+      display: flex; justify-content: center; padding: clamp(1.2rem, 4vw, 3rem);
     }
-    main { max-width: 640px; width: 100%; }
-    h1 { color: #fff; font-size: 2rem; margin: 0 0 0.3rem; }
-    .tagline { color: #8fa3b3; margin: 0 0 2rem; }
-    h2 {
-      color: #8fa3b3; font-size: 0.78rem; text-transform: uppercase;
-      letter-spacing: 0.1em; margin: 1.8rem 0 0.7rem;
-    }
-    .links { display: flex; flex-direction: column; gap: 0.7rem; }
-    .links > a, .links > .card {
-      display: block;
-      background: #33465a;
-      border-radius: 10px;
-      padding: 0.85rem 1.2rem;
+    main { max-width: 720px; width: 100%; }
+
+    header { margin: 1.5rem 0 2.2rem; }
+    h1 {
+      font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em;
       color: #fff;
-      text-decoration: none;
-      transition: background 0.15s;
     }
-    .links > a:hover, .links > .card:hover { background: #3d5570; }
-    .links > a span, .links > .card span {
-      display: block; color: #8fa3b3; font-size: 0.85rem; margin-top: 0.15rem;
+    h1 .dot { color: var(--accent); }
+    .tagline { color: var(--mut); margin-top: 0.4rem; font-size: 1.02rem; }
+
+    h2 {
+      color: var(--dim); font-size: 0.74rem; text-transform: uppercase;
+      letter-spacing: 0.14em; margin: 2rem 0 0.8rem; display: flex;
+      align-items: center; gap: 0.7rem;
     }
-    /* A card carrying two links can't be one big <a> — nesting anchors is
-       invalid and the browser closes the outer one early, dropping the rest
-       of the card out of it. The card is a div; the links sit side by side. */
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: 0.5; }
+
+    .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    @media (max-width: 560px) { .links { grid-template-columns: 1fr; } }
+
+    .links > a, .links > .card {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      background: var(--card); border: 1px solid transparent; border-radius: 12px;
+      padding: 0.85rem 1rem; color: #fff; text-decoration: none;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .links > a:hover, .links > .card:hover {
+      background: var(--card-hi); border-color: var(--line); transform: translateY(-1px);
+    }
+    .ico { font-size: 1.25rem; line-height: 1.4; flex: none; }
+    .links b { font-weight: 600; display: block; }
+    .links span { display: block; color: var(--mut); font-size: 0.85rem; margin-top: 0.2rem; line-height: 1.4; }
+
+    /* card with a second inline link (Faresay) */
     .links > .card { position: relative; }
     .links > .card a { color: inherit; text-decoration: none; }
     .links > .card a:hover { text-decoration: underline; }
-    /* Keeps the whole card clickable for the primary link, as it is on every
-       other card, without wrapping the card in an anchor. */
     .links > .card > a::after { content: ""; position: absolute; inset: 0; }
     .links > .card span a { position: relative; z-index: 1; color: #9fc3d8; }
-    footer { margin-top: 2.5rem; font-size: 0.8rem; color: #6b7d8c; }
-    footer a { color: #8fa3b3; }
-    footer .sep { margin: 0 0.5rem; color: #56606b; }
+
+    footer {
+      margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line);
+      font-size: 0.8rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem;
+    }
+    footer a { color: var(--mut); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
   </style>
 </head>
 <body>
   <main>
-    <h1>Joel Harvey</h1>
-    <p class="tagline">Projects, research &amp; writing.</p>
+    <header>
+      <h1>Joel Harvey<span class="dot">.</span></h1>
+      <p class="tagline">Projects, research &amp; writing — built mostly in Tokyo.</p>
+    </header>
 
     <h2>Ventures</h2>
     <div class="links">
       <div class="card">
-        <a href="https://faresay.com">🩺 Faresay</a>
-        <span>Practice portal for therapists.</span>
+        <div class="ico">🩺</div>
+        <a href="https://faresay.com"><b>Faresay</b>
+        <span>Practice portal for therapists.</span></a>
       </div>
       <a href="/fair-do/">
-        🎓 Fair-Do
-        <span>Affordable UK tutoring — tutors keep 100% on their own students.</span>
+        <div class="ico">🎓</div>
+        <div><b>Fair-Do</b>
+        <span>Affordable UK tutoring — tutors keep 100% on their own students.</span></div>
       </a>
       <a href="https://www.airgap.life">
-        🛠️ Airgap
-        <span>Weekly offline skills courses — learn with your hands, away from screens.</span>
+        <div class="ico">🛠️</div>
+        <div><b>Airgap</b>
+        <span>Weekly offline skills courses — learn with your hands, away from screens.</span></div>
       </a>
       <a href="https://lonelybirds.net">
-        🐦 LonelyBirds
-        <span>Companionship sessions for solitary pet birds.</span>
+        <div class="ico">🐦</div>
+        <div><b>LonelyBirds</b>
+        <span>Companionship sessions for solitary pet birds.</span></div>
       </a>
       <a href="https://mettaisbetter.com">
-        🐢 Metta is Better
-        <span>For a meditation practice that has plateaued — a quiz, then a 30-day track.</span>
+        <div class="ico">🐢</div>
+        <div><b>Metta is Better</b>
+        <span>For a meditation practice that has plateaued — a quiz, then a 30-day track.</span></div>
       </a>
       <a href="https://psychosecurity.io">
-        🛡️ Psychosecurity
-        <span>Security scanner for AI-built apps — paste a URL, see what leaks.</span>
+        <div class="ico">🛡️</div>
+        <div><b>Psychosecurity</b>
+        <span>Security scanner for AI-built apps — paste a URL, see what leaks.</span></div>
       </a>
     </div>
 
     <h2>Research &amp; writing</h2>
     <div class="links">
       <a href="https://research.joelmharvey.com">
-        🧠 Research Hub
-        <span>Men's mental health research library — collect, read, cite, ask.</span>
+        <div class="ico">🧠</div>
+        <div><b>Research Hub</b>
+        <span>Men's mental health research library — collect, read, cite, ask.</span></div>
       </a>
       <a href="/writing/">
-        ✍️ Writing
-        <span>Screenplays, fiction, memoir and poetry — the full catalogue.</span>
+        <div class="ico">✍️</div>
+        <div><b>Writing</b>
+        <span>Screenplays, fiction, memoir and poetry — the full catalogue.</span></div>
       </a>
       <a href="/listen/">
-        🕊️ Listening Space
-        <span>A quiet place to talk — an AI listener, trained to listen the way lifeline support workers do.</span>
+        <div class="ico">🕊️</div>
+        <div><b>Listening Space</b>
+        <span>A quiet place to talk — an AI listener, trained the way lifeline support workers are.</span></div>
       </a>
     </div>
 
-    <h2>Apps</h2>
+    <h2>Daily</h2>
     <div class="links">
+      <a href="/tokyo/">
+        <div class="ico">🗼</div>
+        <div><b>Tokyo Today</b>
+        <span>Weather, forecast and the morning's headlines — 日本語 and English.</span></div>
+      </a>
       <a href="/japanese/">
-        🇯🇵 頑張れ日本語！
-        <span>Vipassana retreat Japanese — kitchen &amp; conversation drills, built for the train.</span>
+        <div class="ico">🇯🇵</div>
+        <div><b>頑張れ日本語！</b>
+        <span>Vipassana retreat Japanese — kitchen &amp; conversation drills, built for the train.</span></div>
       </a>
       <a href="/italian/">
-        🇮🇹 Forza Italiano!
-        <span>A1 Italian grammar drills — beat the clock, keep the streak.</span>
-      </a>
-    </div>
-
-    <h2>Elsewhere</h2>
-    <div class="links">
-      <a href="https://github.com/JoelMHarvey">
-        💻 GitHub
-        <span>Code and works in progress.</span>
-      </a>
-      <a href="mailto:joelharvey@me.com">
-        📧 Contact
-        <span>joelharvey@me.com</span>
+        <div class="ico">🇮🇹</div>
+        <div><b>Forza Italiano!</b>
+        <span>A1 Italian grammar drills — beat the clock, keep the streak.</span></div>
       </a>
     </div>
 
     <footer>
+      <a href="https://github.com/JoelMHarvey">💻 GitHub</a>
+      <a href="mailto:joelharvey@me.com">📧 joelharvey@me.com</a>
       <a href="/lostphone/">📱 Found my phone?</a>
-      <span class="sep">·</span>
       <a href="https://ops-theta-black.vercel.app" rel="nofollow">🔒 Mission Control</a>
     </footer>
   </main>

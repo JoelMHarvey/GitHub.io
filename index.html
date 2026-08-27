@@ -2,55 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lost Phone</title>
+  <title>Joel Harvey</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Joel Harvey — projects, research, and writing.">
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f6f6f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #22303c;
+      color: #d8e0e7;
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 2rem;
-      text-align: center;
     }
-    .card {
-      max-width: 480px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    main { max-width: 640px; width: 100%; }
+    h1 { color: #fff; font-size: 2rem; margin: 0 0 0.3rem; }
+    .tagline { color: #8fa3b3; margin: 0 0 2rem; }
+    h2 {
+      color: #8fa3b3; font-size: 0.78rem; text-transform: uppercase;
+      letter-spacing: 0.1em; margin: 1.8rem 0 0.7rem;
     }
-    h1 { margin-top: 0; }
-    a {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      color: #0066cc;
+    .links { display: flex; flex-direction: column; gap: 0.7rem; }
+    .links > a, .links > .card {
+      display: block;
+      background: #33465a;
+      border-radius: 10px;
+      padding: 0.85rem 1.2rem;
+      color: #fff;
       text-decoration: none;
+      transition: background 0.15s;
     }
+    .links > a:hover, .links > .card:hover { background: #3d5570; }
+    .links > a span, .links > .card span {
+      display: block; color: #8fa3b3; font-size: 0.85rem; margin-top: 0.15rem;
+    }
+    /* A card carrying two links can't be one big <a> — nesting anchors is
+       invalid and the browser closes the outer one early, dropping the rest
+       of the card out of it. The card is a div; the links sit side by side. */
+    .links > .card { position: relative; }
+    .links > .card a { color: inherit; text-decoration: none; }
+    .links > .card a:hover { text-decoration: underline; }
+    /* Keeps the whole card clickable for the primary link, as it is on every
+       other card, without wrapping the card in an anchor. */
+    .links > .card > a::after { content: ""; position: absolute; inset: 0; }
+    .links > .card span a { position: relative; z-index: 1; color: #9fc3d8; }
+    footer { margin-top: 2.5rem; font-size: 0.8rem; color: #6b7d8c; }
+    footer a { color: #8fa3b3; }
+    footer .sep { margin: 0 0.5rem; color: #56606b; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>📱 Lost Phone</h1>
-    <p>This phone belongs to <strong>Joel</strong>.</p>
-    <p>If you’ve found it, I’d really appreciate it if you could get in touch.</p>
+  <main>
+    <h1>Joel Harvey</h1>
+    <p class="tagline">Projects, research &amp; writing.</p>
 
-    <p>
-      📧 Email:<br>
-      <a href="mailto:joelharvey@me.com">joelharvey@me.com</a>
-    </p>
+    <h2>Ventures</h2>
+    <div class="links">
+      <div class="card">
+        <a href="https://faresay.com">🩺 Faresay</a>
+        <span>Practice portal for therapists.</span>
+      </div>
+      <a href="/fair-do/">
+        🎓 Fair-Do
+        <span>Affordable UK tutoring — tutors keep 100% on their own students.</span>
+      </a>
+      <a href="https://www.airgap.life">
+        🛠️ Airgap
+        <span>Weekly offline skills courses — learn with your hands, away from screens.</span>
+      </a>
+      <a href="https://lonelybirds.net">
+        🐦 LonelyBirds
+        <span>Companionship sessions for solitary pet birds.</span>
+      </a>
+      <a href="https://mettaisbetter.com">
+        🐢 Metta is Better
+        <span>For a meditation practice that has plateaued — a quiz, then a 30-day track.</span>
+      </a>
+      <a href="https://psychosecurity.io">
+        🛡️ Psychosecurity
+        <span>Security scanner for AI-built apps — paste a URL, see what leaks.</span>
+      </a>
+    </div>
 
-    <p>
-      💬 WhatsApp / Signal:<br>
-      <a href="https://wa.me/819060231807">+819060231807 …</a>
-    </p>
+    <h2>Research &amp; writing</h2>
+    <div class="links">
+      <a href="https://research.joelmharvey.com">
+        🧠 Research Hub
+        <span>Men's mental health research library — collect, read, cite, ask.</span>
+      </a>
+      <a href="/writing/">
+        ✍️ Writing
+        <span>Screenplays, fiction, memoir and poetry — the full catalogue.</span>
+      </a>
+      <a href="/listen/">
+        🕊️ Listening Space
+        <span>A quiet place to talk — an AI listener, trained to listen the way lifeline support workers do.</span>
+      </a>
+    </div>
 
-    <p style="margin-top:2rem;font-size:0.9rem;color:#666;">
-      日本語でもご連絡いただけます
-      
-      Thank you for being a decent human.
-    </p>
-  </div>
+    <h2>Apps</h2>
+    <div class="links">
+      <a href="/japanese/">
+        🇯🇵 頑張れ日本語！
+        <span>Vipassana retreat Japanese — kitchen &amp; conversation drills, built for the train.</span>
+      </a>
+      <a href="/italian/">
+        🇮🇹 Forza Italiano!
+        <span>A1 Italian grammar drills — beat the clock, keep the streak.</span>
+      </a>
+    </div>
+
+    <h2>Elsewhere</h2>
+    <div class="links">
+      <a href="https://github.com/JoelMHarvey">
+        💻 GitHub
+        <span>Code and works in progress.</span>
+      </a>
+      <a href="mailto:joelharvey@me.com">
+        📧 Contact
+        <span>joelharvey@me.com</span>
+      </a>
+    </div>
+
+    <footer>
+      <a href="/lostphone/">📱 Found my phone?</a>
+      <span class="sep">·</span>
+      <a href="https://ops-theta-black.vercel.app" rel="nofollow">🔒 Mission Control</a>
+    </footer>
+  </main>
 </body>
 </html>

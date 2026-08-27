@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>頑張れ日本語！ — Vipassana Retreat Japanese</title>
+<meta name="description" content="Retreat Japanese for kitchen service and course managing — vocab sprints and timed conversation drills. Free, no sign-up.">
+</head>
+<body>
+<style>
+  :root {
+    --paper: #F8F5EE;
+    --card: #FFFFFF;
+    --ink: #201D1A;
+    --ink-soft: #6E675D;
+    --line: #E7E1D3;
+    --red: #CE3A2E;
+    --red-deep: #B32A20;
+    --indigo: #33567E;
+    --green: #2F8F5B;
+    --green-soft: #E3F2E8;
+    --red-soft: #FAE5E2;
+    --gold: #C9942E;
+    --shadow: 0 2px 10px rgba(60, 45, 25, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1C1815;
+      --card: #27221B;
+      --ink: #F1EAD9;
+      --ink-soft: #A99D89;
+      --line: #3B342A;
+      --red: #E2544A;
+      --red-deep: #D2423A;
+      --indigo: #6C93C0;
+      --green: #43B274;
+      --green-soft: #223529;
+      --red-soft: #442723;
+      --gold: #D9AC55;
+      --shadow: 0 2px 12px rgba(0, 0, 0, .35);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F8F5EE; --card: #FFFFFF; --ink: #201D1A; --ink-soft: #6E675D;
+    --line: #E7E1D3; --red: #CE3A2E; --red-deep: #B32A20; --indigo: #33567E;
+    --green: #2F8F5B; --green-soft: #E3F2E8; --red-soft: #FAE5E2; --gold: #C9942E;
+    --shadow: 0 2px 10px rgba(60, 45, 25, .08);
+  }
+  :root[data-theme="dark"] {
+    --paper: #1C1815; --card: #27221B; --ink: #F1EAD9; --ink-soft: #A99D89;
+    --line: #3B342A; --red: #E2544A; --red-deep: #D2423A; --indigo: #6C93C0;
+    --green: #43B274; --green-soft: #223529; --red-soft: #442723; --gold: #D9AC55;
+    --shadow: 0 2px 12px rgba(0, 0, 0, .35);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+  .screen { display: none; max-width: 480px; margin: 0 auto; padding: 20px 18px 40px; }
+  .screen.active { display: block; }
+  ruby rt { font-size: .45em; color: var(--ink-soft); font-weight: 600; letter-spacing: 0; }
+  .ans ruby rt, .hl ruby rt { color: inherit; opacity: .75; }
+
+  /* ---- hanko-stamp label device ---- */
+  .hl {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    padding: 3px 12px 5px;
+    border-radius: 6px 10px 5px 9px / 9px 5px 10px 6px;
+    transform: rotate(-1.2deg);
+    font-weight: 800;
+    letter-spacing: .04em;
+  }
+  .hl.indigo { background: var(--indigo); transform: rotate(.8deg); }
+  .hl.green { background: var(--green); transform: rotate(-.6deg); }
+
+  /* ---- home ---- */
+  .masthead { text-align: left; margin: 14px 0 4px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px;
+  }
+  h1 { font-size: 38px; line-height: 1.15; margin: 0 0 10px; letter-spacing: -.01em; text-wrap: balance; }
+  .sub { color: var(--ink-soft); font-size: 15px; line-height: 1.5; margin: 0 0 18px; max-width: 42ch; }
+  .statrow { display: flex; gap: 10px; margin: 18px 0 22px; }
+  .stat {
+    flex: 1; background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow);
+  }
+  .stat .n { font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 2px; }
+
+  .sectionlabel { margin: 22px 0 12px; font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1.5px solid var(--line); background: var(--card); color: var(--ink);
+    border-radius: 999px; padding: 8px 14px; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; transition: transform .08s ease;
+    font-family: inherit;
+  }
+  .chip:active { transform: scale(.95); }
+  .chip.on { background: var(--red); border-color: var(--red); color: #fff; }
+  .chip.on.weak { background: var(--indigo); border-color: var(--indigo); }
+  .chip .pct { font-weight: 800; font-size: 11px; opacity: .75; margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+  .modes { display: flex; flex-direction: column; gap: 12px; margin-top: 26px; }
+  .btn {
+    border: 0; border-radius: 14px; padding: 18px 20px; font-size: 18px; font-weight: 800;
+    cursor: pointer; width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    transition: transform .08s ease; font-family: inherit; letter-spacing: .01em;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn .hint { font-size: 12.5px; font-weight: 600; opacity: .85; text-align: right; }
+  .btn.primary { background: var(--red); color: #fff; box-shadow: 0 4px 14px rgba(206, 58, 46, .35); }
+  .btn.secondary { background: var(--ink); color: var(--paper); }
+  .btn.indigo { background: var(--indigo); color: #fff; box-shadow: 0 4px 14px rgba(51, 86, 126, .3); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); font-weight: 700; font-size: 15px; padding: 14px 20px; }
+
+  .listenrow {
+    display: none; align-items: center; gap: 10px; margin-top: 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+    font-size: 13.5px; color: var(--ink-soft); cursor: pointer; line-height: 1.4;
+  }
+  .listenrow.available { display: flex; }
+  .listenrow input { width: 18px; height: 18px; accent-color: var(--red); flex-shrink: 0; }
+
+  /* ---- game ---- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
+  .quit { background: none; border: 0; color: var(--ink-soft); font-size: 15px; font-weight: 700; cursor: pointer; padding: 6px; font-family: inherit; }
+  .score { font-weight: 800; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .streak { font-weight: 800; font-size: 14px; color: var(--gold); min-width: 52px; text-align: right; }
+  .timerwrap { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 4px 0 20px; }
+  .timerbar { height: 100%; background: var(--green); border-radius: 99px; width: 100%; }
+  .timerbar.hurry { background: var(--red); }
+  .qmeta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .qcat { font-size: 12px; }
+  .qcount { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .qcard {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 24px 20px; box-shadow: var(--shadow); margin-bottom: 18px; min-height: 130px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .qtext { font-size: 22px; line-height: 1.6; font-weight: 600; text-wrap: balance; }
+  .qtext .blank { color: var(--red); font-weight: 800; letter-spacing: .05em; }
+  .qtext.hiddenline { color: var(--ink-soft); font-size: 18px; }
+  .qnote { margin-top: 10px; font-size: 13.5px; color: var(--ink-soft); }
+  .qtrans { margin-top: 10px; font-size: 14.5px; color: var(--ink-soft); font-style: italic; }
+  .speakbtn {
+    margin-top: 12px; align-self: flex-start; background: var(--paper); border: 1.5px solid var(--line);
+    color: var(--ink); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit; display: none;
+  }
+  .speakbtn.show { display: inline-block; }
+  .speakbtn:active { transform: scale(.95); }
+  .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .answers.stack { grid-template-columns: 1fr; }
+  .ans {
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 13px;
+    padding: 15px 12px; font-size: 17px; font-weight: 700; cursor: pointer; color: var(--ink);
+    transition: transform .07s ease; font-family: inherit; line-height: 1.45; text-align: center;
+  }
+  .answers.stack .ans { text-align: left; }
+  .ans:active { transform: scale(.96); }
+  .ans.correct { background: var(--green); border-color: var(--green); color: #fff; }
+  .ans.wrong { background: var(--red); border-color: var(--red); color: #fff; animation: shake .35s; }
+  .ans.reveal { border-color: var(--green); color: var(--green); }
+  .ans:disabled { cursor: default; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 50%{transform:translateX(5px)} 75%{transform:translateX(-3px)} }
+  .verdict { text-align: center; margin-top: 16px; font-size: 19px; font-weight: 800; min-height: 30px; }
+  .verdict.good { color: var(--green); }
+  .verdict.bad { color: var(--red); }
+  .verdict .fix { display: block; font-size: 14px; font-weight: 600; color: var(--ink-soft); margin-top: 4px; line-height: 1.6; }
+
+  /* ---- results ---- */
+  .bigscore { text-align: center; margin: 26px 0 6px; }
+  .bigscore .n { font-size: 64px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .bigscore .l { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 6px; }
+  .newbest { text-align: center; margin: 10px 0 4px; }
+  .accuracy { text-align: center; color: var(--ink-soft); font-size: 15px; margin-bottom: 22px; }
+  .catbars { display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px; }
+  .catbar { display: grid; grid-template-columns: 130px 1fr 40px; align-items: center; gap: 10px; font-size: 13.5px; }
+  .catbar .name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .catbar .track { height: 9px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .catbar .fill { height: 100%; border-radius: 99px; background: var(--green); }
+  .catbar .fill.mid { background: var(--gold); }
+  .catbar .fill.low { background: var(--red); }
+  .catbar .val { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink-soft); }
+  .misses { margin: 22px 0 8px; }
+  .miss {
+    background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--red);
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; font-size: 14.5px; line-height: 1.7;
+  }
+  .miss .mq { font-weight: 600; }
+  .miss .ma { color: var(--green); font-weight: 800; }
+  .miss .mn { color: var(--ink-soft); font-size: 13px; display: block; margin-top: 3px; }
+  .allgood {
+    background: var(--green-soft); border-radius: 12px; padding: 16px; text-align: center;
+    font-weight: 700; color: var(--green); margin: 18px 0;
+  }
+  .resultbtns { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  footer { text-align: center; color: var(--ink-soft); font-size: 12px; margin-top: 34px; line-height: 1.6; }
+  @media (prefers-reduced-motion: reduce) {
+    .ans.wrong { animation: none; }
+    .btn, .ans, .chip { transition: none; }
+  }
+</style>
+
+<!-- ============ HOME ============ -->
+<div class="screen active" id="home">
+  <div class="masthead">
+    <div class="eyebrow">10日間の奉仕 · Vipassana service cram</div>
+    <h1><span class="hl">頑張れ</span>、日本語！</h1>
+    <p class="sub">Kitchen shifts and course-manager duty — the lines you'll hear and the replies you'll need, turned into a train game. Understand fast, answer fast.</p>
+  </div>
+
+  <div class="statrow">
+    <div class="stat"><div class="n" id="bestScore">0</div><div class="l">Best score</div></div>
+    <div class="stat"><div class="n" id="totalAnswered">0</div><div class="l">Answered</div></div>
+    <div class="stat"><div class="n" id="lifetimeAcc">–</div><div class="l">Accuracy</div></div>
+  </div>
+
+  <div class="sectionlabel"><span class="hl indigo">トピック</span></div>
+  <div class="chips" id="chips"></div>
+
+  <div class="modes">
+    <button class="btn primary" id="btnKaiwa">会話ダッシュ <span class="hint">12 exchanges · hear it, answer it</span></button>
+    <button class="btn secondary" id="btnRound">ことば 10問 <span class="hint">vocab · 10 questions · 15s each</span></button>
+    <button class="btn indigo" id="btnSprint">スプリント 60秒 <span class="hint">vocab · as many as you can</span></button>
+    <button class="btn ghost" id="btnWeak">弱点ドリル — drill my weakest topics</button>
+  </div>
+
+  <label class="listenrow" id="listenRow">
+    <input type="checkbox" id="listenChk">
+    <span>🎧 <strong>Listen-first mode</strong> — in 会話ダッシュ, hide the text and play the line out loud instead. Real listening practice (headphones on the train).</span>
+  </label>
+
+  <footer>Tap a topic to toggle it — topics shape the vocab games.<br>会話ダッシュ always draws from the whole retreat. Indigo % = under 70% accuracy.</footer>
+</div>
+
+<!-- ============ GAME ============ -->
+<div class="screen" id="game">
+  <div class="topbar">
+    <button class="quit" id="btnQuit">✕ やめる</button>
+    <div class="score" id="scoreView">0</div>
+    <div class="streak" id="streakView"></div>
+  </div>
+  <div class="timerwrap"><div class="timerbar" id="timerBar"></div></div>
+  <div class="qmeta">
+    <span class="qcat"><span class="hl" id="catLabel" style="font-size:12px">—</span></span>
+    <span class="qcount" id="qCount"></span>
+  </div>
+  <div class="qcard">
+    <div class="qtext" id="qText"></div>
+    <div class="qtrans" id="qTrans"></div>
+    <div class="qnote" id="qNote"></div>
+    <button class="speakbtn" id="btnSpeak">🔊 もう一度聞く</button>
+  </div>
+  <div class="answers" id="answers"></div>
+  <div class="verdict" id="verdict"></div>
+</div>
+
+<!-- ============ RESULTS ============ -->
+<div class="screen" id="results">
+  <div class="bigscore">
+    <div class="n" id="finalScore">0</div>
+    <div class="l">点</div>
+  </div>
+  <div class="newbest" id="newBest" hidden><span class="hl green">新記録！ 🎉</span></div>
+  <div class="accuracy" id="finalAcc"></div>
+
+  <div class="sectionlabel"><span class="hl indigo">トピック別</span></div>
+  <div class="catbars" id="catBars"></div>
+
+  <div class="misses" id="missWrap">
+    <div class="sectionlabel"><span class="hl">復習しよう</span></div>
+    <div id="missList"></div>
+  </div>
+  <div class="allgood" id="allGood" hidden>全問正解 — もう奉仕の準備はできています！ 🙏</div>
+
+  <div class="resultbtns">
+    <button class="btn primary" id="btnAgain">もう一回！ <span class="hint">same mode</span></button>
+    <button class="btn ghost" id="btnHome">← メニュー</button>
+  </div>
+</div>
+
+<script>
+// ================= VOCAB BANK =================
+// Reading notation: 漢字[かんじ] renders as ruby furigana.
+// Format: [question (___ = blank), correct, [wrong options], note, English shown during question (null = would spoil)]
+const BANK = {
+  dougu: { label: "台所の道具", qs: [
+    ["包丁[ほうちょう]", "kitchen knife", ["cutting board","ladle","frying pan"], null, null],
+    ["まな板[いた]", "cutting board", ["kitchen knife","tray","shelf"], null, null],
+    ["鍋[なべ]", "pot", ["lid","kettle","bowl"], null, null],
+    ["お玉[たま]", "ladle", ["chopsticks","peeler","whisk"], "not 卵（たまご egg）!", null],
+    ["ざる", "colander / strainer", ["bucket","tray","grater"], null, null],
+    ["炊飯器[すいはんき]", "rice cooker", ["kettle","fridge","dishwasher"], "炊く（たく）= to cook rice", null],
+    ["布巾[ふきん]", "dish cloth", ["floor rag","apron","sponge"], "布巾 for dishes — 雑巾 for floors!", null],
+    ["雑巾[ぞうきん]", "floor rag", ["dish cloth","towel","duster"], "never wipe a counter with the 雑巾…", null],
+    ["洗剤[せんざい]", "detergent", ["bleach","vinegar","soap dish"], null, null],
+    ["冷蔵庫[れいぞうこ]", "fridge", ["freezer","cupboard","rice cooker"], "freezer = 冷凍庫（れいとうこ）", null],
+    ["蛇口[じゃぐち]", "tap / faucet", ["drain","hose","kettle spout"], "literally “snake mouth” 🐍", null],
+    ["お盆[ぼん]", "tray", ["plate","basket","lid"], "also the August festival of the dead", null],
+    ["蓋[ふた]", "lid", ["handle","pot","bottom"], null, null],
+    ["しゃもじ", "rice paddle", ["ladle","spatula","whisk"], null, null],
+    ["やかん", "kettle", ["pot","ladle","frying pan"], null, null],
+    ["食器[しょっき]", "dishes / tableware", ["food","cutlery drawer","kitchen"], "食器を洗う = do the dishes", null],
+    ["棚[たな]", "shelf / cupboard", ["drawer","sink","counter"], null, null],
+    ["ゴミ箱[ばこ]", "rubbish bin", ["box","bucket","cupboard"], null, null],
+  ]},
+  shokuzai: { label: "食材", qs: [
+    ["大根[だいこん]", "daikon radish", ["carrot","turnip","potato"], null, null],
+    ["人参[にんじん]", "carrot", ["radish","pumpkin","ginger"], null, null],
+    ["玉[たま]ねぎ", "onion", ["potato","egg","cabbage"], "玉 = ball — not 卵（たまご）egg!", null],
+    ["じゃがいも", "potato", ["sweet potato","taro","pumpkin"], "sweet potato = さつまいも", null],
+    ["白菜[はくさい]", "Chinese cabbage", ["spinach","lettuce","round cabbage"], "round cabbage = キャベツ", null],
+    ["ほうれん草[そう]", "spinach", ["parsley","seaweed","spring onion"], null, null],
+    ["豆腐[とうふ]", "tofu", ["miso","natto","soy milk"], null, null],
+    ["味噌[みそ]", "miso", ["soy sauce","stock","salt"], null, null],
+    ["醤油[しょうゆ]", "soy sauce", ["oil","vinegar","mirin"], null, null],
+    ["出汁[だし]", "soup stock", ["sauce","seasoning","gravy"], "the base of almost everything", null],
+    ["油[あぶら]", "oil", ["butter","water","vinegar"], null, null],
+    ["酢[す]", "vinegar", ["sake","salt","sugar"], null, null],
+    ["塩[しお]", "salt", ["sugar","pepper","flour"], null, null],
+    ["砂糖[さとう]", "sugar", ["salt","flour","rice"], null, null],
+    ["小麦粉[こむぎこ]", "flour", ["sugar","starch","breadcrumbs"], null, null],
+    ["生姜[しょうが]", "ginger", ["garlic","onion","radish"], null, null],
+    ["“cooked rice” は？", "ご飯[はん]", ["お米[こめ]","麦[むぎ]","粉[こな]"], "お米 = uncooked grains — ご飯 = cooked (and “meal”)", "cooked rice"],
+    ["果物[くだもの]", "fruit", ["vegetables","sweets","nuts"], null, null],
+    ["野菜[やさい]", "vegetables", ["fruit","salad","rice"], null, null],
+  ]},
+  ryouri: { label: "料理の動詞", qs: [
+    ["切[き]る", "to cut", ["to chop finely","to peel","to break"], null, null],
+    ["刻[きざ]む", "to chop finely", ["to peel","to grate","to mash"], "みじん切り = finely diced", null],
+    ["皮[かわ]を剥[む]く", "to peel", ["to cut","to grate","to wash"], null, null],
+    ["茹[ゆ]でる", "to boil (food)", ["to boil water","to steam","to simmer"], "water itself → 沸かす", null],
+    ["お湯[ゆ]を沸[わ]かす", "to boil water", ["to boil vegetables","to fry","to melt"], "food → 茹でる", null],
+    ["炒[いた]める", "to stir-fry", ["to deep-fry","to grill","to steam"], "deep-fry = 揚げる（あげる）", null],
+    ["揚[あ]げる", "to deep-fry", ["to stir-fry","to bake","to simmer"], null, null],
+    ["煮[に]る", "to simmer / stew", ["to steam","to roast","to boil water"], null, null],
+    ["蒸[む]す", "to steam", ["to simmer","to smoke","to boil"], null, null],
+    ["焼[や]く", "to grill / bake", ["to get burnt","to steam","to stir-fry"], "to get burnt = 焦げる（こげる）", null],
+    ["混[ま]ぜる", "to mix / stir", ["to knead","to shake","to pour"], null, null],
+    ["洗[あら]う", "to wash", ["to wipe","to rinse","to dry"], null, null],
+    ["味見[あじみ]する", "to taste-test", ["to season","to smell","to serve"], null, null],
+    ["温[あたた]める", "to heat up", ["to cool down","to melt","to boil"], null, null],
+    ["冷[さ]ます", "to let cool", ["to chill in the fridge","to freeze","to heat"], "冷やす（ひやす）= chill in the fridge", null],
+    ["盛[も]り付[つ]ける", "to plate up", ["to hand out","to stack","to decorate"], null, null],
+    ["配[くば]る", "to hand out", ["to collect","to receive","to line up"], null, null],
+    ["焦[こ]げる", "to get burnt", ["to boil over","to spill","to melt"], "焦げてる！ = it's burning!", null],
+    ["こぼす", "to spill", ["to drop","to break","to pour"], null, null],
+  ]},
+  souji: { label: "掃除・片付け", qs: [
+    ["拭[ふ]く", "to wipe", ["to sweep", "to scrub", "to rinse"], "sounds like 吹く (to blow)", null],
+    ["掃[は]く", "to sweep", ["to mop","to wipe","to scrub"], "sounds like 履く (to wear shoes)", null],
+    ["磨[みが]く", "to scrub / polish", ["to rinse","to sweep","to dry"], null, null],
+    ["片付[かたづ]ける", "to tidy up", ["to throw away","to line up","to pick up"], null, null],
+    ["ゴミを出[だ]す", "to take out the rubbish", ["to pick up litter","to burn rubbish","to sort rubbish"], null, null],
+    ["干[ほ]す", "to hang out to dry", ["to fold","to wash","to iron"], "布巾を干す, 雑巾を干す…", null],
+    ["しまう", "to put away", ["to take out","to hide","to lose"], "also 〜てしまう = to end up doing", null],
+    ["流[なが]す", "to rinse / run water", ["to soak","to wipe","to dry"], null, null],
+    ["床[ゆか]", "floor", ["ceiling","wall","corridor"], null, null],
+    ["汚[よご]れ", "dirt / stains", ["dust","rubbish","bubbles"], "汚い（きたない）= dirty", null],
+    ["ほうき", "broom", ["mop","dustpan","bucket"], "dustpan = ちりとり", null],
+    ["掃除機[そうじき]をかける", "to vacuum", ["to sweep","to mop","to dust"], "same pattern: モップをかける = to mop", null],
+  ]},
+  kazu: { label: "数と量", qs: [
+    ["にんじんを 2___ ください。", "本[ほん]", ["枚[まい]","個[こ]","杯[はい]"], "long thin things → 本", "two carrots, please"],
+    ["お皿[さら]を 3___ 出[だ]して。", "枚[まい]", ["本[ほん]","個[こ]","台[だい]"], "flat things → 枚", "get out three plates"],
+    ["玉[たま]ねぎ 4___", "個[こ]", ["本[ほん]","枚[まい]","匹[ひき]"], "small roundish things → 個", "four onions"],
+    ["お茶[ちゃ]を 1___ どうぞ。", "杯[はい]", ["個[こ]","本[ほん]","枚[まい]"], "cups & bowls of → 杯（一杯 いっぱい）", "have a cup of tea"],
+    ["30人[にん]___ のスープを作[つく]ります。", "分[ぶん]", ["個[こ]","枚[まい]","台[だい]"], "〜人分 = servings for N people — the key kitchen word", "we're making soup for 30 people"],
+    ["生徒[せいと]が 12___ います。", "人[にん]", ["個[こ]","本[ほん]","枚[まい]"], "people → 人 (but 1人 ひとり, 2人 ふたり)", "there are 12 students"],
+    ["半分[はんぶん]", "half", ["a little","a quarter","double"], null, null],
+    ["少[すこ]し", "a little", ["a lot","all of it","more"], "casual: ちょっと", null],
+    ["たくさん", "a lot", ["a little","enough","too much"], null, null],
+    ["全部[ぜんぶ]", "all / everything", ["half","most of it","nothing"], null, null],
+    ["もう少[すこ]し", "a little more", ["a lot more","enough","less"], null, null],
+    ["一袋[ひとふくろ]", "one bag", ["one box","one cup","one handful"], "one box = 一箱（ひとはこ）", null],
+    ["足[た]りない", "not enough", ["too much","just right","all gone"], "塩が足りない = needs more salt", null],
+    ["十分[じゅうぶん]", "enough / plenty", ["ten minutes","not enough","a little"], "read じゅっぷん it's “10 minutes” — context!", null],
+  ]},
+  jikan: { label: "時間・予定", qs: [
+    ["朝食[ちょうしょく]", "breakfast", ["lunch","dinner","snack"], "casual: 朝ご飯（あさごはん）", null],
+    ["昼食[ちゅうしょく]", "lunch", ["breakfast","dinner","break"], null, null],
+    ["休憩[きゅうけい]", "break / rest", ["holiday","sleep","the end"], null, null],
+    ["集合[しゅうごう]", "meeting up / assembly", ["dismissal","cleaning","meditation"], "集合時間 = time to gather", null],
+    ["開始[かいし]", "start", ["end","break","delay"], null, null],
+    ["終了[しゅうりょう]", "end / finish", ["start","continuation","pause"], null, null],
+    ["予定[よてい]", "schedule / plan", ["rule","promise","memory"], null, null],
+    ["間[ま]に合[あ]う", "to be on time", ["to be late","to hurry","to meet"], "間に合った！ = made it!", null],
+    ["遅[おく]れる", "to be late", ["to be early","to hurry","to wait"], null, null],
+    ["5時[じ]___ 終[お]わらせてください。", "までに", ["まで","から","ごろ"], "までに = deadline “by” — まで = “until”", "please have it done by 5:00"],
+    ["そろそろ", "it's about time (to…)", ["slowly","suddenly","later"], "そろそろ行こう = we should get going", null],
+    ["ベルが鳴[な]る", "the bell rings", ["the bell breaks","to ring the bell","the bell stops"], "鳴らす = to ring something", null],
+    ["もうすぐ", "very soon", ["just now","later","always"], null, null],
+    ["早[はや]めに", "a bit early / in good time", ["quickly","lately","exactly on time"], "早い = early · 速い = fast", null],
+  ]},
+  meisou: { label: "瞑想センター", qs: [
+    ["瞑想[めいそう]", "meditation", ["prayer","chanting","sleep"], null, null],
+    ["呼吸[こきゅう]", "breathing", ["heartbeat","posture","mind"], null, null],
+    ["沈黙[ちんもく]", "silence", ["talking","noise","darkness"], "聖なる沈黙 = noble silence", null],
+    ["法話[ほうわ]", "dhamma talk", ["chanting","interview","sutra"], null, null],
+    ["奉仕[ほうし]", "(volunteer) service", ["work","salary","training"], "奉仕者 = server — that's you", null],
+    ["生徒[せいと]", "student", ["teacher","server","guest"], "新しい生徒 / 古い生徒", null],
+    ["面談[めんだん]", "interview / one-on-one", ["lecture","meeting","exam"], "先生との面談", null],
+    ["座布団[ざぶとん]", "floor cushion", ["blanket","futon","pillow"], null, null],
+    ["毛布[もうふ]", "blanket", ["cushion","sheet","towel"], null, null],
+    ["布団[ふとん]", "futon / bedding", ["pillow","curtain","carpet"], null, null],
+    ["枕[まくら]", "pillow", ["blanket","cushion","sheet"], null, null],
+    ["規則[きそく]", "rules", ["schedule","manners","advice"], null, null],
+    ["休[やす]む", "to rest / take a break", ["to sit","to leave","to wake up"], null, null],
+    ["具合[ぐあい]", "condition (health)", ["mood","illness","pain"], "具合が悪い = feeling unwell", null],
+    ["腰[こし]", "lower back", ["shoulder","knee","neck"], "腰が痛い — the meditation classic", null],
+    ["眠[ねむ]い", "sleepy", ["tired","awake","bored"], "眠れない = can't sleep", null],
+  ]},
+  hyougen: { label: "よく使う表現", qs: [
+    ["Leaving work before the others — what do you say?", "お先[さき]に失礼[しつれい]します", ["お疲[つか]れさまです","おじゃまします","いってきます"], "“excuse me for going first” — they reply お疲れさま", "—"],
+    ["Thanking someone for their work", "お疲[つか]れさまです", ["ご苦労[くろう]さまです","いただきます","おかげさまで"], "ご苦労さま is boss-to-junior — stick with お疲れさま", "—"],
+    ["“That really helps!”", "助[たす]かります", ["助[たす]けて！","手伝[てつだ]います","できます"], "助けて！ = HELP! (emergency) — big difference", "—"],
+    ["“One moment, please”", "少々[しょうしょう]お待[ま]ちください", ["ちょっと待[ま]った","お待[ま]たせしました","まだです"], "casual version: ちょっと待ってね", "—"],
+    ["“Sorry to keep you waiting”", "お待[ま]たせしました", ["お待[ま]ちください","おかえりなさい","お先[さき]にどうぞ"], null, "—"],
+    ["Before eating", "いただきます", ["ごちそうさまでした","めしあがれ","おいしいです"], null, "—"],
+    ["After eating", "ごちそうさまでした", ["いただきます","お先[さき]に失礼[しつれい]します","おなかがすいた"], null, "—"],
+    ["Entering a room / interrupting", "失礼[しつれい]します", ["いらっしゃいませ","ただいま","おやすみなさい"], null, "—"],
+    ["“Could you say that again?”", "もう一度[いちど]お願[ねが]いします", ["もう一回[いっかい]です","何[なん]ですか","聞[き]こえます"], "THE lifesaver phrase — use it shamelessly", "—"],
+    ["“Could you speak slowly?”", "ゆっくり話[はな]してもらえますか", ["早[はや]く話[はな]してください","ゆっくりします","静[しず]かにしてください"], null, "—"],
+    ["“After you / go ahead”", "お先[さき]にどうぞ", ["お先[さき]に失礼[しつれい]します","どうも","いってらっしゃい"], null, "—"],
+    ["Volunteering: “I'll do it!”", "私[わたし]がやります", ["私[わたし]はやりません","やってください","できました"], null, "—"],
+    ["“Leave it to me”", "任[まか]せてください", ["待[ま]ってください","見[み]てください","教[おし]えてください"], null, "—"],
+    ["Offering: “What should I do next?”", "次[つぎ]は何[なに]をしましょうか", ["次[つぎ]に行[い]きます","もう終[お]わりましたか","何[なん]でもいいです"], "〜ましょうか = shall I…? (offering)", "—"],
+  ]},
+};
+
+// ================= KAIWA BANK =================
+// t: "mean" = what are they saying? (English options)
+//    "reply" = pick the natural response (Japanese options)
+const KAIWA = [
+  // --- kitchen: comprehension ---
+  { t:"mean", scene:"台所で", line:"お湯[ゆ]が沸[わ]いたら、火[ひ]を止[と]めてください。",
+    en:"When the water boils, turn off the heat.",
+    a:"When the water boils, turn off the heat.",
+    w:["Boil some water on a high heat.","When you're done, wash the pot.","Turn the heat up until it boils."],
+    note:"火を止める = turn off the heat/gas" },
+  { t:"mean", scene:"台所で", line:"この大根[だいこん]、薄切[うすぎ]りにしてもらえる？",
+    en:"Could you slice this daikon thinly?",
+    a:"Could you slice this daikon thinly?",
+    w:["Could you peel this daikon?","Could you boil this daikon?","Could you throw this daikon away?"],
+    note:"薄切り = thin slices · 〜にする = make into" },
+  { t:"mean", scene:"台所で", line:"それ、冷蔵庫[れいぞうこ]に戻[もど]しておいて。",
+    en:"Put that back in the fridge (for now).",
+    a:"Put that back in the fridge (for now).",
+    w:["Take that out of the fridge.","Leave that out to defrost.","That fridge is broken."],
+    note:"戻す = put back · 〜ておく = do it now, for later" },
+  { t:"mean", scene:"台所で", line:"ちょっと味見[あじみ]してみて。薄[うす]くない？",
+    en:"Have a taste — isn't it a bit bland?",
+    a:"Have a taste — isn't it a bit bland?",
+    w:["Don't taste it — it's still too hot.","Have a look — isn't it too thin?","Add a little more water."],
+    note:"味が薄い = bland · 濃い（こい）= strong" },
+  { t:"mean", scene:"台所で", line:"ご飯[はん]、あと10分[ぷん]で炊[た]けるよ。",
+    en:"The rice will be done in 10 minutes.",
+    a:"The rice will be done in 10 minutes.",
+    w:["The rice was ready 10 minutes ago.","Cook the rice for exactly 10 minutes.","We ran out of rice 10 minutes ago."],
+    note:"炊ける = (rice) finishes cooking" },
+  { t:"mean", scene:"台所で", line:"先[さき]に野菜[やさい]を洗[あら]っておいてください。",
+    en:"Please wash the vegetables first, so they're ready.",
+    a:"Please wash the vegetables first, so they're ready.",
+    w:["Please wash your hands before touching the vegetables.","The vegetables were already washed earlier.","Please cut the vegetables first."],
+    note:"先に = first · 〜ておく = get it done in advance" },
+  { t:"mean", scene:"台所で", line:"鍋[なべ]、焦[こ]げないように混[ま]ぜ続[つづ]けて。",
+    en:"Keep stirring the pot so it doesn't burn.",
+    a:"Keep stirring the pot so it doesn't burn.",
+    w:["Stop stirring — the pot is burning.","Mix the two pots together.","Stir the pot once it has burnt."],
+    note:"〜ないように = so that it doesn't · 〜続ける = keep doing" },
+  { t:"mean", scene:"台所で", line:"熱[あつ]いから気[き]をつけて！",
+    en:"Careful — it's hot!",
+    a:"Careful — it's hot!",
+    w:["It's cold, so hurry up!","I'm hot — please open a window.","Be careful — it's heavy!"],
+    note:"気をつけて = watch out" },
+  { t:"mean", scene:"台所で", line:"お皿[さら]は棚[たな]にしまってください。",
+    en:"Please put the plates away in the cupboard.",
+    a:"Please put the plates away in the cupboard.",
+    w:["Please bring the plates from the cupboard.","Please wash the plates on the shelf.","Please throw those plates away."],
+    note:"しまう = put away" },
+  { t:"mean", scene:"台所で", line:"ゴミ、出[だ]しておいてくれる？",
+    en:"Could you take the rubbish out for me?",
+    a:"Could you take the rubbish out for me?",
+    w:["Could you bring the rubbish in?","Did you make all this rubbish?","Could you buy more bin bags?"],
+    note:"ゴミを出す = take out the rubbish" },
+  { t:"mean", scene:"台所で", line:"火[ひ]が強[つよ]すぎるかも。弱火[よわび]にして。",
+    en:"The heat might be too high — turn it down to low.",
+    a:"The heat might be too high — turn it down to low.",
+    w:["The flame has gone out — light it again.","It might be too weak — turn it up.","The fire alarm is too loud."],
+    note:"強火・中火・弱火 = high / medium / low heat" },
+  { t:"mean", scene:"台所で", line:"これ、全部[ぜんぶ]で何人分[なんにんぶん]？",
+    en:"How many servings is this altogether?",
+    a:"How many servings is this altogether?",
+    w:["How many people are cooking today?","Is this really everything?","How many portions are left over?"],
+    note:"〜人分 = servings for N people" },
+
+  // --- kitchen: replies ---
+  { t:"reply", scene:"台所で", line:"その鍋[なべ]、ちょっと見[み]てて。",
+    en:"“Keep an eye on that pot for a sec.”",
+    a:"はい、見[み]ておきます。",
+    w:["はい、見[み]えます。","鍋[なべ]はどこですか？","見[み]たことがあります。"],
+    note:"見ておく = I'll keep watching it · 見える = it's visible (oops)" },
+  { t:"reply", scene:"台所で", line:"手[て]が空[あ]いてたら、こっち手伝[てつだ]って！",
+    en:"“If you're free, come help over here!”",
+    a:"はい、今[いま]行[い]きます！",
+    w:["はい、今[いま]来[き]ます！","行[い]ったことがあります。","はい、手[て]を洗[あら]いました。"],
+    note:"going toward THEM = 行きます, not 来ます" },
+  { t:"reply", scene:"台所で", line:"野菜[やさい]、もう切[き]れた？",
+    en:"“Are the veggies cut yet?”",
+    a:"すみません、もう少[すこ]しかかります。",
+    w:["はい、野菜[やさい]は切[き]れません。","もう着[つ]きました。","まだ食[た]べていません。"],
+    note:"かかる = to take (time) · もう少しかかります = needs a bit longer" },
+  { t:"reply", scene:"台所で", line:"（早口[はやくち]で、聞[き]き取[と]れなかった…）",
+    en:"(They spoke too fast — you didn't catch it.)",
+    a:"すみません、もう一度[いちど]お願[ねが]いします。",
+    w:["はい、わかりました。","そうですね。","大丈夫[だいじょうぶ]です。"],
+    note:"never fake-nod — asking again always beats guessing" },
+  { t:"reply", scene:"台所で", line:"塩[しお]、取[と]ってもらえる？",
+    en:"“Could you pass the salt?”",
+    a:"はい、どうぞ。",
+    w:["はい、取[と]れます。","どういたしまして。","塩[しお]が好[す]きですか？"],
+    note:"どうぞ = here you go (when handing something over)" },
+  { t:"reply", scene:"台所で", line:"悪[わる]いけど、床[ゆか]も拭[ふ]いておいてくれる？",
+    en:"“Sorry to ask, but could you wipe the floor too?”",
+    a:"わかりました。やっておきます。",
+    w:["悪[わる]くないですよ。","床[ゆか]がありません。","拭[ふ]いたことがありません。"],
+    note:"悪いけど = sorry to ask, but… · やっておきます = I'll get it done" },
+  { t:"reply", scene:"台所で", line:"先[さき]に休憩[きゅうけい]入[はい]っていいよ。",
+    en:"“You can take your break first.”",
+    a:"ありがとうございます。お先[さき]に失礼[しつれい]します。",
+    w:["おかえりなさい。","いただきます。","おじゃまします。"],
+    note:"お先に失礼します = excuse me for going first" },
+  { t:"reply", scene:"台所で", line:"重[おも]いから、二人[ふたり]で運[はこ]ぼう。",
+    en:"“It's heavy — let's carry it together.”",
+    a:"はい、そうしましょう。",
+    w:["はい、そうでした。","一人[ひとり]でどうぞ。","運[はこ]んだことがあります。"],
+    note:"〜ましょう invitation → そうしましょう = yes, let's" },
+  { t:"reply", scene:"台所で", line:"今日[きょう]はここまで。残[のこ]りは明日[あした]でいいよ。",
+    en:"“That's it for today — the rest can wait till tomorrow.”",
+    a:"わかりました。お疲[つか]れさまでした。",
+    w:["ごちそうさまでした。","はじめまして。","いってらっしゃい。"],
+    note:"お疲れさまでした = the all-purpose end-of-work phrase" },
+
+  // --- course manager: comprehension ---
+  { t:"mean", scene:"生徒から", line:"すみません、気分[きぶん]が悪[わる]いので、部屋[へや]で休[やす]んでもいいですか？",
+    en:"I feel unwell — may I rest in my room?",
+    a:"I feel unwell — may I rest in my room?",
+    w:["The room smells bad — may I change rooms?","I feel great — shall I clean the room?","My roommate is unwell — could you check on them?"],
+    note:"気分が悪い = feel unwell · 〜てもいいですか = may I…?" },
+  { t:"mean", scene:"生徒から", line:"毛布[もうふ]をもう一枚[いちまい]もらえますか？",
+    en:"Could I get one more blanket?",
+    a:"Could I get one more blanket?",
+    w:["Could you wash my blanket?","I was given one blanket too many.","Could I get a thicker futon?"],
+    note:"もう一枚 = one more (flat thing)" },
+  { t:"mean", scene:"生徒から", line:"目覚[めざ]ましが鳴[な]らなくて、朝[あさ]の瞑想[めいそう]に遅[おく]れました。",
+    en:"My alarm didn't go off, so I was late for morning meditation.",
+    a:"My alarm didn't go off, so I was late for morning meditation.",
+    w:["The morning bell is too loud to sleep through.","I woke up early and meditated alone.","I forgot where the meditation hall is."],
+    note:"目覚まし（時計）= alarm clock · 鳴らない = doesn't ring" },
+  { t:"mean", scene:"生徒から", line:"隣[となり]の人[ひと]のいびきがうるさくて、眠[ねむ]れません。",
+    en:"The person next to me snores so loudly I can't sleep.",
+    a:"The person next to me snores so loudly I can't sleep.",
+    w:["My neighbour talks in their sleep.","The room next door leaves the light on.","I snore, and it wakes other people up."],
+    note:"いびき = snoring — course-manager classic" },
+  { t:"mean", scene:"生徒から", line:"腰[こし]が痛[いた]いので、椅子[いす]を使[つか]ってもいいですか？",
+    en:"My lower back hurts — may I use a chair?",
+    a:"My lower back hurts — may I use a chair?",
+    w:["My knees hurt — may I stand up?","This chair is broken — may I fix it?","My shoulders hurt — may I lie down?"],
+    note:"腰 = lower back · 膝（ひざ）= knees" },
+  { t:"mean", scene:"生徒から", line:"薬[くすり]を預[あず]けたいのですが。",
+    en:"I'd like to hand in my medication (for safekeeping).",
+    a:"I'd like to hand in my medication (for safekeeping).",
+    w:["I'd like some medicine, please.","I've lost my medication.","I'd like my medication back, please."],
+    note:"預ける = leave in someone's care · 返してもらう = get back" },
+  { t:"mean", scene:"生徒から", line:"面談[めんだん]の時間[じかん]を変[か]えてもらえませんか？",
+    en:"Could my interview time be changed?",
+    a:"Could my interview time be changed?",
+    w:["What time is my interview?","The interview went on too long.","May I skip the interview?"],
+    note:"変える = to change · 〜てもらえませんか = polite request" },
+  { t:"mean", scene:"生徒から", line:"お手洗[てあら]いの電気[でんき]がつかないんですが。",
+    en:"The light in the toilet isn't coming on.",
+    a:"The light in the toilet isn't coming on.",
+    w:["The toilet is always occupied.","The toilet has run out of paper.","The tap in the toilet won't turn off."],
+    note:"電気がつく = the light comes on · 〜んですが = softener" },
+
+  // --- course manager: replies ---
+  { t:"reply", scene:"生徒対応", line:"気分[きぶん]が悪[わる]いんですが…",
+    en:"“I'm not feeling well…”",
+    a:"大丈夫[だいじょうぶ]ですか。少[すこ]し休[やす]みましょうか。",
+    w:["元気[げんき]ですね！","頑張[がんば]って座[すわ]ってください。","私[わたし]もです。"],
+    note:"offer rest — 休みましょうか = shall we get you a rest?" },
+  { t:"reply", scene:"生徒対応", line:"ちょっと聞[き]きたいことがあるんですが。",
+    en:"“There's something I'd like to ask.”",
+    a:"はい、何[なん]でしょうか？",
+    w:["聞[き]こえません。","いいえ、違[ちが]います。","質問[しつもん]はありません。"],
+    note:"何でしょうか = what would that be? (soft, polite)" },
+  { t:"reply", scene:"生徒対応", line:"毛布[もうふ]がもう一枚[いちまい]ほしいんですが。",
+    en:"“I'd like one more blanket.”",
+    a:"わかりました。すぐ持[も]ってきますね。",
+    w:["わかりました。すぐ持[も]って行[い]きましたね。","毛布[もうふ]です。","持[も]ったことがあります。"],
+    note:"bringing it back to here = 持ってくる" },
+  { t:"reply", scene:"生徒対応", line:"（生徒[せいと]が困[こま]った顔[かお]をしている）",
+    en:"(A student is looking troubled.)",
+    a:"どうしましたか？",
+    w:["どうしますか？","どうでしたか？","どうぞよろしく。"],
+    note:"どうしました = what's wrong? · どうします = what will you do? · どうでした = how was it?" },
+  { t:"reply", scene:"生徒対応", line:"明日[あした]、起[お]きられるか心配[しんぱい]です。",
+    en:"“I'm worried I won't manage to wake up tomorrow.”",
+    a:"大丈夫[だいじょうぶ]ですよ。朝[あさ]はベルが鳴[な]りますから。",
+    w:["心配[しんぱい]ですね。私[わたし]も起[お]きられません。","早[はや]く寝[ね]ないからですよ。","起[お]きなくてもいいですよ。"],
+    note:"〜から at the end = reassuring “because”: the bell will ring" },
+  { t:"reply", scene:"生徒対応", line:"先生[せんせい]はどこですか？",
+    en:"“Where is the teacher?”",
+    a:"瞑想[めいそう]ホールにいますよ。",
+    w:["瞑想[めいそう]ホールがありますよ。","瞑想[めいそう]ホールでした。","先生[せんせい]です。"],
+    note:"people → いる · things → ある (polite for teacher: いらっしゃいます)" },
+  { t:"reply", scene:"先生から", line:"新[あたら]しい生徒[せいと]は何人[なんにん]いますか？",
+    en:"“How many new students are there?”",
+    a:"12人[にん]です。",
+    w:["12個[こ]です。","12枚[まい]です。","12本[ぽん]です。"],
+    note:"people → 〜人（にん）— never 個!" },
+  { t:"reply", scene:"生徒対応", line:"今晩[こんばん]、少[すこ]し寒[さむ]いですね。",
+    en:"“It's a bit cold tonight, isn't it.”",
+    a:"そうですね。毛布[もうふ]をもう一枚[いちまい]持[も]ってきましょうか？",
+    w:["いいえ、寒[さむ]くないです。","そうします。","寒[さむ]いですか？"],
+    note:"〜ましょうか = shall I…? — the course manager's best friend" },
+];
+
+const KAIWA_CATS = { kikitori: "聞き取り", henji: "返事" };
+const PRAISE = ["すごい！","完璧！","いいね！","素晴らしい！","その調子！","お見事！","バッチリ！"];
+const OOPS = ["あちゃー！","惜しい！","うーん…","残念！","もう一息！"];
+
+// ================= HELPERS =================
+const $ = id => document.getElementById(id);
+function ruby(s) {
+  return s.replace(/([㐀-鿿々ヵヶ]+)\[([^\]]+)\]/g, "<ruby>$1<rt>$2</rt></ruby>");
+}
+function plain(s) { return s.replace(/\[[^\]]+\]/g, ""); }
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// ================= TTS =================
+let jaVoice = null;
+function findVoice() {
+  if (!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices();
+  jaVoice = vs.find(v => v.lang && v.lang.replace("_", "-").startsWith("ja")) || null;
+  $("listenRow").classList.toggle("available", !!jaVoice);
+}
+if ("speechSynthesis" in window) {
+  findVoice();
+  speechSynthesis.onvoiceschanged = findVoice;
+}
+function speak(txt) {
+  if (!jaVoice) return;
+  const u = new SpeechSynthesisUtterance(plain(txt));
+  u.lang = "ja-JP";
+  u.voice = jaVoice;
+  u.rate = 0.92;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+// ================= STATE & STORAGE =================
+const LS = "ganbareNihongo.v1";
+let store = { best: 0, answered: 0, correct: 0, cats: {}, listen: false };
+try { const s = JSON.parse(localStorage.getItem(LS)); if (s && typeof s === "object") store = Object.assign(store, s); } catch (e) {}
+function save() { try { localStorage.setItem(LS, JSON.stringify(store)); } catch (e) {} }
+
+const catKeys = Object.keys(BANK);
+function labelOf(k) { return BANK[k] ? BANK[k].label : (KAIWA_CATS[k] || k); }
+let selected = new Set(catKeys);
+let mode = "kaiwa"; // kaiwa | round | sprint
+let game = null;
+let tickHandle = null;
+let curItem = null;
+
+// ================= HOME =================
+function catAccuracy(k) {
+  const c = store.cats[k];
+  if (!c || c.n < 3) return null;
+  return Math.round(100 * c.ok / c.n);
+}
+function renderHome() {
+  $("bestScore").textContent = store.best;
+  $("totalAnswered").textContent = store.answered;
+  $("lifetimeAcc").textContent = store.answered ? Math.round(100 * store.correct / store.answered) + "%" : "–";
+  $("listenChk").checked = !!store.listen;
+  const wrap = $("chips");
+  wrap.innerHTML = "";
+  catKeys.forEach(k => {
+    const b = document.createElement("button");
+    const acc = catAccuracy(k);
+    b.className = "chip" + (selected.has(k) ? " on" : "") + (acc !== null && acc < 70 ? " weak" : "");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    b.innerHTML = BANK[k].label + (acc !== null ? `<span class="pct">${acc}%</span>` : "");
+    b.onclick = () => {
+      if (selected.has(k)) { if (selected.size > 1) selected.delete(k); }
+      else selected.add(k);
+      renderHome();
+    };
+    wrap.appendChild(b);
+  });
+}
+
+// ================= DECKS =================
+function buildVocabDeck(keys) {
+  const deck = [];
+  keys.forEach(k => BANK[k].qs.forEach(q => deck.push({ kind: "vocab", cat: k, q: q[0], a: q[1], wrong: q[2], note: q[3], en: q[4] })));
+  return shuffle(deck);
+}
+function buildKaiwaDeck() {
+  return shuffle(KAIWA.map(x => ({
+    kind: "kaiwa", cat: x.t === "mean" ? "kikitori" : "henji",
+    t: x.t, scene: x.scene, q: x.line, a: x.a, wrong: x.w, note: x.note, en: x.en,
+  }))).slice(0, 12);
+}
+
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+// ================= GAME ENGINE =================
+function startGame(m, keys) {
+  mode = m;
+  const useKeys = keys && keys.length ? keys : [...selected];
+  game = {
+    deck: m === "kaiwa" ? buildKaiwaDeck() : buildVocabDeck(useKeys),
+    i: 0, score: 0, streak: 0, best: 0,
+    hits: 0, tries: 0, misses: [], perCat: {},
+    limit: m === "sprint" ? Infinity : (m === "kaiwa" ? 12 : 10),
+    endAt: m === "sprint" ? Date.now() + 60000 : null,
+    qStart: 0, locked: false, keys: useKeys,
+  };
+  show("game");
+  nextQ();
+  if (m === "sprint") runSprintTimer();
+}
+
+function runSprintTimer() {
+  clearInterval(tickHandle);
+  tickHandle = setInterval(() => {
+    if (!game || game.endAt === null) return clearInterval(tickHandle);
+    const left = game.endAt - Date.now();
+    const bar = $("timerBar");
+    bar.style.width = Math.max(0, 100 * left / 60000) + "%";
+    bar.classList.toggle("hurry", left < 12000);
+    if (left <= 0) { clearInterval(tickHandle); finish(); }
+  }, 100);
+}
+
+function qDuration() { return mode === "kaiwa" ? 16000 : 15000; }
+
+function runQuestionTimer() {
+  clearInterval(tickHandle);
+  const DUR = qDuration();
+  game.qStart = Date.now();
+  tickHandle = setInterval(() => {
+    if (!game || game.locked) return;
+    const left = DUR - (Date.now() - game.qStart);
+    const bar = $("timerBar");
+    bar.style.width = Math.max(0, 100 * left / DUR) + "%";
+    bar.classList.toggle("hurry", left < 5000);
+    if (left <= 0) { clearInterval(tickHandle); answer(null); }
+  }, 80);
+}
+
+function nextQ() {
+  if (!game) return;
+  if (game.i >= game.limit || game.i >= game.deck.length) return finish();
+  game.locked = false;
+  const item = curItem = game.deck[game.i];
+  const isKaiwa = item.kind === "kaiwa";
+  const stage = item.q.startsWith("（"); // stage direction — nothing to hear
+  const listening = isKaiwa && !stage && store.listen && jaVoice;
+
+  $("catLabel").textContent = isKaiwa
+    ? (item.t === "mean" ? "👂 " : "💬 ") + item.scene
+    : BANK[item.cat].label;
+
+  const qt = $("qText");
+  qt.classList.toggle("hiddenline", !!listening);
+  if (listening) {
+    qt.innerHTML = "🔊 …（聞いてください）";
+    speak(item.q);
+  } else {
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    qt.innerHTML = ruby(item.q).replace(/___/g, '<span class="blank">____</span>');
+  }
+  $("qTrans").textContent = !isKaiwa && item.en && item.en !== "—" ? "“" + item.en + "”" : "";
+  $("qNote").textContent = isKaiwa ? (item.t === "mean" ? "何と言っていますか？" : "自然な返事は？") : "";
+  $("btnSpeak").classList.toggle("show", isKaiwa && !stage && !!jaVoice);
+  $("verdict").textContent = "";
+  $("verdict").className = "verdict";
+  $("qCount").textContent = mode !== "sprint" ? `${game.i + 1} / ${game.limit}` : `#${game.i + 1}`;
+
+  const opts = shuffle([item.a, ...item.wrong]);
+  const wrap = $("answers");
+  wrap.innerHTML = "";
+  wrap.className = "answers" + (opts.some(o => plain(o).length > 11) ? " stack" : "");
+  opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "ans";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    b.innerHTML = ruby(o);
+    b.dataset.val = o;
+    b.onclick = () => answer(o, b);
+    wrap.appendChild(b);
+  });
+  updateHud();
+  if (mode !== "sprint") runQuestionTimer();
+}
+
+function updateHud() {
+  $("scoreView").textContent = game.score;
+  $("streakView").textContent = game.streak >= 2 ? "🔥×" + game.streak : "";
+}
+
+function answer(choice, btn) {
+  if (!game || game.locked) return;
+  game.locked = true;
+  if (mode !== "sprint") clearInterval(tickHandle);
+  const item = game.deck[game.i];
+  const isKaiwa = item.kind === "kaiwa";
+  const right = choice === item.a;
+  game.tries++;
+  store.answered++;
+  const pc = game.perCat[item.cat] = game.perCat[item.cat] || { ok: 0, n: 0 };
+  const sc = store.cats[item.cat] = store.cats[item.cat] || { ok: 0, n: 0 };
+  pc.n++; sc.n++;
+
+  // reveal the line + translation on kaiwa questions
+  if (isKaiwa) {
+    const qt = $("qText");
+    qt.classList.remove("hiddenline");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    qt.innerHTML = ruby(item.q);
+    $("qTrans").textContent = item.en ? item.en : "";
+  }
+
+  document.querySelectorAll(".ans").forEach(b => {
+    b.disabled = true;
+    if (b.dataset.val === item.a) b.classList.add(right ? "correct" : "reveal");
+  });
+
+  const v = $("verdict");
+  if (right) {
+    game.hits++; game.streak++; store.correct++; pc.ok++; sc.ok++;
+    if (game.streak > game.best) game.best = game.streak;
+    let pts = 100 + Math.min(game.streak - 1, 5) * 20;
+    if (mode !== "sprint") {
+      const left = Math.max(0, qDuration() - (Date.now() - game.qStart));
+      pts += Math.round(left / 1000) * 5;
+    }
+    game.score += pts;
+    if (btn) btn.classList.add("correct");
+    v.textContent = PRAISE[Math.floor(Math.random() * PRAISE.length)] + " +" + pts;
+    v.classList.add("good");
+  } else {
+    game.streak = 0;
+    game.misses.push(item);
+    if (btn) btn.classList.add("wrong");
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    v.innerHTML = (choice === null ? "時間切れ！ ⏰" : OOPS[Math.floor(Math.random() * OOPS.length)]) +
+      `<span class="fix">→ <strong>${ruby(item.a)}</strong>${item.note ? " · " + item.note : ""}</span>`;
+    v.classList.add("bad");
+  }
+  save();
+  updateHud();
+  game.i++;
+  const delay = right ? (isKaiwa ? 1400 : 850) : (isKaiwa ? 3200 : 2100);
+  setTimeout(() => { if (game) { nextQ(); if (mode === "sprint") runSprintTimer(); } }, delay);
+}
+
+function finish() {
+  clearInterval(tickHandle);
+  if (!game) return;
+  const g = game;
+  $("finalScore").textContent = g.score;
+  const acc = g.tries ? Math.round(100 * g.hits / g.tries) : 0;
+  $("finalAcc").textContent = `${g.hits} / ${g.tries} correct · ${acc}% · best streak 🔥×${g.best}`;
+  const isBest = g.score > store.best;
+  if (isBest) { store.best = g.score; save(); }
+  $("newBest").hidden = !isBest;
+
+  const bars = $("catBars");
+  bars.innerHTML = "";
+  Object.keys(g.perCat).forEach(k => {
+    const c = g.perCat[k];
+    const p = Math.round(100 * c.ok / c.n);
+    const row = document.createElement("div");
+    row.className = "catbar";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    row.innerHTML = `<span class="name">${labelOf(k)}</span>
+      <span class="track"><span class="fill ${p >= 80 ? "" : p >= 50 ? "mid" : "low"}" style="width:${p}%"></span></span>
+      <span class="val">${p}%</span>`;
+    bars.appendChild(row);
+  });
+
+  const missList = $("missList");
+  missList.innerHTML = "";
+  $("missWrap").style.display = g.misses.length ? "" : "none";
+  $("allGood").hidden = g.misses.length > 0;
+  g.misses.forEach(m => {
+    const d = document.createElement("div");
+    d.className = "miss";
+    // vibecheck-ignore-next-line: innerhtml-assignment — quiz text from the page's own BANK data
+    d.innerHTML = `<span class="mq">${ruby(m.q).replace(/___/g, "____")}</span> → <span class="ma">${ruby(m.a)}</span>` +
+      (m.kind === "kaiwa" && m.en ? `<span class="mn">${m.en}</span>` : (m.en && m.en !== "—" ? `<span class="mn">“${m.en}”</span>` : "")) +
+      (m.note ? `<span class="mn">${m.note}</span>` : "");
+    missList.appendChild(d);
+  });
+
+  game = null;
+  show("results");
+}
+
+// ================= WIRING =================
+$("btnKaiwa").onclick = () => startGame("kaiwa");
+$("btnRound").onclick = () => startGame("round");
+$("btnSprint").onclick = () => startGame("sprint");
+$("btnWeak").onclick = () => {
+  const ranked = catKeys
+    .map(k => ({ k, acc: catAccuracy(k) }))
+    .filter(x => x.acc !== null)
+    .sort((a, b) => a.acc - b.acc)
+    .slice(0, 3)
+    .map(x => x.k);
+  startGame("round", ranked.length ? ranked : null);
+};
+$("btnSpeak").onclick = () => { if (curItem) speak(curItem.q); };
+$("listenChk").onchange = e => { store.listen = e.target.checked; save(); };
+$("btnQuit").onclick = () => { clearInterval(tickHandle); if ("speechSynthesis" in window) speechSynthesis.cancel(); game = null; renderHome(); show("home"); };
+$("btnAgain").onclick = () => startGame(mode);
+$("btnHome").onclick = () => { renderHome(); show("home"); };
+
+renderHome();
+</script>
+
+</body></html>

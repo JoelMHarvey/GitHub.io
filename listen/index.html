@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Listening Space — Joel Harvey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A quiet place to talk — an AI listener using the client-centred, active-listening approach lifeline support workers are trained in.">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #22303c; color: #d8e0e7; margin: 0; min-height: 100vh;
+      display: flex; justify-content: center; padding: 1.2rem;
+    }
+    main { max-width: 640px; width: 100%; display: flex; flex-direction: column; min-height: calc(100vh - 2.4rem); }
+    h1 { color: #fff; font-size: 1.5rem; margin: 0.4rem 0 0.2rem; }
+    .tagline { color: #8fa3b3; margin: 0 0 1rem; font-size: 0.95rem; }
+    a { color: #9fc3d8; }
+    .back { font-size: 0.85rem; text-decoration: none; color: #8fa3b3; }
+
+    .notice {
+      background: #2c3d4d; border: 1px solid #3d5570; border-radius: 10px;
+      padding: 0.7rem 1rem; font-size: 0.83rem; color: #b7c5d1; margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .notice strong { color: #e8eef3; }
+
+    #chat {
+      flex: 1; overflow-y: auto; display: flex; flex-direction: column;
+      gap: 0.6rem; padding: 0.2rem 0.1rem 1rem;
+    }
+    .msg { max-width: 85%; padding: 0.65rem 0.95rem; border-radius: 14px; line-height: 1.5; white-space: pre-wrap; }
+    .msg.you { align-self: flex-end; background: #3d5570; color: #fff; border-bottom-right-radius: 4px; }
+    .msg.bot { align-self: flex-start; background: #33465a; border-bottom-left-radius: 4px; }
+    .msg.bot.typing { color: #8fa3b3; font-style: italic; }
+    .msg.error { align-self: center; background: none; color: #d8a0a0; font-size: 0.85rem; }
+
+    form { display: flex; gap: 0.5rem; padding-top: 0.6rem; border-top: 1px solid #33465a; }
+    textarea {
+      flex: 1; resize: none; background: #2c3d4d; color: #e8eef3;
+      border: 1px solid #3d5570; border-radius: 10px; padding: 0.6rem 0.8rem;
+      font: inherit; min-height: 2.8rem; max-height: 9rem;
+    }
+    textarea:focus { outline: none; border-color: #6f93b5; }
+    button {
+      background: #3d5570; color: #fff; border: none; border-radius: 10px;
+      padding: 0 1.1rem; font: inherit; cursor: pointer;
+    }
+    button:hover { background: #4a6787; }
+    button:disabled { opacity: 0.5; cursor: default; }
+    footer { margin-top: 0.8rem; font-size: 0.75rem; color: #6b7d8c; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← joelmharvey.com</a>
+    <h1>Listening Space</h1>
+    <p class="tagline">A quiet place to talk. An AI listener, here to listen — not to judge, fix, or advise.</p>
+
+    <div class="notice">
+      <strong>Before you start:</strong> this is an AI, not a person, and not a crisis service.
+      It listens the way lifeline support workers are trained to — client-centred, no judgment —
+      but it is not affiliated with TELL or any helpline, and nothing here replaces real human support.
+      Nothing you write is stored.<br>
+      <strong>If you're in crisis:</strong> in Japan, TELL Lifeline
+      <a href="tel:0800-300-8355">0800-300-8355</a> (9am–11pm, English) or
+      <a href="https://telljp.com/lifeline/" rel="noopener">chat at telljp.com</a> ·
+      emergency <a href="tel:119">119</a> / <a href="tel:110">110</a>.
+      Elsewhere, <a href="https://findahelpline.com" rel="noopener">findahelpline.com</a>.
+    </div>
+
+    <div id="chat" aria-live="polite"></div>
+
+    <form id="composer">
+      <textarea id="input" placeholder="What's on your mind?" rows="1" maxlength="2000" autofocus></textarea>
+      <button id="send" type="submit">Send</button>
+    </form>
+    <footer>Conversations are not saved and end when you close the page.
+      This tool can make mistakes; for anything serious, please talk to a person.</footer>
+  </main>
+
+  <script>
+    const API = "https://research.joelmharvey.com/api/listen";
+    const chat = document.getElementById("chat");
+    const form = document.getElementById("composer");
+    const input = document.getElementById("input");
+    const send = document.getElementById("send");
+    const history = [];
+
+    function add(role, text, cls) {
+      const div = document.createElement("div");
+      div.className = "msg " + (cls || (role === "user" ? "you" : "bot"));
+      div.textContent = text;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+      return div;
+    }
+
+    add("assistant", "Hi — this is a space to talk about whatever's going on for you. I'm an AI listener, and I'm here for as long as you want. What's on your mind?");
+    history.push({ role: "assistant", content: "Hi — this is a space to talk about whatever's going on for you. I'm an AI listener, and I'm here for as long as you want. What's on your mind?" });
+
+    input.addEventListener("input", () => {
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 144) + "px";
+    });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text || send.disabled) return;
+      input.value = ""; input.style.height = "auto";
+      add("user", text);
+      history.push({ role: "user", content: text });
+      send.disabled = true;
+      const typing = add("assistant", "…", "bot typing");
+      try {
+        const r = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: history }),
+        });
+        const data = await r.json().catch(() => ({}));
+        typing.remove();
+        if (!r.ok || !data.reply) throw new Error(data.error || "No reply");
+        add("assistant", data.reply);
+        history.push({ role: "assistant", content: data.reply });
+      } catch (err) {
+        typing.remove();
+        add("assistant", "Sorry — I couldn't respond just now. Your words weren't lost; try sending again. If this is urgent, please use the numbers above.", "error");
+        history.pop(); // let them resend the same message
+        input.value = text;
+      } finally {
+        send.disabled = false;
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>

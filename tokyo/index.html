@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tokyo Today — Joel Harvey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tokyo weather, forecast, and today's Japan headlines.">
+  <script src="/gate.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    :root {
+      --bg: #1b2733; --card: #2c3d4d; --line: #3d5570; --ink: #e8eef3;
+      --mut: #8fa3b3; --dim: #6b7d8c; --accent: #e8b04b;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(1100px 500px at 85% -10%, #2c3d4d 0%, transparent 60%),
+        var(--bg);
+      color: var(--ink); min-height: 100vh; display: flex; justify-content: center;
+      padding: clamp(1.2rem, 4vw, 3rem);
+    }
+    main { max-width: 720px; width: 100%; }
+    .back { font-size: 0.85rem; text-decoration: none; color: var(--mut); }
+    header { margin: 0.8rem 0 1.6rem; display: flex; align-items: baseline; gap: 0.8rem; flex-wrap: wrap; }
+    h1 { font-size: clamp(1.7rem, 5vw, 2.2rem); color: #fff; letter-spacing: -0.02em; }
+    h1 small { color: var(--accent); font-weight: 400; font-size: 0.65em; margin-left: 0.35rem; }
+    #clock { color: var(--mut); font-variant-numeric: tabular-nums; font-size: 1.02rem; }
+
+    h2 {
+      color: var(--dim); font-size: 0.74rem; text-transform: uppercase;
+      letter-spacing: 0.14em; margin: 1.8rem 0 0.7rem; display: flex; align-items: center; gap: 0.7rem;
+    }
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: 0.5; }
+
+    .now {
+      background: var(--card); border-radius: 14px; padding: 1.1rem 1.3rem;
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    }
+    .now .big { font-size: 3rem; line-height: 1; }
+    .now .temp { font-size: 2.4rem; font-weight: 700; color: #fff; }
+    .now .desc { color: var(--mut); margin-top: 0.15rem; }
+    .now .meta { margin-left: auto; text-align: right; color: var(--mut); font-size: 0.88rem; line-height: 1.7; }
+    .now .meta b { color: var(--ink); font-weight: 600; }
+
+    .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.45rem; }
+    @media (max-width: 560px) { .week { grid-template-columns: repeat(4, 1fr); } }
+    .day {
+      background: var(--card); border-radius: 10px; padding: 0.55rem 0.3rem;
+      text-align: center; font-size: 0.8rem; color: var(--mut);
+    }
+    .day .d { font-weight: 600; color: var(--ink); }
+    .day .i { font-size: 1.25rem; margin: 0.25rem 0; }
+    .day .hi { color: #fff; font-weight: 600; }
+    .day .rain { color: #9fc3d8; font-size: 0.72rem; margin-top: 0.15rem; }
+
+    .news { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .news a {
+      display: block; background: var(--card); border-radius: 10px;
+      padding: 0.65rem 0.9rem; color: var(--ink); text-decoration: none;
+      line-height: 1.45; transition: background 0.15s;
+    }
+    .news a:hover { background: #35495c; }
+    .news time { display: block; color: var(--dim); font-size: 0.75rem; margin-top: 0.2rem; }
+    .placeholder { color: var(--dim); font-size: 0.9rem; padding: 0.4rem 0; }
+
+    footer { margin-top: 2.5rem; font-size: 0.78rem; color: var(--dim); line-height: 1.6; }
+    footer a { color: var(--mut); }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← joelmharvey.com</a>
+    <header>
+      <h1>Tokyo Today<small>東京</small></h1>
+      <div id="clock">--:--</div>
+    </header>
+
+    <h2>Now</h2>
+    <div class="now" id="now"><div class="placeholder">Loading weather…</div></div>
+
+    <h2>This week</h2>
+    <div class="week" id="week"><div class="placeholder">Loading forecast…</div></div>
+
+    <h2>ニュース — NHK</h2>
+    <ul class="news" id="news-jp"><li class="placeholder">Loading headlines…</li></ul>
+
+    <h2>News — English</h2>
+    <ul class="news" id="news-en"><li class="placeholder">Loading headlines…</li></ul>
+
+    <footer>Weather by <a href="https://open-meteo.com" rel="noopener">Open-Meteo</a> ·
+      headlines from NHK and Japan Today, refreshed every few minutes · times in JST.</footer>
+  </main>
+
+  <script>
+    const NEWS_API = "https://research.joelmharvey.com/api/tokyo/news";
+    const WMO = {
+      0: ["☀️", "Clear 快晴"], 1: ["🌤️", "Mostly clear 晴れ"], 2: ["⛅", "Partly cloudy 晴れ時々曇り"],
+      3: ["☁️", "Overcast 曇り"], 45: ["🌫️", "Fog 霧"], 48: ["🌫️", "Freezing fog 霧氷"],
+      51: ["🌦️", "Light drizzle 霧雨"], 53: ["🌦️", "Drizzle 霧雨"], 55: ["🌧️", "Heavy drizzle 強い霧雨"],
+      61: ["🌧️", "Light rain 小雨"], 63: ["🌧️", "Rain 雨"], 65: ["🌧️", "Heavy rain 大雨"],
+      66: ["🌧️", "Freezing rain 着氷性の雨"], 67: ["🌧️", "Freezing rain 着氷性の雨"],
+      71: ["🌨️", "Light snow 小雪"], 73: ["🌨️", "Snow 雪"], 75: ["❄️", "Heavy snow 大雪"],
+      77: ["❄️", "Snow grains 霧雪"], 80: ["🌦️", "Showers にわか雨"], 81: ["🌧️", "Showers にわか雨"],
+      82: ["⛈️", "Violent showers 激しいにわか雨"], 85: ["🌨️", "Snow showers にわか雪"],
+      86: ["🌨️", "Snow showers にわか雪"], 95: ["⛈️", "Thunderstorm 雷雨"],
+      96: ["⛈️", "Thunderstorm + hail 雹を伴う雷雨"], 99: ["⛈️", "Thunderstorm + hail 雹を伴う雷雨"],
+    };
+    const wmo = (c) => WMO[c] || ["🌡️", "—"];
+    const esc = (s) => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+
+    // JST clock
+    const clock = document.getElementById("clock");
+    function tick() {
+      clock.textContent = new Date().toLocaleString("en-GB", {
+        timeZone: "Asia/Tokyo", weekday: "short", day: "numeric", month: "short",
+        hour: "2-digit", minute: "2-digit",
+      }) + " JST";
+    }
+    tick(); setInterval(tick, 30000);
+
+    // Weather (Open-Meteo, CORS-friendly, no key)
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=35.6762&longitude=139.6503" +
+          "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m" +
+          "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset" +
+          "&timezone=Asia%2FTokyo")
+      .then((r) => r.json())
+      .then((w) => {
+        const c = w.current, [icon, desc] = wmo(c.weather_code);
+        const sunrise = w.daily.sunrise[0].slice(11), sunset = w.daily.sunset[0].slice(11);
+        document.getElementById("now").innerHTML =
+          `<div class="big">${icon}</div>
+           <div><div class="temp">${Math.round(c.temperature_2m)}°</div>
+           <div class="desc">${desc} · feels like ${Math.round(c.apparent_temperature)}°</div></div>
+           <div class="meta">humidity <b>${c.relative_humidity_2m}%</b> · wind <b>${Math.round(c.wind_speed_10m)} km/h</b><br>
+           ☀️ ${sunrise} → 🌙 ${sunset}</div>`;
+        const days = w.daily.time.map((t, i) => {
+          const [di] = wmo(w.daily.weather_code[i]);
+          const name = i === 0 ? "Today" :
+            new Date(t + "T00:00").toLocaleDateString("en-GB", { weekday: "short" });
+          return `<div class="day"><div class="d">${name}</div><div class="i">${di}</div>
+            <span class="hi">${Math.round(w.daily.temperature_2m_max[i])}°</span> /
+            ${Math.round(w.daily.temperature_2m_min[i])}°
+            <div class="rain">☔ ${w.daily.precipitation_probability_max[i] ?? 0}%</div></div>`;
+        });
+        document.getElementById("week").innerHTML = days.join("");
+      })
+      .catch(() => {
+        document.getElementById("now").innerHTML = '<div class="placeholder">Weather unavailable right now.</div>';
+        document.getElementById("week").innerHTML = "";
+      });
+
+    // Headlines (via research hub — feeds have no CORS of their own)
+    fetch(NEWS_API)
+      .then((r) => r.json())
+      .then((n) => {
+        for (const key of ["jp", "en"]) {
+          const ul = document.getElementById("news-" + key);
+          const items = n[key] || [];
+          if (!items.length) {
+            ul.innerHTML = '<li class="placeholder">No headlines right now.</li>';
+            continue;
+          }
+          // vibecheck-ignore-next-line: innerhtml-assignment — every interpolation passes esc(); href is encoded
+          ul.innerHTML = items.map((it) => {
+            const when = it.published
+              ? new Date(it.published).toLocaleString("en-GB", {
+                  timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" })
+              : "";
+            return `<li><a href="${encodeURI(it.link)}" rel="noopener">${esc(it.title)}` +
+                   `<time>${esc(it.source)}${when ? " · " + when : ""}</time></a></li>`;
+          }).join("");
+        }
+      })
+      .catch(() => {
+        for (const key of ["jp", "en"])
+          document.getElementById("news-" + key).innerHTML =
+            '<li class="placeholder">Headlines unavailable right now.</li>';
+      });
+  </script>
+</body>
+</html>

@@ -8,7 +8,7 @@
 // still in the public repo. Anything genuinely sensitive belongs behind a
 // real server (research hub / ops), not here.
 (function () {
-  var HASH = "908929a7a9fc5fd613bf5a7ed64119e0247202df7d735f7d9156abfd2098391b";
+  var HASH = "ed05301a98dd6a6b78a2fb3b599ced7a33312336c2cf24fdc6195df1cffdb04c";
   var KEY = "jmh_gate";
   try {
     if (localStorage.getItem(KEY) === HASH) return;

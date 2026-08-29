@@ -20,19 +20,28 @@
   document.documentElement.appendChild(style);
 
   function unlockUI() {
+    // The gate is the front door, so it wears the site's own clothes:
+    // same slate ground and radial glows, the wordmark with its amber
+    // full stop, card-styled form, and a visible button (Enter works too).
     var wrap = document.createElement("div");
     wrap.id = "jmh-gate";
     wrap.innerHTML =
-      '<div style="position:fixed;inset:0;background:#22303c;display:flex;align-items:center;' +
-      'justify-content:center;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,' +
-      "'Segoe UI',sans-serif\">" +
-      '<form id="jmh-gate-form" style="text-align:center;max-width:280px;width:90%">' +
-      '<div style="font-size:2rem;margin-bottom:0.4rem">🔒</div>' +
-      '<div style="color:#8fa3b3;margin-bottom:1rem;font-size:0.95rem">This site is private.</div>' +
+      '<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;' +
+      "z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;" +
+      "background:radial-gradient(1100px 500px at 85% -10%,#2c3d4d 0%,transparent 60%)," +
+      'radial-gradient(900px 600px at -10% 110%,#253646 0%,transparent 55%),#1b2733">' +
+      '<form id="jmh-gate-form" style="text-align:center;max-width:300px;width:90%;' +
+      'background:#2c3d4d;border:1px solid #3d5570;border-radius:12px;padding:2rem 1.8rem">' +
+      '<div style="font-size:1.6rem;font-weight:700;letter-spacing:-0.02em;color:#fff;margin-bottom:0.3rem">' +
+      'Joel Harvey<span style="color:#e8b04b">.</span></div>' +
+      '<div style="color:#9db1c0;margin-bottom:1.1rem;font-size:0.9rem">This site is private.</div>' +
       '<input id="jmh-gate-pw" type="password" autocomplete="current-password" placeholder="Password" ' +
       'style="width:100%;padding:0.65rem 0.9rem;border-radius:10px;border:1px solid #3d5570;' +
-      'background:#2c3d4d;color:#e8eef3;font-size:1rem;outline:none;text-align:center">' +
-      '<div id="jmh-gate-err" style="color:#d8a0a0;font-size:0.85rem;height:1.2rem;margin-top:0.5rem"></div>' +
+      'background:#1b2733;color:#e8eef3;font-size:1rem;outline:none;text-align:center;box-sizing:border-box">' +
+      '<button type="submit" style="width:100%;margin-top:0.7rem;padding:0.65rem 0.9rem;border:0;' +
+      'border-radius:10px;background:#e8b04b;color:#1b2733;font-size:1rem;font-weight:600;cursor:pointer">' +
+      "Enter</button>" +
+      '<div id="jmh-gate-err" style="color:#e0a8a8;font-size:0.85rem;height:1.2rem;margin-top:0.6rem"></div>' +
       "</form></div>";
     document.documentElement.appendChild(wrap);
     var input = wrap.querySelector("#jmh-gate-pw");

@@ -379,6 +379,11 @@
   };
 
   var passcode = store.get(PASS, '');
+
+  /* How the last read went: null before any attempt, then true/false. An
+     empty shelf means something different in each case, and saying "no books"
+     when the read actually failed sends you looking in the wrong place. */
+  var lastRead = { ok: null, error: null };
   var books = store.get(CACHE, []);
   if (!Array.isArray(books)) books = [];
 
@@ -419,7 +424,11 @@
       });
       books = Object.keys(byId).map(function (k) { return byId[k]; });
       store.set(CACHE, books);
+      lastRead = { ok: true, error: null, count: remote.length };
       return true;
+    }, function (err) {
+      lastRead = { ok: false, error: err };
+      throw err;
     });
   }
 
@@ -557,12 +566,31 @@
       $('grid').innerHTML = '';
       var filtered = live().length > 0;
       $('empty').hidden = false;
-      $('empty').innerHTML = filtered
-        ? '<div class="ico">🔍</div><h3>Nothing matches</h3><p>Try a different search, or clear the filters.</p>'
-        : '<div class="ico">📚</div><h3>The shelf is empty here</h3>' +
+      if (filtered) {
+        $('empty').innerHTML = '<div class="ico">🔍</div><h3>Nothing matches</h3>' +
+          '<p>Try a different search, or clear the filters.</p>';
+      } else if (lastRead.ok === false) {
+        // The read failed. Saying "no books" here would be a lie.
+        $('empty').innerHTML = '<div class="ico">⚠️</div><h3>Could not read the shelf</h3>' +
+          '<p>' + esc((lastRead.error && lastRead.error.message) || 'The request to shinyashimada.com failed.') +
+          '</p><p style="margin-top:0.6rem"><button type="button" id="retry-read">Try again</button></p>';
+      } else if (lastRead.ok === true) {
+        // The read worked and the server genuinely holds nothing.
+        $('empty').innerHTML = '<div class="ico">📚</div><h3>The shared shelf is empty</h3>' +
+          '<p>shinyashimada.com answered, but has no books stored yet. If the library looks full ' +
+          'over there, its copy has not been synced up — check the pill under its heading says ' +
+          '<b>Synced</b> and not <b>This device only</b>.</p>';
+      } else {
+        $('empty').innerHTML = '<div class="ico">📚</div><h3>The shelf is empty here</h3>' +
           '<p>Add a book, or import the inventory over on ' +
           '<a href="https://shinyashimada.com/library/" style="color:var(--sky)">shinyashimada.com/library</a> — ' +
           'it is the same shelf either way.</p>';
+      }
+      var retry = $('retry-read');
+      if (retry) retry.addEventListener('click', function () {
+        retry.disabled = true;
+        pull().then(render).catch(function () { render(); });
+      });
       return;
     }
     $('empty').hidden = true;
@@ -1018,12 +1046,24 @@
   if (books.length) showApp();
 
   api('/store?health=1').then(function (h) {
-    if (!h.authRequired) { showApp(); pull().then(render); return; }
+    if (!h.authRequired) {
+      showApp();
+      // Without a catch here a failed read left an empty shelf and no reason.
+      return pull().then(render).catch(function () { render(); });
+    }
     if (!passcode) { showGate(); return; }
     return pull().then(function () { showApp(); }).catch(function (err) {
-      if (err.status === 401) { store.del(PASS); passcode = ''; showGate('That passcode was not accepted. Try again.'); }
-      else if (!books.length) showGate('Could not reach the library just now.');
-      else toast('Offline — showing the last copy saved on this device.', true);
+      if (err.status === 401) {
+        store.del(PASS);
+        passcode = '';
+        showGate('That passcode was not accepted. Try again.');
+        return;
+      }
+      /* The passcode is fine and the network is not. Sending someone back to
+         the passcode box would point them at the wrong thing, so open the
+         library and let it say what actually went wrong. */
+      showApp();
+      if (books.length) toast('Offline — showing the last copy saved on this device.', true);
     });
   }).catch(function () {
     if (!books.length) showGate('Could not reach the library just now.');

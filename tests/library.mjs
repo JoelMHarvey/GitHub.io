@@ -225,6 +225,57 @@ await t('a remembered passcode skips the gate', async () =>
 await t('the shelf is still there after a reload', async () =>
   (await page.locator('.book').count()) >= 3 ? true : 'books lost');
 
+
+/* --- an empty shelf must say WHY it is empty ----------------------------- */
+
+async function emptyCase(label, routeFn, expect) {
+  const c = await browser.newContext();
+  const pg = await c.newPage();
+  await pg.addInitScript(() => {
+    localStorage.setItem('jmh_gate', 'ed05301a98dd6a6b78a2fb3b599ced7a33312336c2cf24fdc6195df1cffdb04c');
+    localStorage.setItem('jmh.library.passcode', JSON.stringify('let-me-in'));
+    localStorage.removeItem('jmh.library.cache');
+  });
+  await routeFn(pg);
+  await pg.goto(`${BASE}/library/`, { waitUntil: 'networkidle' });
+  await pg.waitForTimeout(900);
+  const txt = (await pg.textContent('#empty').catch(() => '')) || '';
+  const appShown = !(await pg.locator('#app').getAttribute('hidden').catch(()=>'x')) ;
+  await t(label, async () => txt.includes(expect) ? true : `saw ${JSON.stringify(txt.replace(/\s+/g,' ').trim().slice(0,110))}`);
+  await c.close();
+}
+
+// The server answers but holds nothing — say so, and point at the likely cause.
+await emptyCase('an empty server says the shared shelf is empty', async pg => {
+  await pg.route('https://shinyashimada.com/api/**', r => {
+    const u = new URL(r.request().url());
+    if (u.searchParams.has('health')) return r.fulfill({ status:200, contentType:'application/json',
+      body: JSON.stringify({ ok:true, database:true, authRequired:true }) });
+    return r.fulfill({ status:200, contentType:'application/json', body: JSON.stringify({ records: [] }) });
+  });
+}, 'shared shelf is empty');
+
+// The read failed — never render that as "no books".
+await emptyCase('a failed read says the read failed', async pg => {
+  await pg.route('https://shinyashimada.com/api/**', r => {
+    const u = new URL(r.request().url());
+    if (u.searchParams.has('health')) return r.fulfill({ status:200, contentType:'application/json',
+      body: JSON.stringify({ ok:true, database:true, authRequired:true }) });
+    return r.abort('failed');
+  });
+}, 'Could not read the shelf');
+
+// No passcode required, but the read still fails — the branch that used to
+// swallow the error entirely and show a bare empty shelf.
+await emptyCase('an open server with a failing read still explains itself', async pg => {
+  await pg.route('https://shinyashimada.com/api/**', r => {
+    const u = new URL(r.request().url());
+    if (u.searchParams.has('health')) return r.fulfill({ status:200, contentType:'application/json',
+      body: JSON.stringify({ ok:true, database:true, authRequired:false }) });
+    return r.abort('failed');
+  });
+}, 'Could not read the shelf');
+
 /* ------------------------------------------------------------------------- */
 
 if (errs.length) fails.push('console/page errors: ' + errs.join(' | '));

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Library — Joel Harvey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The shared book library — every book Shin and I own, in one catalogue.">
+  <meta name="robots" content="noindex">
+  <script src="/gate.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    :root {
+      --bg: #1b2733; --card: #2c3d4d; --card-hi: #35495c; --line: #3d5570;
+      --ink: #e8eef3; --mut: #9db1c0; --dim: #6b7d8c; --accent: #e8b04b;
+      --green: #6bbf8a; --sky: #7fb3d5; --rose: #e08a8a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background:
+        radial-gradient(1100px 500px at 85% -10%, #2c3d4d 0%, transparent 60%),
+        radial-gradient(900px 600px at -10% 110%, #253646 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink); min-height: 100vh; display: flex; justify-content: center;
+      padding: clamp(1.2rem, 4vw, 3rem);
+    }
+    main { max-width: 1080px; width: 100%; }
+
+    .back { font-size: 0.85rem; text-decoration: none; color: var(--mut); }
+    .back:hover { color: var(--ink); }
+    header { margin: 0.8rem 0 1.4rem; }
+    h1 { font-size: clamp(1.7rem, 5vw, 2.3rem); color: #fff; letter-spacing: -0.02em; }
+    h1 .dot { color: var(--accent); }
+    .tagline { color: var(--mut); margin-top: 0.35rem; font-size: 0.98rem; }
+
+    h2 {
+      color: var(--dim); font-size: 0.74rem; text-transform: uppercase;
+      letter-spacing: 0.14em; margin: 1.8rem 0 0.7rem; display: flex; align-items: center; gap: 0.7rem;
+    }
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: 0.5; }
+
+    /* --- controls --- */
+    button, input, select, textarea {
+      font: inherit; color: var(--ink); background: var(--bg);
+      border: 1px solid var(--line); border-radius: 9px; padding: 0.5rem 0.7rem;
+    }
+    input:focus, select:focus, textarea:focus, button:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 1px;
+    }
+    button { cursor: pointer; background: var(--card); }
+    button:hover { background: var(--card-hi); }
+    .btn-primary { background: var(--accent); color: #1b2733; border-color: var(--accent); font-weight: 600; }
+    .btn-primary:hover { filter: brightness(1.08); background: var(--accent); }
+    .btn-danger { color: var(--rose); }
+    [hidden] { display: none !important; }
+
+    label.f { display: block; margin-bottom: 0.75rem; }
+    label.f > span { display: block; font-size: 0.78rem; color: var(--mut); margin-bottom: 0.25rem; }
+    label.f input, label.f select, label.f textarea { width: 100%; }
+    .row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .row > * { flex: 1 1 140px; }
+
+    /* --- gate --- */
+    .panel {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 1.6rem 1.5rem; max-width: 420px; margin: 3rem auto; text-align: center;
+    }
+    .panel h3 { color: #fff; font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .panel p { color: var(--mut); font-size: 0.88rem; line-height: 1.55; }
+    .panel form { margin-top: 1.1rem; text-align: left; }
+    .panel button { width: 100%; }
+
+    /* --- stats --- */
+    .stats { display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); }
+    .stat { background: var(--card); border-radius: 11px; padding: 0.7rem 0.85rem; }
+    .stat b { display: block; font-size: 1.5rem; color: #fff; line-height: 1.1; }
+    .stat span { font-size: 0.68rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* --- toolbar --- */
+    .toolbar { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: flex-end; margin: 1.2rem 0 1rem; }
+    .toolbar .grow { flex: 1 1 200px; }
+    .toolbar label.f { margin-bottom: 0; }
+    .spacer { flex: 1 1 auto; }
+    .toggle[aria-pressed="true"] { background: var(--accent); color: #1b2733; border-color: var(--accent); font-weight: 600; }
+
+    /* --- progress --- */
+    .bulk { margin: 0 0 1rem; }
+    .track { height: 5px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+    .bar { height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
+    .bulk p { color: var(--mut); font-size: 0.78rem; margin-top: 0.35rem; }
+
+    /* --- grid --- */
+    .grid { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); }
+    .book {
+      background: var(--card); border: 1px solid transparent; border-radius: 12px;
+      padding: 0.7rem; cursor: pointer; display: flex; flex-direction: column; gap: 0.55rem;
+      text-align: left; color: inherit;
+    }
+    .book:hover { background: var(--card-hi); border-color: rgba(232,176,75,0.45); }
+    .cover {
+      width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 7px;
+      background: var(--bg); display: block;
+    }
+    .cover.broken { visibility: hidden; }
+    .blank {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 0.7rem; overflow: hidden; font-size: 0.8rem; line-height: 1.3; font-weight: 600;
+      background: hsl(var(--h, 210) 24% 30%); color: hsl(var(--h, 210) 45% 86%);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .blank span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden; }
+    .book b { font-size: 0.9rem; line-height: 1.3; color: #fff; font-weight: 600; }
+    .book .who { font-size: 0.78rem; color: var(--mut); }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
+    .chip {
+      font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 999px;
+      background: var(--bg); color: var(--mut); border: 1px solid var(--line);
+    }
+    .chip.read { color: var(--green); border-color: rgba(107,191,138,0.5); }
+    .chip.reading { color: var(--sky); border-color: rgba(127,179,213,0.5); }
+    .chip.lent { color: var(--accent); border-color: rgba(232,176,75,0.5); }
+    .chip.check { color: var(--rose); border-color: rgba(224,138,138,0.55); }
+    .stars { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.04em; }
+    .stars i { color: var(--line); font-style: normal; }
+
+    .empty { text-align: center; padding: 3rem 1rem; color: var(--mut); }
+    .empty .ico { font-size: 2.4rem; }
+    .empty h3 { color: #fff; margin: 0.6rem 0 0.3rem; }
+
+    /* --- dialogs --- */
+    dialog {
+      background: var(--card); color: var(--ink); border: 1px solid var(--line);
+      border-radius: 14px; padding: 0; max-width: 620px; width: calc(100% - 2rem);
+    }
+    dialog::backdrop { background: rgba(10, 16, 22, 0.62); }
+    .dhead {
+      display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .dhead h3 { color: #fff; font-size: 1.1rem; flex: 1; }
+    .dbody { padding: 1.1rem 1.2rem; max-height: 68vh; overflow-y: auto; }
+    .dfoot {
+      display: flex; gap: 0.6rem; align-items: center;
+      padding: 0.9rem 1.2rem; border-top: 1px solid var(--line);
+    }
+    .icon-btn { border: 0; background: none; color: var(--mut); font-size: 1.1rem; padding: 0.2rem 0.45rem; }
+
+    .detail { display: grid; grid-template-columns: minmax(0,140px) minmax(0,1fr); gap: 1.1rem; align-items: start; }
+    @media (max-width: 520px) { .detail { grid-template-columns: 1fr; } .detail .cover { max-width: 170px; } }
+    .kv { display: flex; gap: 0.6rem; font-size: 0.85rem; margin-top: 0.25rem; }
+    .kv dt { color: var(--dim); flex: 0 0 7.5rem; }
+    .kv dd { color: var(--ink); }
+    .desc { margin-top: 1rem; line-height: 1.65; color: var(--mut); font-size: 0.92rem; }
+    .note { margin-top: 0.9rem; padding: 0.7rem 0.9rem; border-radius: 9px; background: var(--bg); border: 1px solid var(--line); }
+    .warn { margin-top: 0.9rem; padding: 0.7rem 0.9rem; border-radius: 9px;
+            background: rgba(224,138,138,0.09); border: 1px solid rgba(224,138,138,0.4); color: var(--rose);
+            font-size: 0.86rem; }
+
+    .hit { display: flex; gap: 0.7rem; align-items: center; background: var(--bg);
+           border: 1px solid var(--line); border-radius: 9px; padding: 0.45rem 0.55rem; margin-bottom: 0.45rem; }
+    .hit img { width: 32px; height: 48px; object-fit: cover; border-radius: 3px; background: var(--card); flex: none; }
+    .hit div { flex: 1; min-width: 0; }
+    .hit b { display: block; font-size: 0.85rem; color: #fff; }
+    .hit small { color: var(--mut); font-size: 0.74rem; }
+    .rule { border: 0; border-top: 1px solid var(--line); margin: 1.2rem 0; }
+
+    .toasts { position: fixed; left: 50%; bottom: 1.4rem; transform: translateX(-50%); z-index: 999;
+              display: flex; flex-direction: column; gap: 0.4rem; align-items: center; }
+    .toast { background: var(--card); border: 1px solid var(--line); color: var(--ink);
+             padding: 0.6rem 1rem; border-radius: 999px; font-size: 0.86rem; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+    .toast.bad { border-color: rgba(224,138,138,0.6); color: var(--rose); }
+
+    .starbtn { background: none; border: 0; color: var(--line); font-size: 1.4rem; padding: 0.1rem; cursor: pointer; }
+    .starbtn[data-on="true"] { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Joel Harvey</a>
+  <header>
+    <h1>The Library<span class="dot">.</span></h1>
+    <p class="tagline">Every book Shin and I own, in one catalogue. The same shelf as
+      <a href="https://shinyashimada.com/library/" style="color:var(--sky)">shinyashimada.com/library</a> —
+      one record, two front doors.</p>
+  </header>
+
+  <!-- Passcode ---------------------------------------------------------- -->
+  <section class="panel" id="gate" hidden>
+    <h3>Shared passcode</h3>
+    <p id="gate-msg">The library lives on Shin's site and syncs between our devices, so it asks for the passcode we share.</p>
+    <form id="gate-form">
+      <label class="f"><span>Passcode</span>
+        <input type="password" id="gate-input" autocomplete="current-password" required>
+      </label>
+      <button class="btn-primary" type="submit">Unlock</button>
+    </form>
+  </section>
+
+  <!-- App --------------------------------------------------------------- -->
+  <section id="app" hidden>
+    <div class="stats" id="stats"></div>
+
+    <div class="toolbar">
+      <label class="f grow"><span>Search</span>
+        <input type="search" id="q" placeholder="Title, author, subject…">
+      </label>
+      <label class="f"><span>Whose</span>
+        <select id="f-owner">
+          <option value="all">All</option><option value="joel">Joel's</option>
+          <option value="shin">Shin's</option><option value="both">Ours</option>
+        </select>
+      </label>
+      <label class="f"><span>Status</span>
+        <select id="f-status">
+          <option value="all">All</option><option value="unread">To read</option>
+          <option value="reading">Reading</option><option value="read">Read</option>
+          <option value="lent">Lent out</option>
+        </select>
+      </label>
+      <label class="f" id="shelf-wrap" hidden><span>Shelf</span>
+        <select id="f-shelf"></select>
+      </label>
+      <label class="f"><span>Sort</span>
+        <select id="f-sort">
+          <option value="added">Recently added</option><option value="title">Title</option>
+          <option value="author">Author</option><option value="year">Year</option>
+          <option value="rating">Rating</option>
+        </select>
+      </label>
+      <button type="button" class="toggle" id="f-check" aria-pressed="false" hidden>
+        Needs checking<span id="check-count"></span>
+      </button>
+    </div>
+
+    <div class="toolbar">
+      <button type="button" id="bulk-go"
+              title="Asks Open Library and Google Books about every book missing a publisher, year, cover or blurb. One at a time, so it can take a couple of minutes.">Fill in the gaps</button>
+      <button type="button" id="export">Export as JSON</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn-primary" id="add-book">Add a book</button>
+    </div>
+
+    <div class="bulk" id="bulk" hidden>
+      <div class="track"><div class="bar" id="bulk-bar"></div></div>
+      <p id="bulk-text"></p>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden></div>
+  </section>
+</main>
+
+<!-- Detail ---------------------------------------------------------------->
+<dialog id="detail">
+  <div class="dhead"><h3 id="d-title"></h3><button class="icon-btn" data-close>✕</button></div>
+  <div class="dbody" id="d-body"></div>
+  <div class="dfoot">
+    <button type="button" id="d-enrich">Fill in the gaps</button>
+    <div class="spacer"></div>
+    <button type="button" data-close>Close</button>
+    <button type="button" class="btn-primary" id="d-edit">Edit</button>
+  </div>
+</dialog>
+
+<!-- Editor ---------------------------------------------------------------->
+<dialog id="editor">
+  <form method="dialog" id="ed-form">
+    <div class="dhead"><h3 id="ed-title">Add a book</h3><button type="button" class="icon-btn" data-close>✕</button></div>
+    <div class="dbody">
+      <label class="f"><span>ISBN, or title and author</span>
+        <div style="display:flex;gap:0.5rem">
+          <input type="text" id="look-input" autocomplete="off" style="flex:1">
+          <button type="button" id="look-go">Look up</button>
+        </div>
+      </label>
+      <div id="look-results"></div>
+
+      <hr class="rule">
+
+      <label class="f"><span>Title</span><input type="text" id="e-title" required></label>
+      <label class="f"><span>Subtitle</span><input type="text" id="e-subtitle"></label>
+      <label class="f"><span>Authors <small style="color:var(--dim)">— separate several with commas</small></span>
+        <input type="text" id="e-authors"></label>
+      <div class="row">
+        <label class="f"><span>Publisher</span><input type="text" id="e-publisher"></label>
+        <label class="f"><span>Year</span><input type="number" id="e-year" min="0" max="2999"></label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Pages</span><input type="number" id="e-pages" min="0"></label>
+        <label class="f"><span>Language</span><input type="text" id="e-language"></label>
+      </div>
+      <label class="f"><span>ISBN</span><input type="text" id="e-isbn" autocomplete="off"></label>
+      <label class="f"><span>Subjects <small style="color:var(--dim)">— commas</small></span>
+        <input type="text" id="e-subjects"></label>
+      <label class="f"><span>Description</span><textarea id="e-description" rows="4"></textarea></label>
+
+      <div class="f"><span style="display:block;font-size:0.78rem;color:var(--mut);margin-bottom:0.25rem">Cover</span>
+        <div style="display:flex;gap:0.8rem;align-items:flex-start">
+          <img id="e-cover-preview" style="width:84px;aspect-ratio:2/3;object-fit:cover;border-radius:7px;border:1px solid var(--line)" alt="" hidden>
+          <div style="display:flex;flex-direction:column;gap:0.4rem">
+            <label class="btn-like" style="display:inline-block">
+              <button type="button" id="e-cover-pick">Use my own photo</button>
+              <input type="file" id="e-cover" accept="image/*" hidden>
+            </label>
+            <button type="button" id="e-cover-remove" hidden>Remove</button>
+          </div>
+        </div>
+        <input type="hidden" id="e-coverurl">
+      </div>
+
+      <hr class="rule">
+
+      <div class="row">
+        <label class="f"><span>Whose is it</span>
+          <select id="e-owner"><option value="joel">Joel's</option><option value="shin">Shin's</option><option value="both">Ours</option></select>
+        </label>
+        <label class="f"><span>Status</span>
+          <select id="e-status"><option value="unread">To read</option><option value="reading">Reading</option>
+            <option value="read">Read</option><option value="lent">Lent out</option></select>
+        </label>
+      </div>
+      <label class="f" id="lentto-wrap" hidden><span>Lent to</span><input type="text" id="e-lentto"></label>
+      <label class="f"><span>Shelf or room</span><input type="text" id="e-shelf"></label>
+      <div class="f"><span style="display:block;font-size:0.78rem;color:var(--mut);margin-bottom:0.25rem">Rating</span>
+        <div id="e-stars"></div><input type="hidden" id="e-rating" value="0">
+      </div>
+      <label class="f"><span>Notes</span><textarea id="e-notes" rows="3"></textarea></label>
+    </div>
+    <div class="dfoot">
+      <button type="button" class="btn-danger" id="ed-delete">Delete</button>
+      <div class="spacer"></div>
+      <button type="button" data-close>Cancel</button>
+      <button type="submit" class="btn-primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* =========================================================================
+   The shared library, seen from joelmharvey.com.
+
+   There is one copy of this data and it lives in Shin's Netlify site's
+   Postgres. This page is a second front door onto it: every read and write
+   goes to https://shinyashimada.com/api, which allowlists this origin.
+
+   Deliberately self-contained. Pulling the other site's scripts across the
+   origin would couple two repositories' deploys together and drag its whole
+   design system along with them; this page wears joelmharvey.com's clothes
+   and speaks only to the API.
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  var API   = 'https://shinyashimada.com/api';
+  var PASS  = 'jmh.library.passcode';
+  var CACHE = 'jmh.library.cache';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function esc(s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function toast(msg, bad) {
+    var el = document.createElement('div');
+    el.className = 'toast' + (bad ? ' bad' : '');
+    el.textContent = msg;
+    $('toasts').appendChild(el);
+    setTimeout(function () { el.remove(); }, bad ? 5200 : 2800);
+  }
+
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+
+  var passcode = store.get(PASS, '');
+  var books = store.get(CACHE, []);
+  if (!Array.isArray(books)) books = [];
+
+  /* ------------------------------------------------------------- network -- */
+
+  function api(path, options) {
+    var opts = options || {};
+    var headers = { 'Content-Type': 'application/json' };
+    if (passcode) headers['X-Store-Passcode'] = passcode;
+    return fetch(API + path, {
+      method: opts.method || 'GET',
+      headers: headers,
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function (res) {
+      return res.text().then(function (text) {
+        var payload = null;
+        try { payload = text ? JSON.parse(text) : null; } catch (e) {}
+        if (!res.ok) {
+          var err = new Error((payload && payload.error) || ('HTTP ' + res.status));
+          err.status = res.status;
+          throw err;
+        }
+        return payload || {};
+      });
+    });
+  }
+
+  function pull() {
+    return api('/store?collection=books').then(function (payload) {
+      var remote = (payload && payload.records) || [];
+      var byId = {};
+      books.forEach(function (b) { byId[b.id] = b; });
+      remote.forEach(function (r) {
+        if (!r || !r.id) return;
+        var mine = byId[r.id];
+        // Last write wins, same rule the other site uses.
+        if (!mine || String(r.updatedAt || '') > String(mine.updatedAt || '')) byId[r.id] = r;
+      });
+      books = Object.keys(byId).map(function (k) { return byId[k]; });
+      store.set(CACHE, books);
+      return true;
+    });
+  }
+
+  function save(records) {
+    var list = [].concat(records);
+    var stamp = new Date().toISOString();
+    list.forEach(function (r) {
+      r.updatedAt = stamp;
+      if (!r.id) r.id = (crypto.randomUUID ? crypto.randomUUID()
+                        : 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 9));
+      if (!r.createdAt) r.createdAt = stamp;
+      var i = -1;
+      for (var k = 0; k < books.length; k++) if (books[k].id === r.id) { i = k; break; }
+      if (i === -1) books.push(r); else books[i] = r;
+    });
+    store.set(CACHE, books);
+    render();
+    return api('/store', { method: 'POST', body: { collection: 'books', records: list } })
+      .catch(function (err) {
+        toast(err.status === 401 ? 'The passcode was not accepted — the change is saved on this device only.'
+                                 : 'Could not reach the library — the change is saved on this device only.', true);
+      });
+  }
+
+  function live() { return books.filter(function (b) { return !b.deleted; }); }
+
+  /* --------------------------------------------------------------- model -- */
+
+  var OWNERS = { joel: "Joel's", shin: "Shin's", both: 'Ours' };
+  var STATUS = { unread: 'To read', reading: 'Reading', read: 'Read', lent: 'Lent out' };
+
+  var filters = { q: '', owner: 'all', status: 'all', shelf: 'all', sort: 'added', check: false };
+
+  function authorsOf(b) { return Array.isArray(b.authors) ? b.authors : []; }
+  function authorLine(b) { return authorsOf(b).join(', '); }
+  function statusOf(b) { return STATUS[b.status] ? b.status : 'unread'; }
+  function ownerOf(b) { return OWNERS[b.owner] ? b.owner : 'both'; }
+  function coverOf(b) { return b.cover || b.coverUrl || null; }
+  function needsCheck(b) { return b.confidence === 'low' || b.confidence === 'medium'; }
+
+  function hue(b) {
+    var s = String(b.title || b.id || ''), h = 0;
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360;
+    return h;
+  }
+
+  function matches(b) {
+    if (filters.owner !== 'all' && ownerOf(b) !== filters.owner) return false;
+    if (filters.status !== 'all' && statusOf(b) !== filters.status) return false;
+    if (filters.shelf !== 'all' && (b.location || '') !== filters.shelf) return false;
+    if (filters.check && !needsCheck(b)) return false;
+    if (!filters.q) return true;
+    var hay = [b.title, b.subtitle, authorLine(b), b.publisher, b.notes,
+               (b.subjects || []).join(' '), b.isbn13, b.isbn10, b.location].join(' ').toLowerCase();
+    return filters.q.toLowerCase().split(/\s+/).every(function (t) { return hay.indexOf(t) !== -1; });
+  }
+
+  function sortBooks(list) {
+    var by = filters.sort;
+    return list.slice().sort(function (a, b) {
+      if (by === 'title')  return String(a.title || '').localeCompare(String(b.title || ''));
+      if (by === 'author') return authorLine(a).localeCompare(authorLine(b));
+      if (by === 'year')   return (b.publishedYear || 0) - (a.publishedYear || 0);
+      if (by === 'rating') return (b.rating || 0) - (a.rating || 0);
+      return String(b.createdAt || '').localeCompare(String(a.createdAt || ''));
+    });
+  }
+
+  function starsHtml(n) {
+    var out = '';
+    for (var i = 1; i <= 5; i++) out += i <= (Number(n) || 0) ? '★' : '<i>★</i>';
+    return out;
+  }
+
+  /* ------------------------------------------------------------ rendering -- */
+
+  function renderStats() {
+    var all = live();
+    var by = function (s) { return all.filter(function (b) { return statusOf(b) === s; }).length; };
+    var authors = {};
+    all.forEach(function (b) { authorsOf(b).forEach(function (a) { authors[a.toLowerCase()] = 1; }); });
+    var pages = all.reduce(function (n, b) {
+      return statusOf(b) === 'read' && Number(b.pages) ? n + Number(b.pages) : n;
+    }, 0);
+
+    $('stats').innerHTML = [
+      ['Books', all.length], ['Read', by('read')], ['Reading', by('reading')],
+      ['To read', by('unread')], ['Lent out', by('lent')],
+      ['Authors', Object.keys(authors).length], ['Pages read', pages]
+    ].map(function (c) {
+      return '<div class="stat"><b>' + c[1].toLocaleString() + '</b><span>' + c[0] + '</span></div>';
+    }).join('');
+  }
+
+  function renderShelves() {
+    var seen = {};
+    live().forEach(function (b) { if (b.location) seen[b.location] = 1; });
+    var names = Object.keys(seen).sort(function (a, b) { return a.localeCompare(b, 'en', { numeric: true }); });
+    $('f-shelf').innerHTML = '<option value="all">All</option>' +
+      names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+    if (filters.shelf !== 'all' && names.indexOf(filters.shelf) === -1) filters.shelf = 'all';
+    $('f-shelf').value = filters.shelf;
+    $('shelf-wrap').hidden = names.length < 2;
+  }
+
+  function cardFor(b) {
+    var cover = coverOf(b);
+    var status = statusOf(b);
+    return '<button type="button" class="book" data-id="' + esc(b.id) + '">' +
+      (cover
+        ? '<img class="cover" src="' + esc(cover) + '" alt="" loading="lazy" onerror="this.classList.add(\'broken\')">'
+        : '<div class="cover blank" style="--h:' + hue(b) + '"><span>' + esc(b.title || '?') + '</span></div>') +
+      '<b>' + esc(b.title || '—') + '</b>' +
+      (authorLine(b) ? '<span class="who">' + esc(authorLine(b)) + '</span>' : '') +
+      '<span class="chips">' +
+        '<span class="chip ' + status + '">' + esc(STATUS[status]) + '</span>' +
+        '<span class="chip">' + esc(OWNERS[ownerOf(b)]) + '</span>' +
+        (needsCheck(b) ? '<span class="chip check">Check</span>' : '') +
+        (b.publishedYear ? '<span class="chip">' + esc(b.publishedYear) + '</span>' : '') +
+      '</span>' +
+      (b.rating ? '<span class="stars">' + starsHtml(b.rating) + '</span>' : '') +
+    '</button>';
+  }
+
+  function render() {
+    renderStats();
+    renderShelves();
+
+    var toCheck = live().filter(needsCheck).length;
+    $('f-check').hidden = toCheck === 0;
+    $('check-count').textContent = toCheck ? ' (' + toCheck + ')' : '';
+
+    var shown = sortBooks(live().filter(matches));
+    if (!shown.length) {
+      $('grid').innerHTML = '';
+      var filtered = live().length > 0;
+      $('empty').hidden = false;
+      $('empty').innerHTML = filtered
+        ? '<div class="ico">🔍</div><h3>Nothing matches</h3><p>Try a different search, or clear the filters.</p>'
+        : '<div class="ico">📚</div><h3>The shelf is empty here</h3>' +
+          '<p>Add a book, or import the inventory over on ' +
+          '<a href="https://shinyashimada.com/library/" style="color:var(--sky)">shinyashimada.com/library</a> — ' +
+          'it is the same shelf either way.</p>';
+      return;
+    }
+    $('empty').hidden = true;
+    $('grid').innerHTML = shown.map(cardFor).join('');
+  }
+
+  /* --------------------------------------------------------------- detail -- */
+
+  var detailId = null;
+
+  function kv(label, value) {
+    if (value === null || value === undefined || value === '') return '';
+    return '<div class="kv"><dt>' + esc(label) + '</dt><dd>' + esc(value) + '</dd></div>';
+  }
+
+  function openDetail(id) {
+    var b = byId(id);
+    if (!b) return;
+    detailId = id;
+    var cover = coverOf(b);
+    var status = statusOf(b);
+
+    $('d-title').textContent = b.title || '—';
+    $('d-body').innerHTML =
+      '<div class="detail">' +
+        (cover ? '<img class="cover" src="' + esc(cover) + '" alt="">'
+               : '<div class="cover blank" style="--h:' + hue(b) + '"><span>' + esc(b.title || '?') + '</span></div>') +
+        '<div>' +
+          (b.subtitle ? '<p style="color:var(--mut);margin-bottom:0.4rem">' + esc(b.subtitle) + '</p>' : '') +
+          (authorLine(b) ? '<p style="margin-bottom:0.6rem">by ' + esc(authorLine(b)) + '</p>' : '') +
+          '<span class="chips" style="margin-bottom:0.5rem">' +
+            '<span class="chip ' + status + '">' + esc(STATUS[status]) + '</span>' +
+            '<span class="chip">' + esc(OWNERS[ownerOf(b)]) + '</span>' +
+          '</span>' +
+          '<div class="stars">' + starsHtml(b.rating) + '</div>' +
+          '<dl style="margin-top:0.7rem">' +
+            kv('Publisher', b.publisher) + kv('Published', b.publishedYear) +
+            kv('Pages', b.pages) + kv('ISBN', b.isbn13 || b.isbn10) +
+            kv('Language', b.language) + kv('Shelf', b.location) +
+            kv('Lent to', status === 'lent' ? b.lentTo : '') +
+          '</dl>' +
+        '</div>' +
+      '</div>' +
+      ((b.subjects || []).length
+        ? '<div class="chips" style="margin-top:0.8rem">' +
+          b.subjects.map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('') + '</div>'
+        : '') +
+      (needsCheck(b) ? '<p class="warn">⚠ Read off the shelf photo with ' + esc(b.confidence) +
+                       ' confidence — worth confirming.</p>' : '') +
+      (b.description ? '<p class="desc">' + esc(b.description) + '</p>' : '') +
+      (b.notes ? '<div class="note"><b>Notes</b><p style="margin-top:0.3rem;white-space:pre-wrap;color:var(--mut)">' +
+                 esc(b.notes) + '</p></div>' : '');
+
+    $('detail').showModal();
+  }
+
+  function byId(id) {
+    for (var i = 0; i < books.length; i++) if (books[i].id === id && !books[i].deleted) return books[i];
+    return null;
+  }
+
+  /* ----------------------------------------------------------- enrichment -- */
+
+  function lookup(query) {
+    return api('/books?' + query).then(function (p) { return (p && p.results) || []; });
+  }
+
+  /* Ours to say, never the catalogue's: notes, rating, owner, status, shelf. */
+  var FILLABLE = [
+    ['subtitle', 'subtitle'], ['authors', 'authors'], ['publisher', 'publisher'],
+    ['publishedYear', 'year'], ['pages', 'pages'], ['language', 'language'],
+    ['subjects', 'subjects'], ['description', 'description'], ['coverUrl', 'cover'], ['isbn13', 'ISBN']
+  ];
+
+  function blank(v) {
+    return v === null || v === undefined || v === '' || (Array.isArray(v) && v.length === 0);
+  }
+
+  function normTitle(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+
+  /* A title-only lookup is a guess; some inventory rows are misreadings. If
+     the answer is not recognisably the book we asked about, it is dropped
+     rather than written in. */
+  function titlesLookAlike(asked, got) {
+    var a = normTitle(asked), b = normTitle(got);
+    if (!a || !b) return false;
+    return a === b || a.indexOf(b) === 0 || b.indexOf(a) === 0;
+  }
+
+  function queryFor(b) {
+    return (b.isbn13 || b.isbn10)
+      ? 'isbn=' + encodeURIComponent(b.isbn13 || b.isbn10)
+      : 'q=' + encodeURIComponent([b.title, authorsOf(b)[0]].filter(Boolean).join(' '));
+  }
+
+  function fillFrom(current, best) {
+    var patch = {}, filled = [];
+    FILLABLE.forEach(function (pair) {
+      if (!blank(current[pair[0]]) || blank(best[pair[0]])) return;
+      patch[pair[0]] = best[pair[0]];
+      filled.push(pair[1]);
+    });
+    return { patch: patch, filled: filled };
+  }
+
+  function enrichOne(id) {
+    var b = byId(id);
+    if (!b) return;
+    var btn = $('d-enrich'), was = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Looking it up…';
+
+    lookup(queryFor(b)).then(function (results) {
+      var best = results[0];
+      if (!best) { toast('The catalogues had nothing for this one.', true); return; }
+      var out = fillFrom(b, best);
+      if (!out.filled.length) { toast('Nothing new to add — this record is already complete.'); return; }
+      var next = Object.assign({}, b, out.patch);
+      save(next).then(function () { openDetail(id); });
+      toast('Added ' + out.filled.join(', ') + ' from the catalogues.');
+    }).catch(function () {
+      toast('Could not reach the catalogues.', true);
+    }).then(function () { btn.disabled = false; btn.textContent = was; });
+  }
+
+  var bulk = { running: false, stop: false };
+
+  function runBulk() {
+    if (bulk.running) { bulk.stop = true; return; }
+    var queue = live().filter(function (b) {
+      return FILLABLE.some(function (p) { return blank(b[p[0]]); });
+    });
+    if (!queue.length) { toast('Every book already has everything the catalogues offer.'); return; }
+
+    bulk.running = true; bulk.stop = false;
+    $('bulk').hidden = false;
+    $('bulk-go').textContent = 'Stop';
+
+    var i = 0, filled = 0, pending = [];
+    var flush = function () { if (pending.length) { save(pending.slice()); pending = []; } };
+    var finish = function (stopped) {
+      flush();
+      bulk.running = false;
+      $('bulk').hidden = true;
+      $('bulk-go').textContent = 'Fill in the gaps';
+      toast(stopped ? 'Stopped after ' + i + '. ' + filled + ' filled in.'
+                    : 'Finished: ' + filled + ' of ' + queue.length + ' books filled in.');
+    };
+
+    var step = function () {
+      if (bulk.stop) return finish(true);
+      if (i >= queue.length) return finish(false);
+      var b = queue[i++];
+      $('bulk-bar').style.width = Math.round((i / queue.length) * 100) + '%';
+      $('bulk-text').textContent = i + ' of ' + queue.length + ' looked up · ' + filled + ' filled in';
+
+      var byIsbn = !!(b.isbn13 || b.isbn10);
+      lookup(queryFor(b)).then(function (results) {
+        var best = results[0];
+        if (!best) return;
+        if (!byIsbn && !titlesLookAlike(b.title, best.title)) return;
+        var current = byId(b.id);
+        if (!current) return;
+        var out = fillFrom(current, best);
+        if (out.filled.length) { pending.push(Object.assign({}, current, out.patch)); filled++; }
+      }).catch(function () { /* one dead lookup must not end the run */ })
+        .then(function () {
+          if (pending.length >= 25) flush();
+          setTimeout(step, 260);
+        });
+    };
+    step();
+  }
+
+  /* --------------------------------------------------------------- editor -- */
+
+  var editingId = null;
+  var editorCover;          // undefined = untouched · null = removed · string = new
+  var hits = [];
+
+  function val(id, v) { $(id).value = (v === null || v === undefined) ? '' : String(v); }
+
+  function openEditor(id) {
+    editingId = id;
+    editorCover = undefined;
+    hits = [];
+    $('look-results').innerHTML = '';
+    $('look-input').value = '';
+
+    var b = id ? byId(id) : null;
+    $('ed-title').textContent = id ? 'Edit book' : 'Add a book';
+
+    val('e-title', b && b.title); val('e-subtitle', b && b.subtitle);
+    val('e-authors', b ? authorsOf(b).join(', ') : '');
+    val('e-publisher', b && b.publisher); val('e-year', b && b.publishedYear);
+    val('e-pages', b && b.pages); val('e-language', b && b.language);
+    val('e-isbn', b && (b.isbn13 || b.isbn10));
+    val('e-subjects', b ? (b.subjects || []).join(', ') : '');
+    val('e-description', b && b.description);
+    val('e-shelf', b && b.location); val('e-lentto', b && b.lentTo);
+    val('e-notes', b && b.notes);
+    val('e-coverurl', b && b.coverUrl);
+    $('e-owner').value = b ? ownerOf(b) : 'both';
+    $('e-status').value = b ? statusOf(b) : 'unread';
+    $('e-rating').value = String((b && b.rating) || 0);
+
+    renderStarField(); renderCoverField(); syncLent();
+    $('ed-delete').hidden = !id;
+    $('editor').showModal();
+    $('look-input').focus();
+  }
+
+  function renderStarField() {
+    var v = Number($('e-rating').value) || 0;
+    $('e-stars').innerHTML = [1,2,3,4,5].map(function (i) {
+      return '<button type="button" class="starbtn" data-star="' + i + '"' +
+             (i <= v ? ' data-on="true"' : '') + ' aria-label="' + i + '">★</button>';
+    }).join('');
+    $('e-stars').querySelectorAll('[data-star]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var n = Number(btn.getAttribute('data-star'));
+        $('e-rating').value = String(n === v ? 0 : n);   // click the current rating to clear it
+        renderStarField();
+      });
+    });
+  }
+
+  function currentCover() {
+    if (editorCover !== undefined) return editorCover;
+    var b = editingId ? byId(editingId) : null;
+    return (b && b.cover) || null;
+  }
+
+  function renderCoverField() {
+    var own = currentCover();
+    var shown = own || $('e-coverurl').value || null;
+    $('e-cover-preview').hidden = !shown;
+    if (shown) $('e-cover-preview').src = shown;
+    $('e-cover-pick').textContent = own ? 'Change photo' : 'Use my own photo';
+    $('e-cover-remove').hidden = !own;
+  }
+
+  function syncLent() { $('lentto-wrap').hidden = $('e-status').value !== 'lent'; }
+
+  /* Records live in a 64 KB row and sync whole, so an own photo is squeezed
+     to fit. A catalogue cover is only a URL and costs nothing. */
+  function compress(file, done, fail) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      URL.revokeObjectURL(url);
+      var dims = [520, 400, 300], quals = [0.72, 0.6, 0.5, 0.4];
+      for (var d = 0; d < dims.length; d++) {
+        var scale = Math.min(1, dims[d] / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(img.width * scale));
+        c.height = Math.max(1, Math.round(img.height * scale));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        for (var q = 0; q < quals.length; q++) {
+          var out = c.toDataURL('image/jpeg', quals[q]);
+          if (out.length <= 50000) return done(out);
+        }
+      }
+      fail();
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); fail(); };
+    img.src = url;
+  }
+
+  function splitList(v) {
+    return String(v || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function saveEditor() {
+    var title = $('e-title').value.trim();
+    if (!title) { toast('A title is the one thing a book needs.', true); $('e-title').focus(); return false; }
+
+    var existing = editingId ? byId(editingId) : null;
+    var isbn = String($('e-isbn').value || '').toUpperCase().replace(/[^0-9X]/g, '');
+    var year = parseInt($('e-year').value, 10);
+    var pages = parseInt($('e-pages').value, 10);
+
+    save(Object.assign({}, existing, {
+      id: editingId || undefined,
+      title: title,
+      subtitle: $('e-subtitle').value.trim(),
+      authors: splitList($('e-authors').value),
+      publisher: $('e-publisher').value.trim(),
+      publishedYear: isFinite(year) ? year : null,
+      pages: isFinite(pages) ? pages : null,
+      isbn13: isbn.length === 13 ? isbn : (existing && existing.isbn13) || null,
+      isbn10: isbn.length === 10 ? isbn : (existing && existing.isbn10) || null,
+      language: $('e-language').value.trim(),
+      subjects: splitList($('e-subjects').value),
+      description: $('e-description').value.trim(),
+      owner: $('e-owner').value,
+      status: $('e-status').value,
+      location: $('e-shelf').value.trim(),
+      lentTo: $('e-status').value === 'lent' ? $('e-lentto').value.trim() : '',
+      rating: Number($('e-rating').value) || 0,
+      notes: $('e-notes').value.trim(),
+      coverUrl: $('e-coverurl').value || null,
+      cover: editorCover !== undefined ? editorCover : ((existing && existing.cover) || null),
+      deleted: false
+    }));
+    return true;
+  }
+
+  function runLookup() {
+    var q = $('look-input').value.trim();
+    if (!q) return;
+    var box = $('look-results');
+    box.innerHTML = '<p style="color:var(--mut);font-size:0.85rem">Searching…</p>';
+
+    lookup('q=' + encodeURIComponent(q)).then(function (results) {
+      hits = results;
+      if (!results.length) {
+        box.innerHTML = '<p style="color:var(--mut);font-size:0.85rem">No matches — fill the form in by hand.</p>';
+        return;
+      }
+      box.innerHTML = results.map(function (r, i) {
+        return '<div class="hit">' +
+          (r.coverUrl ? '<img src="' + esc(r.coverUrl) + '" alt="" loading="lazy">' : '<img alt="">') +
+          '<div><b>' + esc(r.title) + '</b><small>' +
+            esc([(r.authors || []).join(', '), r.publisher, r.publishedYear].filter(Boolean).join(' · ')) +
+          '</small></div>' +
+          '<button type="button" data-use="' + i + '">Use this</button></div>';
+      }).join('');
+      box.querySelectorAll('[data-use]').forEach(function (btn) {
+        btn.addEventListener('click', function () { applyHit(hits[Number(btn.getAttribute('data-use'))]); });
+      });
+    }).catch(function () {
+      box.innerHTML = '<p style="color:var(--mut);font-size:0.85rem">Could not reach the catalogues. The form still works by hand.</p>';
+    });
+  }
+
+  /** Fill the form from a hit, leaving anything already typed alone. */
+  function applyHit(c) {
+    if (!c) return;
+    var fill = function (id, v) {
+      if (v === null || v === undefined || v === '') return;
+      if ($(id).value.trim()) return;
+      $(id).value = String(v);
+    };
+    fill('e-title', c.title); fill('e-subtitle', c.subtitle);
+    fill('e-authors', (c.authors || []).join(', '));
+    fill('e-publisher', c.publisher); fill('e-year', c.publishedYear);
+    fill('e-pages', c.pages); fill('e-isbn', c.isbn13 || c.isbn10);
+    fill('e-language', c.language); fill('e-subjects', (c.subjects || []).join(', '));
+    fill('e-description', c.description);
+    if (c.coverUrl && !$('e-coverurl').value) $('e-coverurl').value = c.coverUrl;
+    renderCoverField();
+    $('look-results').innerHTML = '';
+    $('e-title').focus();
+  }
+
+  /* ----------------------------------------------------------------- wire -- */
+
+  document.querySelectorAll('dialog').forEach(function (dlg) {
+    dlg.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', function () { dlg.close(); });
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  });
+
+  $('grid').addEventListener('click', function (e) {
+    var card = e.target.closest('.book');
+    if (card) openDetail(card.getAttribute('data-id'));
+  });
+
+  var debounce;
+  $('q').addEventListener('input', function () {
+    clearTimeout(debounce);
+    debounce = setTimeout(function () { filters.q = $('q').value.trim(); render(); }, 160);
+  });
+
+  ['owner', 'status', 'shelf', 'sort'].forEach(function (k) {
+    $('f-' + k).addEventListener('change', function () { filters[k] = this.value; render(); });
+  });
+
+  $('f-check').addEventListener('click', function () {
+    filters.check = !filters.check;
+    this.setAttribute('aria-pressed', String(filters.check));
+    render();
+  });
+
+  $('bulk-go').addEventListener('click', runBulk);
+  $('add-book').addEventListener('click', function () { openEditor(null); });
+  $('d-edit').addEventListener('click', function () { $('detail').close(); openEditor(detailId); });
+  $('d-enrich').addEventListener('click', function () { enrichOne(detailId); });
+
+  $('look-go').addEventListener('click', runLookup);
+  $('look-input').addEventListener('keydown', function (e) {
+    // The editor is a form; Enter here means "search", not "save".
+    if (e.key === 'Enter') { e.preventDefault(); runLookup(); }
+  });
+
+  $('e-status').addEventListener('change', syncLent);
+  $('e-cover-pick').addEventListener('click', function () { $('e-cover').click(); });
+  $('e-cover').addEventListener('change', function () {
+    var file = this.files && this.files[0];
+    this.value = '';
+    if (!file) return;
+    compress(file, function (data) { editorCover = data; renderCoverField(); },
+                   function () { toast('Could not read that image — try a different one.', true); });
+  });
+  $('e-cover-remove').addEventListener('click', function () {
+    editorCover = null; $('e-coverurl').value = ''; renderCoverField();
+  });
+
+  $('ed-form').addEventListener('submit', function (e) { if (!saveEditor()) e.preventDefault(); });
+  $('ed-delete').addEventListener('click', function () {
+    if (!editingId) return;
+    if (!confirm('Remove this book from the library?')) return;
+    var b = byId(editingId);
+    if (b) save(Object.assign({}, b, { deleted: true }));
+    $('editor').close();
+  });
+
+  $('export').addEventListener('click', function () {
+    var blob = new Blob([JSON.stringify({ collection: 'books', exportedAt: new Date().toISOString(),
+                                          records: live() }, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'library-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  /* ----------------------------------------------------------------- boot -- */
+
+  function showApp() { $('gate').hidden = true; $('app').hidden = false; render(); }
+  function showGate(msg) {
+    $('app').hidden = true; $('gate').hidden = false;
+    if (msg) $('gate-msg').textContent = msg;
+  }
+
+  $('gate-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    passcode = $('gate-input').value;
+    if (!passcode) return;
+    pull().then(function () {
+      store.set(PASS, passcode);
+      showApp();
+    }).catch(function (err) {
+      passcode = '';
+      showGate(err.status === 401
+        ? 'That passcode was not accepted. Try again.'
+        : 'Could not reach the library just now — check the connection and try again.');
+    });
+  });
+
+  // Anything already pulled shows straight away; the network only refreshes it.
+  if (books.length) showApp();
+
+  api('/store?health=1').then(function (h) {
+    if (!h.authRequired) { showApp(); pull().then(render); return; }
+    if (!passcode) { showGate(); return; }
+    return pull().then(function () { showApp(); }).catch(function (err) {
+      if (err.status === 401) { store.del(PASS); passcode = ''; showGate('That passcode was not accepted. Try again.'); }
+      else if (!books.length) showGate('Could not reach the library just now.');
+      else toast('Offline — showing the last copy saved on this device.', true);
+    });
+  }).catch(function () {
+    if (!books.length) showGate('Could not reach the library just now.');
+  });
+
+})();
+</script>
+</body>
+</html>

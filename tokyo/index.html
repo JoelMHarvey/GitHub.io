@@ -63,6 +63,8 @@
     .news a:hover { background: #35495c; }
     .news time { display: block; color: var(--dim); font-size: 0.75rem; margin-top: 0.2rem; }
     .placeholder { color: var(--dim); font-size: 0.9rem; padding: 0.4rem 0; }
+    .note { color: var(--dim); font-size: 0.82rem; margin: -0.4rem 0 0.6rem; }
+    [hidden] { display: none !important; }
 
     footer { margin-top: 2.5rem; font-size: 0.78rem; color: var(--dim); line-height: 1.6; }
     footer a { color: var(--mut); }
@@ -82,18 +84,21 @@
     <h2>This week</h2>
     <div class="week" id="week"><div class="placeholder">Loading forecast…</div></div>
 
-    <h2>ニュース — NHK</h2>
+    <h2>ニュース — 日本語</h2>
+    <p class="note" id="note-jp" hidden></p>
     <ul class="news" id="news-jp"><li class="placeholder">Loading headlines…</li></ul>
 
     <h2>News — English</h2>
+    <p class="note" id="note-en" hidden></p>
     <ul class="news" id="news-en"><li class="placeholder">Loading headlines…</li></ul>
 
     <footer>Weather by <a href="https://open-meteo.com" rel="noopener">Open-Meteo</a> ·
-      headlines from NHK and Japan Today, refreshed every few minutes · times in JST.</footer>
+      headlines from NHK and Asahi (日本語) and NHK World, The Japan Times and Kyodo News
+      (English), refreshed every few minutes · times in JST.</footer>
   </main>
 
   <script>
-    const NEWS_API = "https://research.joelmharvey.com/api/tokyo/news";
+    const NEWS_API = "https://shinyashimada.com/api/news";
     const WMO = {
       0: ["☀️", "Clear 快晴"], 1: ["🌤️", "Mostly clear 晴れ"], 2: ["⛅", "Partly cloudy 晴れ時々曇り"],
       3: ["☁️", "Overcast 曇り"], 45: ["🌫️", "Fog 霧"], 48: ["🌫️", "Freezing fog 霧氷"],
@@ -150,33 +155,56 @@
         document.getElementById("week").innerHTML = "";
       });
 
-    // Headlines (via research hub — feeds have no CORS of their own)
-    fetch(NEWS_API)
-      .then((r) => r.json())
-      .then((n) => {
-        for (const key of ["jp", "en"]) {
-          const ul = document.getElementById("news-" + key);
-          const items = n[key] || [];
+    // Headlines. One request per language, to shinyashimada.com's /api/news,
+    // which keeps a separate feed list for each: NHK and Asahi for 日本語, NHK
+    // World / Japan Times / Kyodo for English. Asking per language is the whole
+    // point — the previous endpoint returned a single mixed bundle, which is
+    // how Japanese headlines came to sit under "News — English".
+    //
+    // The two calls are independent so a language that fails does not take the
+    // other down with it. Feeds have no CORS of their own, which is why this
+    // goes through the function rather than straight at the publishers.
+    function loadNews(key, lang) {
+      const ul = document.getElementById("news-" + key);
+      const note = document.getElementById("note-" + key);
+
+      return fetch(NEWS_API + "?lang=" + encodeURIComponent(lang))
+        .then((r) => r.json())
+        .then((n) => {
+          const items = (n && n.ok && n.items) || [];
           if (!items.length) {
             ul.innerHTML = '<li class="placeholder">No headlines right now.</li>';
-            continue;
+            return;
           }
-          // vibecheck-ignore-next-line: innerhtml-assignment — every interpolation passes esc(); href is encoded
+
+          // Every Japanese feed being down falls back to the English wire
+          // rather than blanking the section. Say so, so the reader is not left
+          // wondering why this column switched language.
+          if (n.fallbackFrom && n.fallbackFrom !== lang) {
+            note.textContent = "日本語のニュースが取得できないため、英語の記事を表示しています。" +
+              " (Japanese feeds unavailable — showing the English wire.)";
+            note.hidden = false;
+          } else {
+            note.hidden = true;
+          }
+
+          // vibecheck-ignore-next-line: innerhtml-assignment — every interpolation passes esc(); href is encoded then escaped
           ul.innerHTML = items.map((it) => {
-            const when = it.published
-              ? new Date(it.published).toLocaleString("en-GB", {
+            const when = it.publishedAt
+              ? new Date(it.publishedAt).toLocaleString("en-GB", {
                   timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" })
               : "";
-            return `<li><a href="${encodeURI(it.link)}" rel="noopener">${esc(it.title)}` +
+            return `<li><a href="${esc(encodeURI(it.link))}" rel="noopener">${esc(it.title)}` +
                    `<time>${esc(it.source)}${when ? " · " + when : ""}</time></a></li>`;
           }).join("");
-        }
-      })
-      .catch(() => {
-        for (const key of ["jp", "en"])
-          document.getElementById("news-" + key).innerHTML =
-            '<li class="placeholder">Headlines unavailable right now.</li>';
-      });
+        })
+        .catch(() => {
+          ul.innerHTML = '<li class="placeholder">Headlines unavailable right now.</li>';
+        });
+    }
+
+    loadNews("jp", "ja");
+    loadNews("en", "en");
   </script>
 </body>
 </html>

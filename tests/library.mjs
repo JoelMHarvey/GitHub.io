@@ -31,6 +31,7 @@ const GOOD = 'let-me-in';
 let server = [
   { id: 'b1', title: 'Bagombo Snuff Box', authors: ['Kurt Vonnegut'], owner: 'joel',
     status: 'read', rating: 4, publisher: 'Putnam', publishedYear: 1999, pages: 295,
+    description: 'Twenty-three short stories written for the magazines of the 1950s.',
     location: 'Bookcase 1 – Shelf 1', createdAt: '2026-08-01T00:00:00.000Z',
     updatedAt: '2026-08-01T00:00:00.000Z' },
   { id: 'b2', title: 'Hedro', owner: 'joel', confidence: 'low',
@@ -134,6 +135,35 @@ await t('the shelf filter picked up both shelves', async () => {
   const n = await page.locator('#f-shelf option').count();
   return n === 3 ? true : `${n} options`;
 });
+
+/* --- the description gap ------------------------------------------------- */
+// One of the two has a blurb; the other is the gap.
+
+await t('the no-description filter appears with a count', async () => {
+  if (await page.isHidden('#f-nodesc')) return 'filter hidden while a book has no description';
+  const label = (await page.textContent('#f-nodesc')).replace(/\s+/g, ' ').trim();
+  return label.includes('(1)') ? true : `label read "${label}"`;
+});
+
+await t('the described book shows a snippet on its card', async () => {
+  const n = await page.locator('.book .desc').count();
+  if (n !== 1) return `${n} snippets for 1 described book`;
+  return (await page.textContent('.book .desc')).includes('Twenty-three short stories')
+    ? true : await page.textContent('.book .desc');
+});
+
+await page.click('#f-nodesc');
+await page.waitForTimeout(400);
+await t('filtering to it leaves only the undescribed one', async () => {
+  const n = await page.locator('.book').count();
+  if (n !== 1) return `${n} shown`;
+  return (await page.textContent('.book')).includes('Hedro') ? true : await page.textContent('.book');
+});
+await page.click('#f-nodesc');
+await page.waitForTimeout(400);
+
+await t('turning the filter off brings the shelf back', async () =>
+  (await page.locator('.book').count()) === 2 ? true : 'shelf did not come back');
 
 /* --- editing writes back ------------------------------------------------- */
 

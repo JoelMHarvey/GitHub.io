@@ -110,6 +110,13 @@
     .blank span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden; }
     .book b { font-size: 0.9rem; line-height: 1.3; color: #fff; font-weight: 600; }
     .book .who { font-size: 0.78rem; color: var(--mut); }
+    /* Three lines of the blurb, so a card stays a card. Clamped rather than cut
+       in JS: the full text stays in the DOM for find-in-page, and the cut lands
+       on a line rather than mid-word. */
+    .book .desc {
+      font-size: 0.75rem; line-height: 1.45; color: var(--mut); text-align: left;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+    }
     .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
     .chip {
       font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 999px;
@@ -228,6 +235,10 @@
       </label>
       <button type="button" class="toggle" id="f-check" aria-pressed="false" hidden>
         Needs checking<span id="check-count"></span>
+      </button>
+      <button type="button" class="toggle" id="f-nodesc" aria-pressed="false" hidden
+              title="Books with no description yet. Fill gaps writes one where a catalogue has it; the rest are yours to add.">
+        No description<span id="nodesc-count"></span>
       </button>
     </div>
 
@@ -460,7 +471,8 @@
   var OWNERS = { joel: "Joel's", shin: "Shin's", both: 'Ours' };
   var STATUS = { unread: 'To read', reading: 'Reading', read: 'Read', lent: 'Lent out' };
 
-  var filters = { q: '', owner: 'all', status: 'all', shelf: 'all', sort: 'added', check: false };
+  var filters = { q: '', owner: 'all', status: 'all', shelf: 'all', sort: 'added',
+                  check: false, nodesc: false };
 
   function authorsOf(b) { return Array.isArray(b.authors) ? b.authors : []; }
   function authorLine(b) { return authorsOf(b).join(', '); }
@@ -468,6 +480,11 @@
   function ownerOf(b) { return OWNERS[b.owner] ? b.owner : 'both'; }
   function coverOf(b) { return b.cover || b.coverUrl || null; }
   function needsCheck(b) { return b.confidence === 'low' || b.confidence === 'medium'; }
+
+  /* A catalogue has a blurb for a book or it does not, and for a shelf this size
+     that gap is most of the work. Filterable, so it can be worked through rather
+     than discovered one book at a time. */
+  function needsDescription(b) { return blank(b.description); }
 
   function hue(b) {
     var s = String(b.title || b.id || ''), h = 0;
@@ -480,6 +497,7 @@
     if (filters.status !== 'all' && statusOf(b) !== filters.status) return false;
     if (filters.shelf !== 'all' && (b.location || '') !== filters.shelf) return false;
     if (filters.check && !needsCheck(b)) return false;
+    if (filters.nodesc && !needsDescription(b)) return false;
     if (!filters.q) return true;
     var hay = [b.title, b.subtitle, authorLine(b), b.publisher, b.notes,
                (b.subjects || []).join(' '), b.isbn13, b.isbn10, b.location].join(' ').toLowerCase();
@@ -550,6 +568,7 @@
         (b.publishedYear ? '<span class="chip">' + esc(b.publishedYear) + '</span>' : '') +
       '</span>' +
       (b.rating ? '<span class="stars">' + starsHtml(b.rating) + '</span>' : '') +
+      (b.description ? '<span class="desc">' + esc(b.description) + '</span>' : '') +
     '</button>';
   }
 
@@ -560,6 +579,16 @@
     var toCheck = live().filter(needsCheck).length;
     $('f-check').hidden = toCheck === 0;
     $('check-count').textContent = toCheck ? ' (' + toCheck + ')' : '';
+
+    // The button disappears when the count reaches zero, which is the only
+    // "all done" signal this page has any business giving.
+    var toDescribe = live().filter(needsDescription).length;
+    $('f-nodesc').hidden = toDescribe === 0;
+    $('nodesc-count').textContent = toDescribe ? ' (' + toDescribe + ')' : '';
+    if (toDescribe === 0 && filters.nodesc) {
+      filters.nodesc = false;
+      $('f-nodesc').setAttribute('aria-pressed', 'false');
+    }
 
     var shown = sortBooks(live().filter(matches));
     if (!shown.length) {
@@ -968,6 +997,12 @@
 
   ['owner', 'status', 'shelf', 'sort'].forEach(function (k) {
     $('f-' + k).addEventListener('change', function () { filters[k] = this.value; render(); });
+  });
+
+  $('f-nodesc').addEventListener('click', function () {
+    filters.nodesc = !filters.nodesc;
+    this.setAttribute('aria-pressed', String(filters.nodesc));
+    render();
   });
 
   $('f-check').addEventListener('click', function () {

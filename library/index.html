@@ -113,6 +113,26 @@
     /* Three lines of the blurb, so a card stays a card. Clamped rather than cut
        in JS: the full text stays in the DOM for find-in-page, and the cut lands
        on a line rather than mid-word. */
+    /* Setting the status: four buttons rather than a select behind an edit
+       form, because marking a book read is the thing you do most often. */
+    .status-set { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; }
+    .status-set button {
+      font: inherit; font-size: 0.75rem; line-height: 1; cursor: pointer;
+      padding: 0.34rem 0.6rem; border-radius: 999px;
+      border: 1px solid var(--line); background: transparent; color: var(--mut);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .status-set button:hover { background: var(--card-hi); color: var(--ink); }
+    .status-set button[aria-pressed="true"] {
+      background: var(--accent); color: #1b2733; border-color: var(--accent); font-weight: 600;
+    }
+    .lent-row { display: flex; gap: 0.4rem; align-items: center; margin: 0.55rem 0; }
+    .lent-row input {
+      flex: 1 1 auto; min-width: 0; font: inherit; font-size: 0.82rem;
+      padding: 0.38rem 0.6rem; border-radius: 8px;
+      border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    }
+
     /* No catalogue carries covers for back issues, so the placeholder gives an
        issue the one thing the shelf photo shows: the yellow border and its date. */
     .book .cover.issue {
@@ -665,6 +685,55 @@
     return '<div class="kv"><dt>' + esc(label) + '</dt><dd>' + esc(value) + '</dd></div>';
   }
 
+  /* The only date this page shows, so it formats it here rather than carrying
+     a helper. Invalid or missing stamps render as nothing, not "Invalid Date". */
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    return isNaN(d) ? '' : d.toLocaleDateString('en-GB',
+      { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function statusSwitcher(current) {
+    return '<span class="status-set" role="group">' +
+      ['unread', 'reading', 'read', 'lent'].map(function (st) {
+        return '<button type="button" data-set-status="' + st + '" aria-pressed="' +
+          (st === current) + '">' + esc(STATUS[st]) + '</button>';
+      }).join('') + '</span>';
+  }
+
+  /* Who has it is worth recording, but not worth blocking on: the status is
+     already set by the time this appears, and a blank name is allowed. */
+  function lentToRow(b) {
+    return '<div class="lent-row">' +
+      '<input type="text" id="lent-who" value="' + esc(b.lentTo || '') + '" placeholder="Who has it?">' +
+      '<button type="button" id="lent-save">Save</button></div>';
+  }
+
+  function setStatus(id, next) {
+    var b = byId(id);
+    if (!b || statusOf(b) === next) return;
+    var rec = Object.assign({}, b, { status: next });
+    if (next === 'lent') {
+      // Dated on the way in, so "lent since" is a fact rather than a guess.
+      rec.lentAt = b.lentAt || new Date().toISOString();
+    } else {
+      // Off loan: the borrower and the date go with it rather than lingering.
+      rec.lentTo = '';
+      rec.lentAt = '';
+    }
+    save(rec);
+    toast(next === 'lent' || !b.lentTo ? 'Marked as ' + STATUS[next] : 'Back on the shelf');
+    openDetail(id);
+  }
+
+  function setLentTo(id, who) {
+    var b = byId(id);
+    if (!b) return;
+    save(Object.assign({}, b, { lentTo: who }));
+    toast(who ? 'Lent to ' + who : 'Marked as ' + STATUS.lent);
+    openDetail(id);
+  }
+
   function openDetail(id) {
     var b = byId(id);
     if (!b) return;
@@ -681,15 +750,21 @@
           (b.subtitle ? '<p style="color:var(--mut);margin-bottom:0.4rem">' + esc(b.subtitle) + '</p>' : '') +
           (authorLine(b) ? '<p style="margin-bottom:0.6rem">by ' + esc(authorLine(b)) + '</p>' : '') +
           '<span class="chips" style="margin-bottom:0.5rem">' +
-            '<span class="chip ' + status + '">' + esc(STATUS[status]) + '</span>' +
+            /* Status is a book idea, so a magazine keeps its chip and sits out
+               of the switcher — the same line the stat tiles take. */
+            (isMagazine(b)
+              ? '<span class="chip issue">Magazine</span>'
+              : statusSwitcher(status)) +
             '<span class="chip">' + esc(OWNERS[ownerOf(b)]) + '</span>' +
           '</span>' +
+          (!isMagazine(b) && status === 'lent' ? lentToRow(b) : '') +
           '<div class="stars">' + starsHtml(b.rating) + '</div>' +
           '<dl style="margin-top:0.7rem">' +
             kv('Publisher', b.publisher) + kv('Published', b.publishedYear) +
             kv('Pages', b.pages) + kv('ISBN', b.isbn13 || b.isbn10) +
             kv('Language', b.language) + kv('Shelf', b.location) +
             kv('Lent to', status === 'lent' ? b.lentTo : '') +
+            kv('Lent since', status === 'lent' && b.lentAt ? fmtDate(b.lentAt) : '') +
           '</dl>' +
         '</div>' +
       '</div>' +
@@ -703,7 +778,19 @@
       (b.notes ? '<div class="note"><b>Notes</b><p style="margin-top:0.3rem;white-space:pre-wrap;color:var(--mut)">' +
                  esc(b.notes) + '</p></div>' : '');
 
-    $('detail').showModal();
+    $('d-body').querySelectorAll('[data-set-status]').forEach(function (btn) {
+      btn.onclick = function () { setStatus(id, this.getAttribute('data-set-status')); };
+    });
+    var who = $('lent-who');
+    if (who) {
+      var commit = function () { setLentTo(id, who.value.trim()); };
+      $('lent-save').onclick = commit;
+      who.onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); commit(); } };
+    }
+
+    // Re-drawn in place after a status change: showModal() on an already-open
+    // dialog throws, and would also lose the scroll position.
+    if (!$('detail').open) $('detail').showModal();
   }
 
   function byId(id) {

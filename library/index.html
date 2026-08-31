@@ -113,6 +113,14 @@
     /* Three lines of the blurb, so a card stays a card. Clamped rather than cut
        in JS: the full text stays in the DOM for find-in-page, and the cut lands
        on a line rather than mid-word. */
+    /* No catalogue carries covers for back issues, so the placeholder gives an
+       issue the one thing the shelf photo shows: the yellow border and its date. */
+    .book .cover.issue {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background: #ffd200; border: 6px solid #ffd200; box-shadow: inset 0 0 0 3px #1a1a1a;
+      color: #1a1a1a; font-weight: 700; font-size: 0.8rem; padding: 0.5rem;
+    }
+    .chip.issue { background: #ffd200; color: #1a1a1a; border-color: #e0b800; font-weight: 600; }
     .book .desc {
       font-size: 0.75rem; line-height: 1.45; color: var(--mut); text-align: left;
       display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
@@ -210,6 +218,7 @@
       <label class="f grow"><span>Search</span>
         <input type="search" id="q" placeholder="Title, author, subject…">
       </label>
+      <label class="f"><span>Kind</span><select id="f-kind"><option value="all">Everything</option><option value="book">Books</option><option value="magazine">Magazines</option></select></label>
       <label class="f"><span>Whose</span>
         <select id="f-owner">
           <option value="all">All</option><option value="joel">Joel's</option>
@@ -471,7 +480,7 @@
   var OWNERS = { joel: "Joel's", shin: "Shin's", both: 'Ours' };
   var STATUS = { unread: 'To read', reading: 'Reading', read: 'Read', lent: 'Lent out' };
 
-  var filters = { q: '', owner: 'all', status: 'all', shelf: 'all', sort: 'added',
+  var filters = { q: '', kind: 'all', owner: 'all', status: 'all', shelf: 'all', sort: 'added',
                   check: false, nodesc: false };
 
   function authorsOf(b) { return Array.isArray(b.authors) ? b.authors : []; }
@@ -481,10 +490,15 @@
   function coverOf(b) { return b.cover || b.coverUrl || null; }
   function needsCheck(b) { return b.confidence === 'low' || b.confidence === 'medium'; }
 
+  /* A magazine issue has a date rather than an author, no ISBN, and no
+     catalogue to look it up in. It shares the shelf so one search covers both,
+     but sits out of everything that only makes sense for books. */
+  function isMagazine(b) { return b.kind === 'magazine'; }
+
   /* A catalogue has a blurb for a book or it does not, and for a shelf this size
      that gap is most of the work. Filterable, so it can be worked through rather
      than discovered one book at a time. */
-  function needsDescription(b) { return blank(b.description); }
+  function needsDescription(b) { return !isMagazine(b) && blank(b.description); }
 
   function hue(b) {
     var s = String(b.title || b.id || ''), h = 0;
@@ -493,13 +507,14 @@
   }
 
   function matches(b) {
+    if (filters.kind !== 'all' && (isMagazine(b) ? 'magazine' : 'book') !== filters.kind) return false;
     if (filters.owner !== 'all' && ownerOf(b) !== filters.owner) return false;
     if (filters.status !== 'all' && statusOf(b) !== filters.status) return false;
     if (filters.shelf !== 'all' && (b.location || '') !== filters.shelf) return false;
     if (filters.check && !needsCheck(b)) return false;
     if (filters.nodesc && !needsDescription(b)) return false;
     if (!filters.q) return true;
-    var hay = [b.title, b.subtitle, authorLine(b), b.publisher, b.notes,
+    var hay = [b.title, b.subtitle, authorLine(b), b.publisher, b.notes, b.description,
                (b.subjects || []).join(' '), b.isbn13, b.isbn10, b.location].join(' ').toLowerCase();
     return filters.q.toLowerCase().split(/\s+/).every(function (t) { return hay.indexOf(t) !== -1; });
   }
@@ -525,18 +540,24 @@
 
   function renderStats() {
     var all = live();
-    var by = function (s) { return all.filter(function (b) { return statusOf(b) === s; }).length; };
+    /* Reading status is a book idea. Counting a hundred magazine issues as
+       "to read" would be a lie told in a large font, so the status tiles count
+       books and the magazines get a tile of their own. */
+    var vols = all.filter(function (b) { return !isMagazine(b); });
+    var mags = all.filter(isMagazine);
+    var by = function (s) { return vols.filter(function (b) { return statusOf(b) === s; }).length; };
     var authors = {};
-    all.forEach(function (b) { authorsOf(b).forEach(function (a) { authors[a.toLowerCase()] = 1; }); });
-    var pages = all.reduce(function (n, b) {
+    vols.forEach(function (b) { authorsOf(b).forEach(function (a) { authors[a.toLowerCase()] = 1; }); });
+    var pages = vols.reduce(function (n, b) {
       return statusOf(b) === 'read' && Number(b.pages) ? n + Number(b.pages) : n;
     }, 0);
 
-    $('stats').innerHTML = [
-      ['Books', all.length], ['Read', by('read')], ['Reading', by('reading')],
+    var cells = [['Books', vols.length], ['Read', by('read')], ['Reading', by('reading')],
       ['To read', by('unread')], ['Lent out', by('lent')],
-      ['Authors', Object.keys(authors).length], ['Pages read', pages]
-    ].map(function (c) {
+      ['Authors', Object.keys(authors).length], ['Pages read', pages]];
+    if (mags.length) cells.splice(1, 0, ['Magazines', mags.length]);
+
+    $('stats').innerHTML = cells.map(function (c) {
       return '<div class="stat"><b>' + c[1].toLocaleString() + '</b><span>' + c[0] + '</span></div>';
     }).join('');
   }
@@ -555,20 +576,29 @@
   function cardFor(b) {
     var cover = coverOf(b);
     var status = statusOf(b);
+    var mag = isMagazine(b);
     return '<button type="button" class="book" data-id="' + esc(b.id) + '">' +
       (cover
         ? '<img class="cover" src="' + esc(cover) + '" alt="" loading="lazy" onerror="this.classList.add(\'broken\')">'
-        : '<div class="cover blank" style="--h:' + hue(b) + '"><span>' + esc(b.title || '?') + '</span></div>') +
+        : mag
+          ? '<div class="cover issue"><span>' + esc(b.subtitle || b.title || '?') + '</span></div>'
+          : '<div class="cover blank" style="--h:' + hue(b) + '"><span>' + esc(b.title || '?') + '</span></div>') +
       '<b>' + esc(b.title || '—') + '</b>' +
-      (authorLine(b) ? '<span class="who">' + esc(authorLine(b)) + '</span>' : '') +
+      (mag
+        ? (b.subtitle ? '<span class="who">' + esc(b.subtitle) + '</span>' : '')
+        : (authorLine(b) ? '<span class="who">' + esc(authorLine(b)) + '</span>' : '')) +
       '<span class="chips">' +
-        '<span class="chip ' + status + '">' + esc(STATUS[status]) + '</span>' +
+        (mag
+          ? '<span class="chip issue">Magazine</span>'
+          : '<span class="chip ' + status + '">' + esc(STATUS[status]) + '</span>') +
         '<span class="chip">' + esc(OWNERS[ownerOf(b)]) + '</span>' +
         (needsCheck(b) ? '<span class="chip check">Check</span>' : '') +
         (b.publishedYear ? '<span class="chip">' + esc(b.publishedYear) + '</span>' : '') +
       '</span>' +
       (b.rating ? '<span class="stars">' + starsHtml(b.rating) + '</span>' : '') +
       (b.description ? '<span class="desc">' + esc(b.description) + '</span>' : '') +
+      (mag && (b.subjects || []).length
+        ? '<span class="desc">' + esc(b.subjects.join(' · ')) + '</span>' : '') +
     '</button>';
   }
 
@@ -995,7 +1025,7 @@
     debounce = setTimeout(function () { filters.q = $('q').value.trim(); render(); }, 160);
   });
 
-  ['owner', 'status', 'shelf', 'sort'].forEach(function (k) {
+  ['kind', 'owner', 'status', 'shelf', 'sort'].forEach(function (k) {
     $('f-' + k).addEventListener('change', function () { filters[k] = this.value; render(); });
   });
 

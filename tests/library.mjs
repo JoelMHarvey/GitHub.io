@@ -36,7 +36,11 @@ let server = [
     updatedAt: '2026-08-01T00:00:00.000Z' },
   { id: 'b2', title: 'Hedro', owner: 'joel', confidence: 'low',
     location: 'Bookcase 1 – Shelf 5', createdAt: '2026-08-02T00:00:00.000Z',
-    updatedAt: '2026-08-02T00:00:00.000Z' }
+    updatedAt: '2026-08-02T00:00:00.000Z' },
+  { id: 'ng-2002-04', kind: 'magazine', title: 'National Geographic', subtitle: 'April 2002',
+    issue: '2002-04', publishedYear: 2002, publisher: 'National Geographic Society', owner: 'joel',
+    subjects: ['Afghan Girl', 'Tibetans', 'Lions', 'Maya'],
+    createdAt: '2026-08-03T00:00:00.000Z', updatedAt: '2026-08-03T00:00:00.000Z' }
 ];
 let posted = [];
 let sawPasscodeHeader = null;
@@ -123,7 +127,7 @@ await t('the passcode travelled as a header', async () =>
 
 await t("the other site's records are shown", async () => {
   const n = await page.locator('.book').count();
-  return n === 2 ? true : `${n} cards`;
+  return n === 3 ? true : `${n} cards`;
 });
 await t('a title from the shared shelf is there', async () =>
   (await page.textContent('#grid')).includes('Bagombo Snuff Box') ? true : 'missing');
@@ -131,6 +135,51 @@ await t('the low-confidence row is flagged', async () =>
   (await page.locator('.chip.check').count()) === 1 ? true : 'no check chip');
 await t('stats are computed', async () =>
   (await page.textContent('#stats')).includes('2') ? true : 'stats blank');
+
+/* --- magazines share the shelf without distorting it --------------------- */
+
+await t('books and magazines are counted apart', async () => {
+  const txt = (await page.textContent('#stats')).replace(/\s+/g, ' ');
+  return /2\s*Books/i.test(txt) && /1\s*Magazines/i.test(txt)
+    ? true : `stats read "${txt.trim().slice(0, 90)}"`;
+});
+
+await t('the issue is not counted as an unread book', async () => {
+  const txt = (await page.textContent('#stats')).replace(/\s+/g, ' ');
+  return /1\s*To read/i.test(txt) ? true : `stats read "${txt.trim().slice(0, 120)}"`;
+});
+
+await page.selectOption('#f-kind', 'magazine');
+await page.waitForTimeout(400);
+await t('filtering to magazines leaves only the issue', async () => {
+  const n = await page.locator('.book').count();
+  if (n !== 1) return `${n} shown`;
+  return (await page.textContent('.book')).includes('April 2002') ? true : await page.textContent('.book');
+});
+await t('the issue gets the yellow placeholder, not a spine', async () =>
+  (await page.locator('.book .cover.issue').count()) === 1 ? true : 'no issue placeholder');
+
+await page.selectOption('#f-kind', 'book');
+await page.waitForTimeout(400);
+await t('filtering to books hides the issue', async () =>
+  (await page.locator('.book').count()) === 2 ? true : `${await page.locator('.book').count()} shown`);
+await page.selectOption('#f-kind', 'all');
+await page.waitForTimeout(400);
+
+// The reason the cover lines are stored at all.
+await t('a cover line finds the issue', async () => {
+  await page.fill('#q', 'afghan girl');
+  await page.waitForTimeout(400);
+  const n = await page.locator('.book').count();
+  await page.fill('#q', '');
+  await page.waitForTimeout(400);
+  return n === 1 ? true : `${n} matches`;
+});
+
+await t('the description gap ignores magazines', async () => {
+  const label = (await page.textContent('#f-nodesc')).replace(/\s+/g, ' ').trim();
+  return label.includes('(1)') ? true : `label read "${label}"`;
+});
 await t('the shelf filter picked up both shelves', async () => {
   const n = await page.locator('#f-shelf option').count();
   return n === 3 ? true : `${n} options`;
@@ -146,10 +195,9 @@ await t('the no-description filter appears with a count', async () => {
 });
 
 await t('the described book shows a snippet on its card', async () => {
-  const n = await page.locator('.book .desc').count();
-  if (n !== 1) return `${n} snippets for 1 described book`;
-  return (await page.textContent('.book .desc')).includes('Twenty-three short stories')
-    ? true : await page.textContent('.book .desc');
+  const texts = await page.locator('.book .desc').allTextContents();
+  const hit = texts.filter(t => t.includes('Twenty-three short stories'));
+  return hit.length === 1 ? true : `${hit.length} cards carry the blurb (of ${texts.length} snippets)`;
 });
 
 await page.click('#f-nodesc');
@@ -163,7 +211,7 @@ await page.click('#f-nodesc');
 await page.waitForTimeout(400);
 
 await t('turning the filter off brings the shelf back', async () =>
-  (await page.locator('.book').count()) === 2 ? true : 'shelf did not come back');
+  (await page.locator('.book').count()) === 3 ? true : 'shelf did not come back');
 
 /* --- editing writes back ------------------------------------------------- */
 
@@ -208,7 +256,7 @@ await page.click('#ed-form button[type=submit]');
 await page.waitForTimeout(700);
 await t('the new book was saved', async () => {
   const n = await page.locator('.book').count();
-  return n === 3 ? true : `${n} cards`;
+  return n === 4 ? true : `${n} cards`;
 });
 
 /* --- lent-to only when lent ---------------------------------------------- */

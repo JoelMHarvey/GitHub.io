@@ -259,6 +259,56 @@ await t('the new book was saved', async () => {
   return n === 4 ? true : `${n} cards`;
 });
 
+/* --- setting the status without the editor ------------------------------- */
+
+posted = [];
+await page.locator('.book').first().click();
+await page.waitForTimeout(400);
+
+await t('the detail offers all four states', async () =>
+  (await page.locator('[data-set-status]').count()) === 4
+    ? true : `${await page.locator('[data-set-status]').count()} buttons`);
+
+await page.click('[data-set-status="lent"]');
+await page.waitForTimeout(500);
+
+await t('one click lends it, and it reaches the shared store', async () => {
+  const rec = (posted[0] && posted[0].records[0]) || null;
+  if (!rec) return 'nothing was posted';
+  return rec.status === 'lent' && rec.lentAt ? true : `posted ${JSON.stringify(rec.status)}, lentAt ${!!rec.lentAt}`;
+});
+await t('lending asks who has it', async () =>
+  await page.isVisible('#lent-who') ? true : 'no borrower field');
+
+posted = [];
+await page.fill('#lent-who', 'Shin');
+await page.click('#lent-save');
+await page.waitForTimeout(500);
+await t('the borrower is pushed too', async () => {
+  const rec = (posted[0] && posted[0].records[0]) || null;
+  return rec && rec.lentTo === 'Shin' ? true : `posted ${JSON.stringify(rec && rec.lentTo)}`;
+});
+await t('and shown with the date it went out', async () => {
+  const txt = (await page.textContent('#d-body')).replace(/\s+/g, ' ');
+  return /Lent to\s*Shin/.test(txt) && /Lent since/.test(txt) ? true : txt.slice(0, 140);
+});
+
+// A stale borrower is worse than none, so coming off loan takes it along.
+posted = [];
+await page.click('[data-set-status="read"]');
+await page.waitForTimeout(500);
+await t('returning it clears the borrower and the date', async () => {
+  const rec = (posted[0] && posted[0].records[0]) || null;
+  if (!rec) return 'nothing was posted';
+  return rec.status === 'read' && !rec.lentTo && !rec.lentAt
+    ? true : `lentTo=${JSON.stringify(rec.lentTo)} lentAt=${JSON.stringify(rec.lentAt)}`;
+});
+await t('the detail stayed open throughout', async () =>
+  await page.isVisible('#detail') ? true : 'the panel closed on a status change');
+
+await page.click('#detail [data-close]').catch(() => {});
+await page.waitForTimeout(300);
+
 /* --- lent-to only when lent ---------------------------------------------- */
 
 await page.locator('.book').first().click();

@@ -43,6 +43,7 @@ let server = [
     createdAt: '2026-08-03T00:00:00.000Z', updatedAt: '2026-08-03T00:00:00.000Z' }
 ];
 let posted = [];
+let lookups = [];
 let sawPasscodeHeader = null;
 
 await page.route('https://shinyashimada.com/api/**', async route => {
@@ -79,6 +80,16 @@ await page.route('https://shinyashimada.com/api/**', async route => {
   }
   if (url.pathname === '/api/books') {
     const q = (url.searchParams.get('q') || '').toLowerCase();
+    lookups.push(q);
+    // What a "National Geographic" query really returns: a Nat Geo Kids reader
+    // whose title starts with the same words, so the title guard lets it in.
+    if (/national\s+geographic/.test(q)) {
+      return route.fulfill({ status: 200, contentType: 'application/json',
+        body: JSON.stringify({ results: [{ title: 'National Geographic Kids: Tide Pools',
+          authors: ['Laura Marsh'], publisher: 'National Geographic Kids', publishedYear: 2011,
+          pages: 32, isbn13: '9781426317170', coverUrl: 'https://covers.example/tide-pools.jpg',
+          description: 'Be a Nat Geo Kids Super Reader!', subjects: ['juvenile literature'] }] }) });
+    }
     const hit = /bagombo|vonnegut/.test(q)
       ? { title: 'Bagombo Snuff Box', authors: ['Kurt Vonnegut'], publisher: 'Putnam',
           publishedYear: 1999, description: 'Twenty-three short stories.', isbn13: '9780399144509' }
@@ -224,6 +235,44 @@ await page.waitForTimeout(400);
 
 await t('turning the filter off brings the shelf back', async () =>
   (await page.locator('.book').count()) === 3 ? true : 'shelf did not come back');
+
+/* --- the catalogues are never asked about a magazine ---------------------- */
+
+/* This is the bug this test exists for. The bulk fill had no magazine guard,
+   so every issue was looked up; every issue matched whatever else is called
+   "National Geographic" — a Nat Geo Kids reader — and its cover was written
+   onto all of them. The title guard cannot catch it: the wrong book's title
+   starts with the right one. */
+
+lookups = [];
+await page.click('#bulk-go');
+await page.waitForTimeout(2500);
+
+await t('filling the gaps never looks up a magazine', async () => {
+  const mags = lookups.filter(q => /national\s+geographic/i.test(q));
+  return mags.length === 0 ? true : `${mags.length} magazine lookups: ${JSON.stringify(mags.slice(0, 2))}`;
+});
+await t('and no issue was written to', async () => {
+  const touched = posted.flatMap(p => p.records || [])
+    .filter(r => r.kind === 'magazine').length;
+  return touched === 0 ? true : `${touched} issues were written to`;
+});
+if (await page.isVisible('#bulk')) { await page.click('#bulk-go'); await page.waitForTimeout(600); }
+
+// The per-book button had no guard either.
+await page.selectOption('#f-kind', 'magazine');
+await page.waitForTimeout(400);
+await page.locator('.book').first().click();
+await page.waitForTimeout(400);
+lookups = [];
+await page.click('#d-enrich');
+await page.waitForTimeout(700);
+await t('looking up a single issue is refused outright', async () =>
+  lookups.length === 0 ? true : `${lookups.length} lookups went out`);
+await page.click('#detail [data-close]').catch(() => {});
+await page.waitForTimeout(300);
+await page.selectOption('#f-kind', 'all');
+await page.waitForTimeout(400);
 
 /* --- editing writes back ------------------------------------------------- */
 

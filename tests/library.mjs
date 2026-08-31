@@ -159,6 +159,18 @@ await t('filtering to magazines leaves only the issue', async () => {
 await t('the issue gets the yellow placeholder, not a spine', async () =>
   (await page.locator('.book .cover.issue').count()) === 1 ? true : 'no issue placeholder');
 
+// The date and the lead story are what tell two issues apart; showing only the
+// shared title and border makes every issue the same picture.
+await t('the placeholder carries the date and the lead story', async () => {
+  const txt = (await page.textContent('.book .cover.issue')).replace(/\s+/g, ' ');
+  return /April/.test(txt) && /2002/.test(txt) && /Afghan Girl/.test(txt)
+    ? true : `placeholder reads "${txt.trim()}"`;
+});
+await t('the year is set large, and only when it is a year', async () => {
+  const y = (await page.textContent('.book .issue-year')).trim();
+  return /^(19|20)\d{2}$/.test(y) ? true : `year reads "${y}"`;
+});
+
 await page.selectOption('#f-kind', 'book');
 await page.waitForTimeout(400);
 await t('filtering to books hides the issue', async () =>

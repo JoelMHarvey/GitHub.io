@@ -881,6 +881,10 @@
   function enrichOne(id) {
     var b = byId(id);
     if (!b) return;
+    if (isMagazine(b)) {
+      toast('The catalogues do not carry magazine back issues — a lookup here can only return a different book.', true);
+      return;
+    }
     var btn = $('d-enrich'), was = btn.textContent;
     btn.disabled = true; btn.textContent = 'Looking it up…';
 
@@ -902,6 +906,10 @@
   function runBulk() {
     if (bulk.running) { bulk.stop = true; return; }
     var queue = live().filter(function (b) {
+      // No ISBN, and no catalogue carries back issues. Worse, every issue is
+      // titled "National Geographic", so a lookup matches whatever else shares
+      // that name and writes its cover onto all of them.
+      if (isMagazine(b)) return false;
       return FILLABLE.some(function (p) { return blank(b[p[0]]); });
     });
     if (!queue.length) { toast('Every book already has everything the catalogues offer.'); return; }

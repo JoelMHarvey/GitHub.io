@@ -25,6 +25,7 @@
     // full stop, card-styled form, and a visible button (Enter works too).
     var wrap = document.createElement("div");
     wrap.id = "jmh-gate";
+    // vibecheck-ignore-next-line: innerhtml-assignment — fixed literal markup, nothing interpolated
     wrap.innerHTML =
       '<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;' +
       "z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;" +

@@ -112,7 +112,10 @@
       96: ["⛈️", "Thunderstorm + hail 雹を伴う雷雨"], 99: ["⛈️", "Thunderstorm + hail 雹を伴う雷雨"],
     };
     const wmo = (c) => WMO[c] || ["🌡️", "—"];
-    const esc = (s) => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+    const esc = (s) => String(s ?? "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
 
     // JST clock
     const clock = document.getElementById("clock");
@@ -132,22 +135,24 @@
       .then((r) => r.json())
       .then((w) => {
         const c = w.current, [icon, desc] = wmo(c.weather_code);
-        const sunrise = w.daily.sunrise[0].slice(11), sunset = w.daily.sunset[0].slice(11);
+        const sunrise = esc(String(w.daily.sunrise[0]).slice(11)), sunset = esc(String(w.daily.sunset[0]).slice(11));
+        // vibecheck-ignore-next-line: innerhtml-assignment — icon/desc are this file's own WMO table; API values pass num() or esc()
         document.getElementById("now").innerHTML =
           `<div class="big">${icon}</div>
-           <div><div class="temp">${Math.round(c.temperature_2m)}°</div>
-           <div class="desc">${desc} · feels like ${Math.round(c.apparent_temperature)}°</div></div>
-           <div class="meta">humidity <b>${c.relative_humidity_2m}%</b> · wind <b>${Math.round(c.wind_speed_10m)} km/h</b><br>
+           <div><div class="temp">${Math.round(num(c.temperature_2m))}°</div>
+           <div class="desc">${desc} · feels like ${Math.round(num(c.apparent_temperature))}°</div></div>
+           <div class="meta">humidity <b>${num(c.relative_humidity_2m)}%</b> · wind <b>${Math.round(num(c.wind_speed_10m))} km/h</b><br>
            ☀️ ${sunrise} → 🌙 ${sunset}</div>`;
         const days = w.daily.time.map((t, i) => {
           const [di] = wmo(w.daily.weather_code[i]);
           const name = i === 0 ? "Today" :
             new Date(t + "T00:00").toLocaleDateString("en-GB", { weekday: "short" });
           return `<div class="day"><div class="d">${name}</div><div class="i">${di}</div>
-            <span class="hi">${Math.round(w.daily.temperature_2m_max[i])}°</span> /
-            ${Math.round(w.daily.temperature_2m_min[i])}°
-            <div class="rain">☔ ${w.daily.precipitation_probability_max[i] ?? 0}%</div></div>`;
+            <span class="hi">${Math.round(num(w.daily.temperature_2m_max[i]))}°</span> /
+            ${Math.round(num(w.daily.temperature_2m_min[i]))}°
+            <div class="rain">☔ ${num(w.daily.precipitation_probability_max[i])}%</div></div>`;
         });
+        // vibecheck-ignore-next-line: innerhtml-assignment — day names from toLocaleDateString, icons from the WMO table, numbers via num()
         document.getElementById("week").innerHTML = days.join("");
       })
       .catch(() => {
@@ -194,7 +199,8 @@
               ? new Date(it.publishedAt).toLocaleString("en-GB", {
                   timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", day: "numeric", month: "short" })
               : "";
-            return `<li><a href="${esc(encodeURI(it.link))}" rel="noopener">${esc(it.title)}` +
+            const link = /^https?:\/\//i.test(it.link || "") ? it.link : "#"; // feeds only ever carry http(s); refuse anything else
+            return `<li><a href="${esc(encodeURI(link))}" rel="noopener">${esc(it.title)}` +
                    `<time>${esc(it.source)}${when ? " · " + when : ""}</time></a></li>`;
           }).join("");
         })

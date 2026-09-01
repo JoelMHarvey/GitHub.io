@@ -594,6 +594,7 @@
       ['Authors', Object.keys(authors).length], ['Pages read', pages]];
     if (mags.length) cells.splice(1, 0, ['Magazines', mags.length]);
 
+    // vibecheck-ignore-next-line: innerhtml-assignment — labels are this file's own strings; counts are numbers
     $('stats').innerHTML = cells.map(function (c) {
       return '<div class="stat"><b>' + c[1].toLocaleString() + '</b><span>' + c[0] + '</span></div>';
     }).join('');
@@ -603,6 +604,7 @@
     var seen = {};
     live().forEach(function (b) { if (b.location) seen[b.location] = 1; });
     var names = Object.keys(seen).sort(function (a, b) { return a.localeCompare(b, 'en', { numeric: true }); });
+    // vibecheck-ignore-next-line: innerhtml-assignment — shelf names pass esc(), which escapes quotes for the attribute context
     $('f-shelf').innerHTML = '<option value="all">All</option>' +
       names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
     if (filters.shelf !== 'all' && names.indexOf(filters.shelf) === -1) filters.shelf = 'all';
@@ -663,20 +665,24 @@
       var filtered = live().length > 0;
       $('empty').hidden = false;
       if (filtered) {
+        // vibecheck-ignore-next-line: innerhtml-assignment — fixed literal markup, nothing interpolated
         $('empty').innerHTML = '<div class="ico">🔍</div><h3>Nothing matches</h3>' +
           '<p>Try a different search, or clear the filters.</p>';
       } else if (lastRead.ok === false) {
         // The read failed. Saying "no books" here would be a lie.
+        // vibecheck-ignore-next-line: innerhtml-assignment — the error message passes esc(); the rest is literal
         $('empty').innerHTML = '<div class="ico">⚠️</div><h3>Could not read the shelf</h3>' +
           '<p>' + esc((lastRead.error && lastRead.error.message) || 'The request to shinyashimada.com failed.') +
           '</p><p style="margin-top:0.6rem"><button type="button" id="retry-read">Try again</button></p>';
       } else if (lastRead.ok === true) {
         // The read worked and the server genuinely holds nothing.
+        // vibecheck-ignore-next-line: innerhtml-assignment — fixed literal markup, nothing interpolated
         $('empty').innerHTML = '<div class="ico">📚</div><h3>The shared shelf is empty</h3>' +
           '<p>shinyashimada.com answered, but has no books stored yet. If the library looks full ' +
           'over there, its copy has not been synced up — check the pill under its heading says ' +
           '<b>Synced</b> and not <b>This device only</b>.</p>';
       } else {
+        // vibecheck-ignore-next-line: innerhtml-assignment — fixed literal markup, nothing interpolated
         $('empty').innerHTML = '<div class="ico">📚</div><h3>The shelf is empty here</h3>' +
           '<p>Add a book, or import the inventory over on ' +
           '<a href="https://shinyashimada.com/library/" style="color:var(--sky)">shinyashimada.com/library</a> — ' +
@@ -690,6 +696,7 @@
       return;
     }
     $('empty').hidden = true;
+    // vibecheck-ignore-next-line: innerhtml-assignment — cardFor() passes every record field through esc() (quote-safe); hue() is numeric
     $('grid').innerHTML = shown.map(cardFor).join('');
   }
 
@@ -778,6 +785,7 @@
     var status = statusOf(b);
 
     $('d-title').textContent = b.title || '—';
+    // vibecheck-ignore-next-line: innerhtml-assignment — every record field passes esc() (quote-safe); hue() is numeric
     $('d-body').innerHTML =
       '<div class="detail">' +
         (cover ? '<img class="cover" src="' + esc(cover) + '" alt="">'
@@ -994,6 +1002,7 @@
 
   function renderStarField() {
     var v = Number($('e-rating').value) || 0;
+    // vibecheck-ignore-next-line: innerhtml-assignment — loop indices and numbers only
     $('e-stars').innerHTML = [1,2,3,4,5].map(function (i) {
       return '<button type="button" class="starbtn" data-star="' + i + '"' +
              (i <= v ? ' data-on="true"' : '') + ' aria-label="' + i + '">★</button>';
@@ -1100,6 +1109,7 @@
         box.innerHTML = '<p style="color:var(--mut);font-size:0.85rem">No matches — fill the form in by hand.</p>';
         return;
       }
+      // vibecheck-ignore-next-line: innerhtml-assignment — title, authors and cover URL pass esc() (quote-safe); the rest is literal
       box.innerHTML = results.map(function (r, i) {
         return '<div class="hit">' +
           (r.coverUrl ? '<img src="' + esc(r.coverUrl) + '" alt="" loading="lazy">' : '<img alt="">') +

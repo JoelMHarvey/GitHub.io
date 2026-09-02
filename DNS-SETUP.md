@@ -27,8 +27,8 @@ Fly.io; doesn't interact with any of the above).
 
 ## Mission Control on `ops.joelmharvey.com`
 
-The footer links to the Vercel-generated URL because that is what currently
-resolves. To move it to a subdomain: add `ops.joelmharvey.com` under the
+The **Ops** section on the homepage links to the Vercel-generated URL because
+that is what currently resolves. To move it to a subdomain: add `ops.joelmharvey.com` under the
 Vercel project's **Settings → Domains**, add the CNAME record Vercel gives you
 (`cname.vercel-dns.com`), then change the one `href` in `index.html`. Nothing
 else on this site depends on it.
@@ -54,5 +54,7 @@ misconfigured deployment returns 500 rather than serving the cost model.
 - `/italian/` — Forza Italiano!, the A1 grammar drill app. Self-contained
   static page; progress is kept in the visitor's own localStorage, so there is
   no account, no server and nothing to sign in to.
-- Footer → **Mission Control** — the private ops dashboard, hosted on Vercel,
-  not part of this site. Password-protected; see above.
+- **Ops** section — the private tools, hosted on Vercel, not part of this
+  site, each behind its own login: **Mission Control** (see above),
+  **Listening Post** (`listen.joelmharvey.com`) and **Outreach**
+  (`outreach.joelmharvey.com`). All three live in the `projects` repo.

@@ -27,11 +27,19 @@ Fly.io; doesn't interact with any of the above).
 
 ## Mission Control on `ops.joelmharvey.com`
 
-The **Ops** section on the homepage links to the Vercel-generated URL because
-that is what currently resolves. To move it to a subdomain: add `ops.joelmharvey.com` under the
-Vercel project's **Settings → Domains**, add the CNAME record Vercel gives you
-(`cname.vercel-dns.com`), then change the one `href` in `index.html`. Nothing
-else on this site depends on it.
+The **Ops** section on the homepage links to `ops.joelmharvey.com`. That name
+is the Mission Control Vercel project (`ops`, generated URL
+`ops-theta-black.vercel.app`) with the domain added under **Settings →
+Domains** and one record at the DNS provider:
+
+```
+CNAME  ops   cname.vercel-dns.com
+```
+
+Same shape as `listen` and `research`. If the name ever stops resolving, the
+generated URL still answers; the Claude Code task-board hook in the projects
+repo (`ops/hooks/mc-sync.py`) falls back to it on its own. Nothing else on
+this site depends on it.
 
 The link is `rel="nofollow"`, which asks crawlers not to follow it — it does
 not stop them, and it does nothing about anyone reading the page source. This

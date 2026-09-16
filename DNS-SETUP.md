@@ -56,8 +56,6 @@ misconfigured deployment returns 500 rather than serving the cost model.
   finder now lands on the homepage — the "Found my phone?" link at the
   bottom takes them to the card, and the contact email is on the homepage
   anyway. If you'd rather keep the card at the root, don't merge this.
-- `/faresay/` — existing Faresay documents (unchanged; note this repo is
-  public, so these are publicly reachable).
 - `/writing/` — the writing catalogue.
 - `/italian/` — Forza Italiano!, the A1 grammar drill app. Self-contained
   static page; progress is kept in the visitor's own localStorage, so there is

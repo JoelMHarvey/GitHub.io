@@ -1,8 +1,8 @@
-# Pointing joelmharvey.com (apex) at this site
+# joelmharvey.com — how the domain reaches this site
 
-The site is already served by GitHub Pages at **www.joelmharvey.com** (the
-`CNAME` file). To make the bare apex `joelmharvey.com` work too, add these
-records at your DNS provider:
+**Done, not a to-do.** The apex `joelmharvey.com` is the live name: it is what
+the `CNAME` file holds and what GitHub Pages serves. These are the records
+behind it, for reference if the domain ever has to be rebuilt:
 
 ```
 A     @    185.199.108.153
@@ -13,13 +13,45 @@ AAAA  @    2606:50c0:8000::153
 AAAA  @    2606:50c0:8001::153
 AAAA  @    2606:50c0:8002::153
 AAAA  @    2606:50c0:8003::153
+CNAME www  joelmharvey.github.io
 ```
 
-(Keep the existing `www` CNAME record pointing at `joelmharvey.github.io`.)
+The `www` record stays: GitHub answers `www.joelmharvey.com` with a 301 to the
+apex, so both names work and only one is canonical. HTTPS is enforced in
+**Settings → Pages**.
 
-GitHub then automatically redirects `joelmharvey.com` → `www.joelmharvey.com`
-and issues the certificate. Check status in the repo's **Settings → Pages**;
-tick "Enforce HTTPS" once the cert is issued.
+## If the site starts 404ing
+
+A 404 from `server: GitHub.com` on a domain whose settings all look correct
+means Pages has the domain but no published deployment. The usual cause:
+
+> **Making this repo private takes the site down, and making it public again
+> does not bring it back.** Pages on a free plan is a public-repo feature, so
+> going private unpublishes the site; going public again restores the settings
+> — source branch, custom domain, DNS check, the `CNAME` file, even the
+> www → apex redirect — but *not* the deployment. Everything reads green and
+> the apex still serves GitHub's stock "There isn't a GitHub Pages site here."
+> (That is what the "Visibility / GitHub Enterprise" panel on the Pages
+> settings page is advertising: private-repo Pages is the paid tier.)
+
+The fix is to make Pages build again, which a visibility change does not do on
+its own. Re-run the most recent **pages build and deployment** run in
+[Actions](../../actions), or in **Settings → Pages** switch the branch to
+anything else, Save, switch back to `master` / `(root)`, Save. One green run
+and the site is back. Two things to know while doing it: only one Pages
+deployment can be in flight at a time (a second is refused with *"due to in
+progress deployment"* — just re-run it after the first finishes), and whichever
+branch is selected when a build fires is the branch that goes live, so put the
+selector back on `master` before you walk away.
+
+To tell this apart from a DNS problem without leaving the terminal:
+
+```bash
+curl -sSI https://joelmharvey.com/ | head -3
+```
+
+`server: GitHub.com` with a 404 is the case above. Anything else answering, or
+no answer at all, is DNS or the registrar, not Pages.
 
 The Research Hub goes on `research.joelmharvey.com` separately — see
 `mens-health-research/DEPLOY.md` in the projects repo (one CNAME record to
@@ -36,10 +68,34 @@ Domains** and one record at the DNS provider:
 CNAME  ops   cname.vercel-dns.com
 ```
 
-Same shape as `listen` and `research`. If the name ever stops resolving, the
+Same shape as every other subdomain here. If the name ever stops resolving, the
 generated URL still answers; the Claude Code task-board hook in the projects
 repo (`ops/hooks/mc-sync.py`) falls back to it on its own. Nothing else on
 this site depends on it.
+
+### Every subdomain this site links to
+
+All of them are Vercel projects in the `projects` repo (except `research`,
+which is Fly.io), each one `CNAME <name> → cname.vercel-dns.com` at the DNS
+provider *and* the domain added under the Vercel project's **Settings →
+Domains**. Both halves are needed; one without the other is a dead link.
+
+| Name | Project | Linked from |
+|---|---|---|
+| `research` | mens-health-research (Fly.io) | Research & writing |
+| `quire` | quire | Research & writing |
+| `nihongo` | nihongo | Daily |
+| `eigo` | eigo | Daily |
+| `tradeflow` | tradeflow | Ventures |
+| `ops` | ops | Ops |
+| `listen` | listening | Ops |
+| `outreach` | outreach | Ops |
+
+Before adding a link to this site, check the name actually resolves:
+
+```bash
+getent hosts eigo.joelmharvey.com || echo "no DNS — do not link it yet"
+```
 
 The link is `rel="nofollow"`, which asks crawlers not to follow it — it does
 not stop them, and it does nothing about anyone reading the page source. This
@@ -60,6 +116,11 @@ misconfigured deployment returns 500 rather than serving the cost model.
 - `/italian/` — Forza Italiano!, the A1 grammar drill app. Self-contained
   static page; progress is kept in the visitor's own localStorage, so there is
   no account, no server and nothing to sign in to.
+- **Daily** section — the two language-game sites are not hosted here:
+  **日本語ゲーム** (`nihongo.joelmharvey.com`, Japanese for English speakers)
+  and **英語ゲーム** (`eigo.joelmharvey.com`, its mirror image — English for
+  Japanese speakers, interface in Japanese). Both want an account, so both
+  links are `rel="nofollow"` like the Ops ones.
 - **Ops** section — the private tools, hosted on Vercel, not part of this
   site, each behind its own login: **Mission Control** (see above),
   **Listening Post** (`listen.joelmharvey.com`) and **Outreach**

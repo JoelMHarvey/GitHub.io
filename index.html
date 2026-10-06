@@ -39,6 +39,18 @@
     }
     h2::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: 0.5; }
 
+    /* A group within a section — the Robin of Loxley apps sit under Ventures.
+       Lighter than an h2 and set a little tighter, so it reads as a subhead
+       rather than a section of its own. */
+    h3 {
+      color: var(--mut); font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.12em; font-weight: 600; margin: 1.5rem 0 0.7rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    h3::after { content: ""; flex: 1; height: 1px; background: var(--line); opacity: 0.3; }
+    h3 a { color: var(--accent); text-decoration: none; }
+    h3 a:hover { text-decoration: underline; }
+
     .links { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
     @media (max-width: 560px) { .links { grid-template-columns: 1fr; } }
 
@@ -92,11 +104,6 @@
         <div><b>Psychosecurity</b>
         <span>Security scanner for AI-built apps — paste a URL, see what leaks.</span></div>
       </a>
-      <a href="https://myownarc.com">
-        <div class="ico">📚</div>
-        <div><b>MyOwnArc</b>
-        <span>AI research library for students — every answer cites its source. From $5/month.</span></div>
-      </a>
       <a href="https://www.myownmenu.com">
         <div class="ico">🍽️</div>
         <div><b>MyOwnMenu</b>
@@ -107,15 +114,44 @@
         <div><b>Seasoned Beings</b>
         <span>Health, wellness &amp; smart tech for the over-50s — plus history worth retelling.</span></div>
       </a>
-      <a href="https://tradeflow.joelmharvey.com">
-        <div class="ico">🔧</div>
-        <div><b>TradeFlow</b>
-        <span>Scheduling and invoicing for solo tradespeople — quote to job to invoice to paid. £15 a month flat, no per-seat pricing.</span></div>
-      </a>
       <a href="https://shinyashimada.com">
         <div class="ico">🌸</div>
         <div><b>shinyashimada.com</b>
         <span>Shin's own corner of the web — home of the plant journal and the croissant hunt.</span></div>
+      </a>
+    </div>
+
+    <h3><a href="https://robinofloxley.com">robinofloxley.com</a> apps</h3>
+    <div class="links">
+      <a href="https://myownsession.com">
+        <div class="ico">🛋️</div>
+        <div><b>MyOwnSession</b>
+        <span>Practice management for therapists — caseload, video sessions, payments and records. Free, then £10 a month, and 0% commission on every tier.</span></div>
+      </a>
+      <a href="https://myownedu.com">
+        <div class="ico">🎓</div>
+        <div><b>MyOwnEdu</b>
+        <span>Online tutoring for UK tutors — students, lessons, payments and courses, with parent and school portals. 0% commission, where the agencies take 25–40%.</span></div>
+      </a>
+      <a href="https://www.myowntrader.com">
+        <div class="ico">🔧</div>
+        <div><b>MyOwnTrader</b>
+        <span>Scheduling and invoicing for solo tradespeople — quote to job to invoice to paid. £15 a month flat, no per-seat pricing.</span></div>
+      </a>
+      <a href="https://www.myownarc.com">
+        <div class="ico">📚</div>
+        <div><b>MyOwnArc</b>
+        <span>AI research library for students — every answer cites its source. From $5/month.</span></div>
+      </a>
+      <a href="https://myownreach.com">
+        <div class="ico">✉️</div>
+        <div><b>MyOwnReach</b>
+        <span>Cold email that behaves — domains, warm-up, campaigns, replies and sender health in one place.</span></div>
+      </a>
+      <a href="https://www.myownlingo.com">
+        <div class="ico">🗣️</div>
+        <div><b>MyOwnLingo</b>
+        <span>Language learning games — one engine, a pack per language. Levels, streaks and scoreboards.</span></div>
       </a>
     </div>
 
